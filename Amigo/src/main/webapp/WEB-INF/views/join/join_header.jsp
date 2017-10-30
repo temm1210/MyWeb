@@ -27,5 +27,5 @@
 	}
 </style>
 <div id="header">
-	<a href="../../../index.jsp">amiGo</a>
+	<a href="${location}/index.jsp">amiGo</a>
 </div>

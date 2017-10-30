@@ -23,7 +23,7 @@
 	
 		<form-login
 			login-page="/member/login.amg"
-			login-processing-url="/member/login_process.amg"
+			login-processing-url="/member/login_proccess.amg"
 			always-use-default-target="true"
 			authentication-failure-url="/member/login.amg?state=fail"
 			authentication-success-handler-ref="LoginSuccessHandler"

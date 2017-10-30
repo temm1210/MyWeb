@@ -44,7 +44,7 @@
 	    </label>
  	</div>
 
-  		<a href="../../../index.jsp" title="logo" id="logo">
+  		<a href="${location}/index.jsp" title="logo" id="logo">
   			<h2>amiGo</h2>
   		</a>
  	    <div class="sub-logo"> 

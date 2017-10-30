@@ -27,7 +27,6 @@
 </script>
 </head>
 <body>
-
 	<div id="content">
 		<h3>이용약관</h3>
 		<form method="post" id="join_form" name="join_form" action="">

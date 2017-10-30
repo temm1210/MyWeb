@@ -9,7 +9,8 @@
 <script>
 	$(document).ready(function(){
 		$("#loginBtn").click(function(){
-			$("#login_form").attr("method","post").attr('action','<c:url value="${location}/member/login_process.amg"/>');
+			/* c:url value 현재 url값(controller/member)뒤에 login_process.amg를붙인다. */
+			$("#login_form").attr("method","post").attr('action','<c:url value="login_proccess.amg"/>');
 		})
 		$("#joinBtn").click(function(){
 			$("#login_form").attr("method","get").attr("action","${location}/member/joinFirst.amg");

@@ -15,7 +15,6 @@
 		<param-value>
 			/WEB-INF/spring/root-context.xml
 			/WEB-INF/spring/appServlet/security-context.xml
-			
 		</param-value>
 	</context-param>
 	

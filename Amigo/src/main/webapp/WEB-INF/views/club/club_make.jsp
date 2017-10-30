@@ -46,7 +46,7 @@
 	 	/* 취소버튼 클릭시  */
 		$("#cancelBtn").click(function(){
 			if(confirm("이 페이지에서 나가시겠습니까?"))
-				$("#club_form").attr("method","get").attr("action","../../../index.jsp").submit();  
+				$("#club_form").attr("method","get").attr("action","${location}/index.jsp").submit();  
 		})
 	})
 	

@@ -45,7 +45,7 @@ public class ClubController {
 	}
 	
 	@RequestMapping(value="/insertClub.amg",method=RequestMethod.POST)
-	public String insertClub(@RequestParam("cpic") MultipartFile file,
+	public String insertClub(@RequestParam(value="cpic",required=false) MultipartFile file,
 						   MultipartHttpServletRequest request,
 						   RedirectAttributes rdr,
 						   Authentication authencation,
@@ -54,7 +54,9 @@ public class ClubController {
 		FileUpLoad ful = new FileUpLoad();
 		String picName = ful.fileForm(file,request);
 		/*------------*/
-		
+		System.out.println("사진경로및 이름확인:"+picName);
+		System.out.println("map확인:"+map.get("cTitle"));
+		System.out.println("map확인2:"+map.get("cContent"));
 		/*동호회 만드는 사람의 아이디 확인(동호회장)*/
 		map.put("username", authencation.getName());
 		

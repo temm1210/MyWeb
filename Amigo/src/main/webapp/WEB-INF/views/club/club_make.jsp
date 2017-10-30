@@ -97,14 +97,21 @@
 					<span>*모두 빠짐없이 입력하셔야 합니다.</span>
 					<div id="title_field" class="club_row">
 						<label for="title">동호회 제목 </label>
-						<input type="text" id="title" name="cTitle" placeholder="동호회제목 입력(2자이상)">
+						<input type="text" id="title" name="cTitle" placeholder="동호회제목 입력(5자이상)">
 						<span class="input_check"></span>
 						<i class="fa fa-check ch" aria-hidden="true"></i>						
 					</div>
 					
 					<div id="content_field" class="club_row">
 						<label for="content">동호회 소개글 </label>
-						<input type="text" id="content" name="cContent" placeholder="소개글 입력(5자이상)">
+						<input type="text" id="content" name="cContent" placeholder="소개글 입력(10자이상)">
+						<span class="input_check"></span>	
+						<i class="fa fa-check ch" aria-hidden="true"></i>					
+					</div>
+					
+					<div id="name_field" class="club_row">
+						<label for="nickname">닉네임<span class="detail">(*동호회에서 사용할 닉네임)</span> </label>
+						<input type="text" id="cNickname" name="cNickname" placeholder="닉네임을 입력하세요(2자이상)">
 						<span class="input_check"></span>	
 						<i class="fa fa-check ch" aria-hidden="true"></i>					
 					</div>

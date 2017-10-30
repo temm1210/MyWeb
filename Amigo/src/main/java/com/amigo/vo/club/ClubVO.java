@@ -11,7 +11,7 @@ public class ClubVO {
 	private String cMaster;
 	private Date cRegdate;
 	private int cArea;
-	private int cHoby;
+	private int cHobby;
 	
 	public ClubVO() {}
 	public int getcNum() {
@@ -56,16 +56,15 @@ public class ClubVO {
 	public void setcArea(int cArea) {
 		this.cArea = cArea;
 	}
-	public int getcHoby() {
-		return cHoby;
+	public int getcHobby() {
+		return cHobby;
 	}
-	public void setcHoby(int cHoby) {
-		this.cHoby = cHoby;
+	public void setcHobby(int cHobby) {
+		this.cHobby = cHobby;
 	}
 	@Override
 	public String toString() {
 		return "ClubVO [cNum=" + cNum + ", cTitle=" + cTitle + ", cContent=" + cContent + ", cPic=" + cPic
-				+ ", cMaster=" + cMaster + ", cRegdate=" + cRegdate + ", cArea=" + cArea + ", cHoby=" + cHoby + "]";
+				+ ", cMaster=" + cMaster + ", cRegdate=" + cRegdate + ", cArea=" + cArea + ", cHobby=" + cHobby + "]";
 	}
-
 }

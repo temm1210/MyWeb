@@ -69,3 +69,8 @@ input[type='button']:hover{
 .view{
 	display: inline-block;
 }
+
+.detail{
+	font-size: 11px;
+	vertical-align: 2px;
+}

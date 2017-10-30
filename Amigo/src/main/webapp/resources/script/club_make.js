@@ -1,16 +1,16 @@
 $(document).ready(function(){
 	/* 동호회 제목 체크 */
-
 	$("#title").stop().blur(function(){
-		 checkValue(this,"이름을 입력하세요",2)
+		 checkValue(this,"이름을 입력하세요",5)
 	})
-	
 	/* 소개글체크 */
 	$("#content").stop().blur(function(){
-		 checkValue(this,"소개글을 입력하세요",5)
+		 checkValue(this,"소개글을 입력하세요",10)
 	})
-
-	
+	/*닉네임 체크*/
+	$("#cNickname").stop().blur(function(){
+		 checkValue(this,"닉네임을 입력하세요",2)
+	})
 })
 
 function checkValue(sel,errorStr,condition){
@@ -18,7 +18,7 @@ function checkValue(sel,errorStr,condition){
 	 var $sel_parent = $(sel).parent();
 	 
 	 if(value == '' || value.length < condition)
-		 errorCheckEffect("이름을 입력하세요",$sel_parent);
+		 errorCheckEffect(errorStr,$sel_parent);
 	 else
 		 successCheckEffect($sel_parent);
 }

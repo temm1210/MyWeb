@@ -44,7 +44,7 @@
 	</tx:advice>
 	
 	<aop:config>				  
-		<aop:pointcut expression="execution(* com.amigo.service..*.*(..))" id="txPointCut"/>
+		<aop:pointcut expression="execution(* com.amigo.service.club.*Impl.insert*(..)) or execution(* com.amigo.service.member.*Impl.insert*(..))" id="txPointCut"/>
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointCut"/>
 	</aop:config>
 	

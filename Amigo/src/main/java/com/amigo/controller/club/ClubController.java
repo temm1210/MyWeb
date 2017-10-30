@@ -53,18 +53,17 @@ public class ClubController {
 		/*파일업로드후 경로반환*/
 		FileUpLoad ful = new FileUpLoad();
 		String picName = ful.fileForm(file,request);
-		/*------------*/
-		System.out.println("사진경로및 이름확인:"+picName);
-		System.out.println("map확인:"+map.get("cTitle"));
-		System.out.println("map확인2:"+map.get("cContent"));
+
+		System.out.println("map확인:"+map);
 		/*동호회 만드는 사람의 아이디 확인(동호회장)*/
 		map.put("username", authencation.getName());
 		
 		/*업로드된 파일이 저장된 경로랑,사용자가입력한 정보를 저장한 map객체전달*/
-		int ch = service.insertClub(map, picName);
+		int ch_club = service.insertClub(map, picName);
+		int ch_club_member;
 		String redirectPath = "";
 		
-		if(ch > 0) {
+		if(ch_club > 0) {
 			rdr.addAttribute("msg", "success" );
 			rdr.addAttribute("picName", picName);
 			/*동호회 이름저장*/

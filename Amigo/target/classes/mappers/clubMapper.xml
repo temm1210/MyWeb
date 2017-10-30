@@ -4,8 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.amigo.dao.club">
   	<insert id="insertClub">
-  		INSERT INTO amigo_club(cnum,ctitle,ccontent,cpic,cmaster,carea,choby)
-  		VALUES(AMIGO_CLUB_SEQ.NEXTVAL,#{cTitle},#{cContent},#{cPic},#{cMaster},#{cArea},#{cHoby})
+  		INSERT INTO amigo_club(cnum,ctitle,ccontent,cpic,cmaster,carea,chobby)
+  		VALUES(AMIGO_CLUB_MEMBERS_SEQ.CURRVAL,#{cTitle},#{cContent},#{cPic},#{cMaster},#{cArea},#{cHobby})
   	</insert>
   	
   	<select id="selectSubArea" resultType="String">

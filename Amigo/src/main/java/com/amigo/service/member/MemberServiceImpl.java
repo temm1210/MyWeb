@@ -23,7 +23,7 @@ public class MemberServiceImpl implements MemberService {
 	private MemberDAO dao;
 	
 	
-	/*AOP肺 飘罚黎记 贸府*/
+	/*AOP 飘罚黎记 贸府*/
 	@Override
 	public void insertMember(MemberVO member,String authority) {
 		// TODO Auto-generated method stub

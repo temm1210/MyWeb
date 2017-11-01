@@ -30,6 +30,7 @@ private static final Logger logger = LoggerFactory.getLogger(MemberQueryTest.cla
 	}
 	
 	@Test
+	@Ignore
 	public void insertMemberTest() {
 		logger.info("insertMemberTest 시작");
 		
@@ -43,6 +44,21 @@ private static final Logger logger = LoggerFactory.getLogger(MemberQueryTest.cla
 		member.setmAge(23);
 		
 		service.insertMember(member,"ROLE_USER");
+	}
+	
+	@Test
+	public void updateMemberTest() {
+		logger.info("updateMember 시작");
+	
+		MemberVO member = service.selectMember("호우");
+		
+		logger.info("member의값:{}",member);
+		member.setPassword("qwer1234@");
+		member.setmName("호날두");
+		member.setmTel("01012341234");
+		member.setmEmail("Real@gmail.com");
+		
+		service.updateMember(member);
 	}
 	
 }

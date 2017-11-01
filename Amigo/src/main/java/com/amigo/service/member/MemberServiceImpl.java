@@ -1,7 +1,5 @@
 package com.amigo.service.member;
 
-import javax.inject.Inject;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,8 +17,8 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private AuthorityDAO authorDao;
 	
-	@Inject
-	private MemberDAO dao;
+	@Autowired
+	private MemberDAO memberDao;
 	
 	
 	/*AOP 트랜잭션 처리*/
@@ -30,14 +28,23 @@ public class MemberServiceImpl implements MemberService {
 		String dbPwd = member.getPassword();
 		member.setPassword(passwordEncoder.encode((dbPwd)));
 		
-		dao.insertMember(member);
+		memberDao.insertMember(member);
 		authorDao.insertUser(member.getUsername(), authority);
 	}
 	
 	@Override
 	public MemberVO selectMember(String mid) {
 		// TODO Auto-generated method stub
-		return dao.selectMember(mid);
+		return memberDao.selectMember(mid);
+	}
+
+	@Override
+	public void updateMember(MemberVO member) {
+		// TODO Auto-generated method stub
+		String dbPwd = member.getPassword();
+		member.setPassword(passwordEncoder.encode(dbPwd));
+		memberDao.updateMember(member);
+		
 	}
 
 }

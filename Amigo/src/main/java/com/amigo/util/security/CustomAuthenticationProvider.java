@@ -27,10 +27,14 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		
 		MemberVO memberVo = (MemberVO) detailService.loadUserByUsername(user_id);
 		
+		System.out.println("memberVO값 확인:"+memberVo);
+		
 		if(!passwordEncoder.matches(user_pwd, memberVo.getPassword()))
 			throw new BadCredentialsException("비밀번호가 틀립니다");
 		
-		return new UsernamePasswordAuthenticationToken(user_id, user_pwd, memberVo.getAuthorities());
+		 
+		return new UsernamePasswordAuthenticationToken(memberVo,null, memberVo.getAuthorities());
+		/*UsernamePasswordAuthenticationToken생성자에 UserDetails를 상속하는 객체를 넣어주지않으면 인식못함*/
 	}
 
 	@Override
@@ -38,5 +42,13 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		// TODO Auto-generated method stub
 		return UsernamePasswordAuthenticationToken.class.isAssignableFrom(checkAuthentication);
 	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return super.toString();
+	}
+	
+	
 
 }

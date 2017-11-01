@@ -65,34 +65,88 @@ main {
 #logo > h2 {
 	font-family: 'Tangerine', serif; 
 	font-weight: bold;
-	padding-left:50px;
+	padding-left:7px;
 	padding-top: 7px;
 	font-size: 66px;
 	letter-spacing:4px;
 	color:#b49759;
 }
-#log > i,#join > i, #logOut > i,#user > span,#mypage > span{
+#log > i,#join > i,.fa-user-circle,#clubs,#log_Out{
 	float:right;
-	line-height: 40px;
+	line-height: 55px;
     padding: 30px 15px;
     font-size: 23px; 
 	color: #fff;
 	margin: 0;
     font-weight: 700;
 }
+#log_Out{
+	padding: 0;
+	margin-right: 20px;
+	margin-top: 29px;
+	font-size: 13px;
+}
 #logOut > i{
-	color:rgba(255,255,255,.6);
+	font-size: 28px; 
+	color:rgba(255,255,255,1);
 }
-#user > span,
-#mypage > span{
-	font-size: 15px;
-	color:rgba(255,255,255,.2);
+
+#clubs{
+	font-size: 13px;
+	margin-top: 4px;
+	cursor: pointer;
 }
-#search > i:hover,#log > i:hover, #join > i:hover, #logOut > i:hover { color: #efa666;  }
-#search > i:hover:before{
-	font-family: 'Tangerine', serif; content: "search";
-	font-size: 1.6em;
+#user_id{
+	font-weight: bold;
+	margin-left: 5px;
+	width: 100px;
+	float: right;
+	color: white;
+	line-height: 120px;
+	font-size: 14px;
 }
+#clubs:hover #clubs_list{
+	display:block;
+}
+#profile_pic{
+	float: right;
+	margin-top: 30px;
+	margin-right: 5px;
+}
+#pr_pic{
+	display: inline-block;
+	border-radius: 30px;
+	
+}
+#clubs_list{
+	display: none;
+	position: absolute;
+	top: 100px;
+	right: 0;
+	padding: 5px 70px;
+	color: rgba(0,0,0,.7);
+	background: rgba(255,255,255,.7);
+}
+
+#detail_comment{
+	position: relative;
+	font-size: 10px;
+	/* top:-20px; */
+}
+
+#mypage:hover #user_id{
+	color: #efa666;
+}
+.fa-user-circle{
+	padding-right: 4px;
+	position: relative;
+	color:rgba(255,255,255,1);
+	margin-top: 7px;
+	cursor: pointer;
+}
+
+#log > i:hover, #join > i:hover, #log_Out:hover,#clubs:hover { color: #efa666;  }
+
 #log > i:hover:before {
 	font-family: 'Tangerine', serif; content: "login"; 
 	font-size: 1.6em;
@@ -101,57 +155,11 @@ main {
 	font-family: 'Tangerine', serif; content: "join"; 
 	font-size: 1.6em;	
 }
-#user > span:hover,
-#mypage > span:hover{
-	color:#b49759;
-}
+
 #logOut > i:hover:before{
 	font-family: 'Tangerine', serif; content: "logOut"; 
 	font-size: 1.2em;	
 }
-.search_box {
-  clear: both;
-  width: 100%;
-  background: #e8ebf0;
-  padding: 0;
-  margin: 0;
-  height: 0;
-  overflow: hidden;
-  transition: all 0.1s ease-in-out;
-}
-
-.search_box.active {
-  height: auto;
-  padding: 15px 0;
-}
-
-.search_box input {
-  width: 80%;
-  font-size: 13px;
-  margin: 0 0 0 15px;
-  padding: 10px;
-  border: none;
-  background: #fff;
-}
-
-.search_box input:focus { outline: none; }
-
-.search_box input.search_icon {
-  clear: both;
-  width: 10%;
-  height: auto;
-  padding: 10px;
-  margin: 0;
-  margin-left: -5px;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  background: #8c949d;
-  opacity: 1;
-  transition: all 0.1s ease;
-}
-
-.search_box input.search_icon:hover { background: #efa666; }
 .menu-link { display: none; }
 .spinner-master input[type=checkbox] { display: none; }
 .menu {
@@ -199,7 +207,7 @@ main {
 }
 
 .menu ul li > a { 
-	padding: 45px 32px 36px 32px;   
+	padding: 52px 32px 36px 32px;   
 	color: white;
 }
 
@@ -220,22 +228,9 @@ main {
   padding: 18px 10px;
   height: auto;
   color: rgba(0,0,0,.7);
-  /* background: #1b1b1b;
-  border-bottom: 0.4px solid rgba(255,255,255,.9);
-   */
 }
-
-/* .menu ul ul > li:last-child a {
-  padding: 18px 10px;
-  height: auto;
-  background: #1b1b1b;
-  border-bottom: 0.4px solid rgba(255,255,255,.9);
-  
-}
- */
 
 .menu ul ul > li:hover{
-  /* background: #39484d; */
   color: #fff;
 }
 
@@ -257,7 +252,7 @@ main {
   height: auto;
 } 
 
-@media all and (max-width: 778px) {
+@media all and (max-width: 787px) {
 
 #logo{
 	display:none;
@@ -272,8 +267,6 @@ main {
 }
 
 .example-header .container { width: 100%; }
-
-/* #search { padding: 10px; } */
 
 .spinner-master * {
   transition: all 0.3s;

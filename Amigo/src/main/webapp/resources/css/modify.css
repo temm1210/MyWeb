@@ -1,0 +1,48 @@
+body{
+	background: #eee;
+}
+
+#container{
+	padding-top: 200px;
+}
+
+#content{
+	display: flex;
+	margin-bottom: 200px;
+}
+
+#content .wrap_link{
+	flex: 1 1 200px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+.second_page{
+	margin-left: 50px;
+}
+
+.sub_comment{
+	display:inline-block;
+	margin-left:40%;
+	font-size: 30px;
+}
+
+.fa-cog{
+	text-align:center;
+	margin:0 auto;
+	padding-left:25px;
+	padding-bottom:70px;
+	width:100%;
+}
+.my_info{
+	text-align: center;
+	font-size: 50px;
+	margin: 0 auto;
+	width: 100%;
+	display: block;
+	padding-left: 22px;
+	color: #b49759
+}
+
+.delete_info:hover{
+	transform:scale(1.2);
+}

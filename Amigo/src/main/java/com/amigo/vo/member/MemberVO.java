@@ -19,22 +19,20 @@ public class MemberVO implements UserDetails{
 	private String mTel;
 	private String mEmail;
 	private String mGender;
-	private Date mRegedate;
+	private String mPic;
+	private Date mRegdate;
 	private int mAge;
 	/*사용자가 가진 권한 전부 저장할 변수*/
 	private Collection<? extends GrantedAuthority> authorities;
 	
 	
-	public void setAuthorities(Collection<GrantedAuthority> authorities) {
-		this.authorities = authorities;
+	public String getmPic() {
+		return mPic;
 	}
 
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return this.authorities;
+	public void setmPic(String mPic) {
+		this.mPic = mPic;
 	}
-	
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
@@ -44,6 +42,18 @@ public class MemberVO implements UserDetails{
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	
+	public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
+		this.authorities = authorities;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return this.authorities;
+	}
+	
+
 	
 	@Override
 	public String getPassword() {
@@ -78,12 +88,15 @@ public class MemberVO implements UserDetails{
 	public void setmGender(String mGender) {
 		this.mGender = mGender;
 	}
-	public Date getmRegedate() {
-		return mRegedate;
+	
+	public Date getmRegdate() {
+		return mRegdate;
 	}
-	public void setmRegedate(Date mRegedate) {
-		this.mRegedate = mRegedate;
+
+	public void setmRegdate(Date mRegdate) {
+		this.mRegdate = mRegdate;
 	}
+
 	public int getmAge() {
 		return mAge;
 	}
@@ -115,9 +128,8 @@ public class MemberVO implements UserDetails{
 	@Override
 	public String toString() {
 		return "MemberVO [username=" + username + ", password=" + password + ", mName=" + mName + ", mTel=" + mTel
-				+ ", mEmail=" + mEmail + ", mGender=" + mGender + ", mRegedate=" + mRegedate + ", mAge=" + mAge
+				+ ", mEmail=" + mEmail + ", mGender=" + mGender + ", mRegdate=" + mRegdate + ", mAge=" + mAge
 				+ ", authorities=" + authorities + "]";
 	}
-	
 	
 }

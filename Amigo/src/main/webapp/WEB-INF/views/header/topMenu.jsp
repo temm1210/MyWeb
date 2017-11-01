@@ -5,29 +5,24 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <c:set var="location" value="${pageContext.request.contextPath}"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="<c:url value="/resources/css/reset.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/top-menu.css" />">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="<c:url value="/resources/css/reset.css"/>">
-<style>
-	#viewCLub{
-		position:absolute;
-		top:0;
-		left:1200px;
-		display:inline-block;
-		background-color: black;
-		width:100px;
-		height:200px;
-		opacity: 0;
-		-webkit-transition: opacity 0.3s;
-		transition: opacity 0.3s;
-	}
-	
-	#myClub:hover + #viewCLub{
-		opacity:1
-	}
-</style>
 <script>
+	$(document).ready(function(){
+		var prevHtml;
+		
+ 		$("#user_id").mouseover(function(){
+			prevHtml = $("#user_id").html();
+			$("#user_id").html(' Mypage');
+		})
+		
+		$("#user_id").mouseout(function(){
+			$("#user_id").html(prevHtml);
+		}) 
+	})
+	
 	function logOutCheck(){
 		if(confirm("로그아웃 하시겠씁니까?")){
 			$("#logOutForm").submit()
@@ -47,23 +42,36 @@
   		<a href="${location}/index.jsp" title="logo" id="logo">
   			<h2>amiGo</h2>
   		</a>
- 	    <div class="sub-logo"> 
+ 	    <div class="sub-logo">
 		    <sec:authorize access="isAnonymous()">
 		   		<a href="${location}/member/login.amg" class="btn" id="log"><i class="fa fa-user-o" aria-hidden="true"></i></a>
 		    	<a href="${location}/member/joinFirst.amg" class="btn" id="join"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
 		  	</sec:authorize>
-		   	
-		   	<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
-		   		<a href="javascript:logOutCheck()" class="btn" id="logOut"><i class="fa fa-user-times" aria-hidden="true"></i></a>
-		   		<a href="" class="btn" id="mypage">
-		   			<span id="myClub">가입한 동호회</span>
+
+		   	<sec:authorize access="isAuthenticated()">
+		   		<sec:authentication property="principal" var="user"/>  	 	
+		   		<a href="javascript:logOutCheck()" class="btn" id="logOut"><span id="log_Out">Logout</span></a>			   			
+				
+				<a href="${location}/member/modify.amg" id="mypage">
+					<span id="user_id">
+						<sec:authentication property="principal.username"/>님
+					</span>
+					
+					<c:choose>
+						<c:when test="${user.mPic == null}">
+							<i class="fa fa-user-circle" style="font-size:40px;" aria-hidden="true"></i>				
+						</c:when>							
+						<c:otherwise>
+							<div id="profile_pic">
+								<img id="pr_pic" height="60px" width="60px" src="<c:url value='/resources/images/member_images/${user.mPic}'/>">
+							</div>
+						</c:otherwise>
+					</c:choose>
 		   		</a>
-		   		<a href="${location}/member/myPage.amg" class="btn" id="user">
-		   			<span id="myPage">MyPage</span>
-		   		</a>
+		   		
 		   		<form id="logOutForm" action="<c:url value='${location}/member/logOut.amg'/>"method="post">
 		   			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-		   		</form>
+		   		</form> 
 			</sec:authorize>	    
  	    </div>
  	    
@@ -76,13 +84,21 @@
       			</ul>
       		</li>
 
-			<li><a href="#Link" title="Link">게시판</a></li>
 			<li><a href="#Link" title="Link">고객센터</a>
 				<ul>
 					<li><a href="${location}/qna/freQuestion.amg" title="Link">F&Q</a></li>
 					<li><a href="${location}/qna//qna.amg" title="Link">1:1질문</a></li>
 				</ul>
 			</li>
+			
+			<sec:authorize access="isAuthenticated()">
+				<li><a href="#Link" title="Link">가입한동호회</a>
+					<ul>
+						<li><a href="${location}/#" title="Link">동호회1</a></li>
+						<li><a href="${location}/#" title="Link">동호회2</a></li>
+					</ul>
+				</li>
+			</sec:authorize>
 	    </ul>
   	</nav>
 	  

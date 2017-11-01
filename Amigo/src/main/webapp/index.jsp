@@ -12,6 +12,7 @@
 			 $('.parallax-window').parallax();
 		 }  
 	});
+	
 </script> 
 </head>
 <body>
@@ -52,7 +53,7 @@
 					</div>
 					<div class="img-text_2">
 						<a href="${location}/amigoService.amg">
-							<img id="second-sub" src="<c:url value="/resources/images/society5.jpg"/>" width="100%" height="700px">
+							<img id="second-sub" src="<c:url value="/resources/images/society.jpg"/>" width="100%" height="700px">
 							<div class="border-line"></div>
 							<div class="img_caption ">
 								<h1 class="main-comment">Amigo Service</h1>

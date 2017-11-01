@@ -28,6 +28,45 @@
 	margin-left:15px;
 }
 
+.wraper_img{
+	display: inline-block;
+	width: 130px;
+	height: 120px;
+	margin-right: 20px;
+	vertical-align: -50px;
+	overflow: hidden;
+	border-radius: 50%;
+}
+#pro_pic{
+	display: none;
+	max-width: 140px;
+	min-height: 140px;
+}
+.wraper_pic{
+	position: relative;
+}
+
+.wraper_pic > .sel_pic{
+	font-weight: bold;
+	cursor: pointer;
+	display: inline-block;
+	border: 1px solid rgba(0,0,0,.2);
+	padding:6px 5px 0 5px;
+	width: 70px;
+	height: 33px;
+}
+
+.wraper_pic > #pic{
+	position: absolute;
+	border: none;
+	left: 0;
+	top: 0;
+	overflow:hidden;
+	width:1px;
+	height:1px;
+	clip:rect(0,0,0,0);
+}
+
 #join_second_form > div.join_row > input{
 	font-family: 'Jeju Gothic', serif; /* Input 박스  위치변경 막기 */
 	height:40px;
@@ -41,11 +80,15 @@ input[type="password"] {
 	font-family: sans-serif !important;
 	font-weight: bold;
 }
-
-#join_second_form > div.join_row:nth-child(7) > input{
+#join_second_form > div.join_row:nth-child(5) > input{
+	width: 77px;
+	background: none;
+	border: 1px solid rgba(0,0,0,.2);
+}
+#join_second_form > div.join_row:nth-child(8) > input{
 	width:100px;
 }
-#join_second_form > div.join_row:nth-child(6) > input{
+#join_second_form > div.join_row:nth-child(7) > input{
 	width:160px;
 }
 
@@ -72,8 +115,12 @@ input:-webkit-autofill { transition: background-color 5000s ease-in-out 0s;}
 #email_box > option{
 	font-size: 16px;
 }
-
-.fa{
+.fa-user-circle{
+	font-size: 120px;
+	vertical-align: -20px;
+	margin-right: 40px;
+}
+.fa-check{
 	display: none;
 	color:green;
 }

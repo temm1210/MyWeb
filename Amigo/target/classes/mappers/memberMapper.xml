@@ -5,15 +5,28 @@
   
   <mapper namespace="com.amigo.dao.member">
   	<insert id="insertMember">
-  		INSERT INTO amigo_member(mid,mpwd,mname,mtel,memail,mgender,mage,enabled)
-  		VALUES(#{username},#{password},#{mName},#{mTel},#{mEmail},#{mGender},#{mAge},'1')
+  		INSERT INTO amigo_member(mid,mpwd,mpic,mname,mtel,memail,mgender,mage,enabled)
+  		VALUES(#{username},#{password},#{mPic},#{mName},#{mTel},#{mEmail},#{mGender},#{mAge},'1')
   	</insert>
   	
   	<select id="selectMember" resultType="MemberVO">
   		SELECT 
-  			mid as username,mpwd as password,mname,mtel,memail,mgender,mregdate,mage
+  			mid as username,mpwd as password,mpic,mname,mtel,memail,mgender,mregdate,mage										       
   		FROM
   			amigo_member
   		where mid=#{mid} 
   	</select>
+
+  	<update id="updateMember">
+  		UPDATE 
+  			amigo_member
+  		SET
+  			mpwd=#{password},
+  			mpic=#{mPic},
+  			mname=#{mName},
+  			mtel=#{mTel},
+  			memail=#{mEmail}
+  		WHERE
+  			mid=#{username}
+  	</update>
   </mapper>

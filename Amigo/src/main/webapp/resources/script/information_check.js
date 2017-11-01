@@ -9,7 +9,9 @@ $(document).ready(function(){
 		 var $id_parent = $(this).parent();
 		 
 		 if(id == '')
-			 errorCheckEffect("이름을 입력하세요",$id_parent);
+			 errorCheckEffect("아이디를 입력하세요",$id_parent);
+		 else if(id.length > 13)
+			 errorCheckEffect("13자리 이하로 입력하세요",$id_parent);
 		 else
 			 successCheckEffect($id_parent);
 	})
@@ -46,8 +48,9 @@ $(document).ready(function(){
 		 var name =$(this).val();
 		 var $name_parent = $(this).parent();
 		 
-		 if(name == '')
-			 errorCheckEffect("이름을 입력하세요",$name_parent);
+		 
+		 if(name == '' || name.length < 2)
+			 errorCheckEffect("이름을 올바르게 입력하세요",$name_parent);
 		 else
 			 successCheckEffect($name_parent);
 	})
@@ -103,7 +106,7 @@ $(document).ready(function(){
 		var $tel_parent = $(this).parent();
 		 
 		if(tel == '' || tel.indexOf("-")!= -1 || tel.length!=11)
-			errorCheckEffect("'-'를 제외하고 다시 입력하세요", $tel_parent);
+			errorCheckEffect("'-'제외하고 올바르게 입력하세요", $tel_parent);
 		else
 		 	successCheckEffect($tel_parent);	 
 	})

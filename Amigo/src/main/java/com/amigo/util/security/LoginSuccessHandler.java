@@ -30,6 +30,11 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
 		
 		
 		System.out.println("uri확인:"+request.getRequestURI());
+		System.out.println("RemoteAddr확인:"+request.getRemoteAddr());
+		System.out.println("urL확인:"+request.getRequestURL());
+		
+		
+		
 		for(GrantedAuthority a : authentication.getAuthorities()){
 			logger.info(a.getAuthority());
 		}
@@ -38,6 +43,8 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
 		
 		if(session != null) {
 			String path = (String) session.getAttribute("prevpage");
+			if(path.contains("joinSuccess.amg"))
+				path = path.replace("member/joinSuccess.amg", "index.jsp");
 			
 			if(path != null) {
 				session.removeAttribute("prevpage");

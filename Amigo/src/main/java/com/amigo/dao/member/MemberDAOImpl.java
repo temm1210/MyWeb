@@ -26,4 +26,10 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectOne("selectMember", mid);
 	}
 
+	@Override
+	public void updateMember(MemberVO member) {
+		// TODO Auto-generated method stub
+		sqlSession.update("updateMember", member);
+	}
+
 }

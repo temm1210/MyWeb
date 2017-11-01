@@ -30,7 +30,7 @@
 			
 			<div class="link_group">
 				<a href="${location}/member/login.amg" class="link" id="agree_link">로그인</a>
-				<a href="${location}/member/index.amg" class="link" id="home_link">홈으로가기</a>
+				<a href="/index.jsp" class="link" id="home_link">홈으로가기</a>
 			</div>
 		</div>
 		<%@ include file="../footer/footer.jsp" %>

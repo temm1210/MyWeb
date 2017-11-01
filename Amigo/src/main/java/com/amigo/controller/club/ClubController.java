@@ -52,7 +52,7 @@ public class ClubController {
 						   @RequestParam Map<String,Object> map) {
 		/*파일업로드후 경로반환*/
 		FileUpLoad ful = new FileUpLoad();
-		String picName = ful.fileForm(file,request);
+		String picName = ful.fileForm(file,request,"club_images");
 
 		System.out.println("map확인:"+map);
 		/*동호회 만드는 사람의 아이디 확인(동호회장)*/
@@ -60,7 +60,8 @@ public class ClubController {
 		
 		/*업로드된 파일이 저장된 경로랑,사용자가입력한 정보를 저장한 map객체전달*/
 		int ch_club = service.insertClub(map, picName);
-		int ch_club_member;
+		
+		
 		String redirectPath = "";
 		
 		if(ch_club > 0) {
@@ -91,7 +92,6 @@ public class ClubController {
 	
 	@RequestMapping("/clubRead.amg/{num}")
 	public String clubReead(@PathVariable("num") int num) {
-		
 		return "club/club";
 	}
 	

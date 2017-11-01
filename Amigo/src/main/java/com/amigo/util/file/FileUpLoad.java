@@ -9,8 +9,8 @@ public class FileUpLoad {
 	
 	public FileUpLoad() {};
 	
-	public String fileForm(MultipartFile file,MultipartHttpServletRequest request ) {		
-		String uploadPath = getSaveLocation(request);
+	public String fileForm(MultipartFile file,MultipartHttpServletRequest request,String folderName) {		
+		String uploadPath = getSaveLocation(request,folderName);
 		String saveFileName = file.getOriginalFilename();
 		
 		if(saveFileName != null && !saveFileName.equals("")) {
@@ -30,9 +30,9 @@ public class FileUpLoad {
 		return saveFileName;
 	}
 	
-	private String getSaveLocation(MultipartHttpServletRequest request){
-	   String defaultPath=request.getSession().getServletContext().getRealPath("/");
-       String filePath=defaultPath+"resources"+File.separator+"images"+File.separator+"club_images"+File.separator;
+	private String getSaveLocation(MultipartHttpServletRequest request,String folderName){
+	   String defaultPath=request.getServletContext().getRealPath("/");
+	   String filePath=defaultPath+"resources"+File.separator+"images"+File.separator+folderName+File.separator;       
        /*defaultPath가 webapp까지의 경로를 알아서 구해줌*/
        
        /*filePath는 webapp이후의 경로를 직접설정*/

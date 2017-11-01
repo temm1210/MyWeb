@@ -43,12 +43,12 @@
 					<span id="stateCh"></span>
 					<div id="id_div" class="login_row">
 						<label for="mid">아이디 </label>
-						<input type="text" id="mId" name="mId">
+						<input type="text" id="mId" name="username">
 					</div>
 					
 					<div id="pwd_div" class="login_row">
 						<label for="pwd">패스워드 </label>
-						<input type="password" id="mPwd" name="mPwd">
+						<input type="password" id="mPwd" name="password">
 					</div>
 					
 					<div class="submit_group">

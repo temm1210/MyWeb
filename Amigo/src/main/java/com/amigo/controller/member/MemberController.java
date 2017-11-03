@@ -5,8 +5,11 @@ import java.security.Principal;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.amigo.service.file.FileUpLoad;
 import com.amigo.service.member.MemberService;
@@ -29,7 +33,9 @@ public class MemberController {
 	
 	@Inject
 	private FileUpLoad fileUpload;
-
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 
 	/*로그인폼*/
 	@RequestMapping("/login.amg")
@@ -56,11 +62,35 @@ public class MemberController {
 	}
 	
 	/*회원정보보기*/
-	@RequestMapping(value ="/modify.amg", method=RequestMethod.GET)
-	public String myPage(Principal principal,Model model ) {
-		return "modify/modify";
+	@RequestMapping(value ="/modify_check.amg", method=RequestMethod.GET)
+	public String myPage() {
+		return "modify/modify_check";
 	}
 	
+	
+	@RequestMapping(value="/modify_entry.amg",method=RequestMethod.POST)
+	public String modifyCheck(@RequestParam("password") String password,RedirectAttributes redirectAttr) {
+		
+		
+		/*시큐리티 인증정보를 가져옴*/
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		/*시큐리티인증정보를 가져온걸 MemberVO로 캐스팅*/
+		MemberVO member = (MemberVO) auth.getPrincipal();
+		String path="";
+		
+		System.out.println("비밀번호:"+member.getPassword());
+		
+		if(passwordEncoder.matches(password,member.getPassword())) {
+			System.out.println("비밀번호일치");
+			path="modify/modify_entry";
+		} else {
+			System.out.println("비밀번호불일치");
+			/*리다이렉트시 데이터를넘김 컨트롤러에서 별도의작업없이 바로 jsp에서 msg사용가능(post와 비슷하게보냄)*/
+			redirectAttr.addFlashAttribute("msg", "fail");
+			path ="redirect:/member/modify_check.amg";
+		}
+		return path;
+	}
 	
 	/*회원수정에서 내정보를 표시*/
 	@RequestMapping("/modify_update.amg")
@@ -76,6 +106,9 @@ public class MemberController {
 						  MultipartHttpServletRequest request,
 						  @RequestParam(value="prev_pic",defaultValue="") String deleteFileName,
 						  @RequestParam(value="pic",defaultValue="") MultipartFile file) {
+		
+		String dbPwd = member.getPassword();
+		member.setPassword(passwordEncoder.encode(dbPwd));
 		
 		/*기존프로필 사진 삭제*/
 		fileUpload.deleteFile(request, PROFILE_IMAGES_FOLDER, deleteFileName);
@@ -102,6 +135,8 @@ public class MemberController {
 		/*프로필 사진 업로드*/
 		String picName = fileUpload.fileForm(file, request, PROFILE_IMAGES_FOLDER);
 		
+		String dbPwd = member.getPassword();
+		member.setPassword(passwordEncoder.encode((dbPwd)));
 		/*업로드한 파일 이름 DB에저장*/
 		member.setmPic(picName);
 		service.insertMember(member, authority);

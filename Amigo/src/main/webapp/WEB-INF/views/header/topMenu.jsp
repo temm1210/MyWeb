@@ -52,7 +52,7 @@
 		   		<sec:authentication property="principal" var="user"/>  	 	
 		   		<a href="javascript:logOutCheck()" class="btn" id="logOut"><span id="log_Out">Logout</span></a>			   			
 				
-				<a href="${location}/member/modify.amg" id="mypage">
+				<a href="${location}/member/modify_check.amg" id="mypage">
 					<span id="user_id">
 						<sec:authentication property="principal.username"/>님
 					</span>

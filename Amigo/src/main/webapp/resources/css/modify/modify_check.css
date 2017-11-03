@@ -1,0 +1,42 @@
+#container{
+	width:90%;
+	height:100%;
+	margin-top: 340px;
+	margin-bottom: 200px;
+	padding:0;
+}
+#content{
+	width: 90%;
+	margin: 0 auto;
+	text-align: center;
+}
+	
+#content .wrap_pwd > h2{
+	font-weight: bold;
+	font-size: 30px;
+}
+
+#content .pwd_field{
+	margin: 20px 0;
+}
+
+#content .pwd_field > label{
+	font-size: 25px;
+}
+
+#content .pwd_field > #password{
+	width: 180px;
+	height: 20px;
+	vertical-align: 5px;
+}
+input[type="submit"]{
+	background: white;
+	width: 80px;
+	height: 26px;
+	vertical-align: 3px;
+	cursor: pointer;
+	font-size: 15px;
+	font-weight: 600;
+	border:1px solid rgba(0,0,0,.3);
+	margin-left: 10px;
+}

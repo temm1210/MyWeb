@@ -24,10 +24,7 @@ public class MemberServiceImpl implements MemberService {
 	/*AOP 트랜잭션 처리*/
 	@Override
 	public void insertMember(MemberVO member,String authority) {
-		// TODO Auto-generated method stub
-		String dbPwd = member.getPassword();
-		member.setPassword(passwordEncoder.encode((dbPwd)));
-		
+		// TODO Auto-generated method stub	
 		memberDao.insertMember(member);
 		authorDao.insertUser(member.getUsername(), authority);
 	}

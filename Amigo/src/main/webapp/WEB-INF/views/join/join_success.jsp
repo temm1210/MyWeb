@@ -4,7 +4,7 @@
 <html>
 <head>
 <%@ include file="../header/topMenu.jsp" %>
-<link rel="stylesheet" href="<c:url value="/resources/css/join_success.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/join/join_success.css"/>">
 <style>
 	#main-img{
 		background-image: url("<c:url value="/resources/images/welcome.jpg"/>");
@@ -33,12 +33,7 @@
 				<a href="/index.jsp" class="link" id="home_link">홈으로가기</a>
 			</div>
 		</div>
-		<%@ include file="../footer/footer.jsp" %>
 	</div>
 </body>
-<style>
-	#footer{
-		top:0;
-	}
-</style>
 </html>
+<%@ include file="../footer/footer.jsp" %>

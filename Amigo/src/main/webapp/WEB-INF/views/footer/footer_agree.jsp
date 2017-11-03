@@ -3,7 +3,7 @@
 <html>
 <head>
 <%@ include file="../header/topMenu.jsp" %>
-<link rel="stylesheet" href="<c:url value="/resources/css/footer_agree.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/footer/footer_agree.css"/>">
 </head>
 <body>
 	<div class="agr_container">
@@ -178,11 +178,6 @@
 			</div>
 		</div>
 	</div>
-	<%@ include file="footer.jsp" %>
 </body>
-<style>
-	#footer{
-		top:0;
-	}
-</style>
 </html>
+<%@ include file="../footer/footer.jsp" %>

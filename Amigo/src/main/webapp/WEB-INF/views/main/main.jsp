@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@ include file="header/topMenu.jsp" %>
-<link rel="stylesheet" href="<c:url value="/resources/css/index.css" />">
+<%@ include file="../header/topMenu.jsp" %>
+<link rel="stylesheet" href="<c:url value="/resources/css/main/main.css" />">
 <script>
 	$(function(){
 		/* $(".parallax-container").parallax({imageSrc:"door.jpg"})  */
@@ -286,6 +286,6 @@
 		</div>
 	</div>
 <script src="<c:url value="/resources/script/parallax.js"/>"></script>
-<%@ include file="footer/footer.jsp" %>
 </body>
 </html>
+<%@ include file="../footer/footer.jsp" %>

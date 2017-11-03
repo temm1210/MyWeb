@@ -85,6 +85,7 @@ main {
 	margin-right: 20px;
 	margin-top: 29px;
 	font-size: 13px;
+	color: rgba(255,255,255,.7);
 }
 #logOut > i{
 	font-size: 28px; 
@@ -99,9 +100,9 @@ main {
 #user_id{
 	font-weight: bold;
 	margin-left: 5px;
-	width: 90px;
+	width: 80px;
 	float: right;
-	color: white;
+	color: rgba(255,255,255,.7);
 	line-height: 120px;
 	font-size: 14px;
 }
@@ -207,7 +208,7 @@ main {
 }
 
 .menu ul li > a { 
-	padding: 52px 32px 36px 32px;   
+	padding: 52px 32px 30px 32px;   
 	color: white;
 }
 

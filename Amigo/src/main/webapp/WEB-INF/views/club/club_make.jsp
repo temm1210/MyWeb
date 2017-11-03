@@ -8,7 +8,7 @@
 <%@ include file="../header/topMenu.jsp" %>
 <script src="<c:url value="/resources/script/checkEffect.js"/>"></script>
 <script src="<c:url value="/resources/script/club_make.js"/>"></script>
-<link rel="stylesheet" href="<c:url value="/resources/css/club_make.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/club/club_make.css"/>">
 <title>Insert title here</title>
 <script>
 	$(document).ready(function(){
@@ -274,13 +274,7 @@
 
 		});
 	</script>
-	<%@ include file="../footer/footer.jsp" %>
 	</div>
 </body>
-<style>
-	#footer{
-		top:0;
-	
-	}
-</style>
 </html>
+<%@ include file="../footer/footer.jsp" %>

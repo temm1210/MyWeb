@@ -3,8 +3,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<%@ include file="header/topMenu.jsp" %>
-<link rel="stylesheet" href="<c:url value="/resources/css/login.css"/>">
+<%@ include file="../header/topMenu.jsp" %>
+<link rel="stylesheet" href="<c:url value="/resources/css/login/login.css"/>">
 <title>Insert title here</title>
 <script>
 	$(document).ready(function(){
@@ -64,12 +64,7 @@
 				</form>
 			</div>
 		</div>
-		<%@ include file="footer/footer.jsp" %>
 	</div>
 </body>
-<style>
-	#footer{
-		top:0;
-	}
-	</style>
 </html>
+<%@ include file="../footer/footer.jsp" %>

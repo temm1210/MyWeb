@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="<c:url value="/resources/script/checkEffect.js"/>"></script>
 <script src="<c:url value="/resources/script/information_check.js"/>"></script>
-<link rel="stylesheet" href="<c:url value="/resources/css/join_second.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/join/join_second.css"/>">
 </head>
 <script>
 	$(document).ready(function(){

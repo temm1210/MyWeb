@@ -30,11 +30,7 @@ public class MemberController {
 	@Inject
 	private FileUpLoad fileUpload;
 
-	/*메인홈페이지*/
-	@RequestMapping("/main.amg")
-	public String main() {
-		return "main";
-	}
+
 	/*로그인폼*/
 	@RequestMapping("/login.amg")
 	public String login(HttpServletRequest request,	Model model,
@@ -44,7 +40,7 @@ public class MemberController {
 		model.addAttribute("state", state);
 		if(state.equals("success"))
 			request.getSession().setAttribute("prevpage", request.getHeader("referer"));
-		return "login";
+		return "login/login";
 	}
 	
 	/*첫번째 회원가입폼(약관동의)*/

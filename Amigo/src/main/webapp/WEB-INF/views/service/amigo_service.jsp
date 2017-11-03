@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<%@ include file="header/topMenu.jsp" %>
+<%@ include file="../header/topMenu.jsp" %>
 <title>Insert title here</title>
-<link rel="stylesheet" href="<c:url value="/resources/css/service.css"/>"> 
+<link rel="stylesheet" href="<c:url value="/resources/css/service/service.css"/>"> 
 <script>
 $(function(){
 	 if($('.parallax-window').length){
@@ -13,10 +13,19 @@ $(function(){
  	}
 });
 </script>
+<style>
+	#main-img{
+		background-image: url("<c:url value="/resources/images/sub-main.jpg"/>");
+		background-position: center;
+		background-size: cover;
+		background-repeat: no-repeat;
+		width:100%;
+		height:100%;
+	}
+</style>
 </head>
 <body>
 	<div id="sev_container">
-		
 		<div id="img_box">
 			<div id="main-img"></div>
 			<div class="img-over"></div>
@@ -109,11 +118,6 @@ $(function(){
 		</div> 
 	</div>
 <script src="<c:url value="/resources/script/parallax.js"/>"></script>
-<%@ include file="footer/footer.jsp" %>
-<style>
-	#footer{
-		top:0;
-	}
-</style>
 </body>
 </html>
+<%@ include file="../footer/footer.jsp" %>

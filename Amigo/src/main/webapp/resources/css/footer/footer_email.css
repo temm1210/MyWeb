@@ -1,6 +1,6 @@
 @import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
 .email_container{
-	margin-top:200px;
+	margin-top:270px;
 	margin-bottom:200px;
 	min-width:960px;
 	font-family: 'Jeju Gothic', serif;
@@ -16,7 +16,7 @@
 	margin-bottom:44px;
 }
 .email_box > h3{
-	padding-bottom:15px;
+	padding-bottom:50px;
 	font-size:20px;
 	font-weight: 500;
 	color:#1a1a1a;

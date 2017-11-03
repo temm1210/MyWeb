@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@ include file="../header/topMenu.jsp" %>
-<link rel="stylesheet" href="<c:url value="/resources/css/modify.css" />">
+<link rel="stylesheet" href="<c:url value="/resources/css/modify/modify.css" />">
 <title>Insert title here</title>
 <style>
 	#delete_info{
@@ -57,12 +57,7 @@
 		</div>
 
 	</div>
-	<%@ include file="../footer/footer.jsp" %>
 </div>
 </body>
-<style>
-	#footer{
-		top:0;
-	}
-</style>
 </html>
+<%@ include file="../footer/footer.jsp" %>

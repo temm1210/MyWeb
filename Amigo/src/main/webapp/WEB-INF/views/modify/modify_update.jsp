@@ -9,7 +9,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script src="<c:url value="/resources/script/information_check.js"/>"></script>
 <script src="<c:url value="/resources/script/checkEffect.js"/>"></script>
-<link rel="stylesheet" href="<c:url value='/resources/css/modify_update.css'/>">
+<link rel="stylesheet" href="<c:url value='/resources/css/modify/modify_update.css'/>">
 <title>Insert title here</title>
 <script>
 	$(document).ready(function(){
@@ -214,11 +214,6 @@
 			</div>
 		</div>
 	</div>
-<%@ include file="../footer/footer.jsp" %>
 </body>
-<style>
-	#footer{
-		top:0;
-	}
-</style>
 </html>
+<%@ include file="../footer/footer.jsp" %>

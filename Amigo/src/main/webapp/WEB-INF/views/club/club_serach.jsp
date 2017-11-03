@@ -4,118 +4,9 @@
 <html>
 <head>
 <%@ include file="../header/topMenu.jsp"%>
+<link rel="stylesheet" href="<c:url value="/resources/css/club/club_search.css"/>">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<style>
-	#container{
-		background-color: white;
-		padding-top: 200px;
-	}
-	#content{
-		width:100%;
-		height:100%;
-	}
-
-	.input_box{
-		margin-bottom: 20px;
-		border-bottom: 1px solid #eee;
-		margin-left: 40px;
-	}
-	
-	label{
-		display:inline-block;
-		text-align:left;
-		width:200px;
-	}
-	input{
-		font-family: 'Jeju Gothic', serif;
-		outline:none;
-		width:170px;
-		height:30px;
-		margin-bottom: 5px;
-	}
-	
-	input[type="button"]{
-		font-family: 'Jeju Gothic', serif;
-		background-color: rgba(50,50,50,.4);
-		outline: none;
-		width: 100px;
-		height: 35px;
-		cursor: pointer;
-		margin-left:40px;
-		border-radius:2px;
-	}
-	.input_box > #category{
-		width:173px;
-		height:40px;
-		border-radius: 2px;
-	}
-	
-	.article-clubs{
-		position: relative;
-		display:block;
-		top:0;
-		width:100%;
-	}
-	
-	#article2 > .first-article{
-		display:flex;
-		flex-flow:row wrap;
-		margin:0 auto;
-		text-align:center;
-	}
-	#article2 > .first-article > .img_box{
-		margin:10px 12px 40px 12px;
-		flex:4 4 400px;
-		width:100%;
-	}
-	
-	#article2 > .first-article > .item-box{
-		position:relative;
-		z-index:1;
-		overflow:hidden;
-		box-shadow:0 1px 1px #332c2c, 
-				   1px 2px 2px #4a4949, 
-				   2px 3px 4px #807c7c;
-		box-sizing: border-box;
-	}
-	
-	#article2 > .first-article > .item-box img{
-		display:block;
-		width:100%;
-		opacity:0.85;
-	}
-	
-	#article2 > h2{
-		text-align: center;
-		font-weight: bold;
-		font-size: 30px;
-	}
-	
-	div.item-box:hover{
-		background:rgba(0,0,0,.9);
-	}  
-	
-/* 	 div.item-box:hover .border-line{
-		border: 1.5px solid #b49759;
-	}  */
-	
-	.supply-comment{
-		position:absolute;
-		top:45%;
-		left:40%;
-		z-index:1;
-		font-weight:bold;
-		font-size:1.4em;
-		color:rgba(255,255,255,.9);
-	}	
-	
-	.test{
-		background-color: white;
-	}
-	input:-webkit-autofill { -webkit-box-shadow: 0 0 0 1000px white inset!important;}
-	input:-webkit-autofill { transition: background-color 5000s ease-in-out 0s;}
-</style>
 </head>
 <body>
 	<div id="container">
@@ -357,7 +248,6 @@
 	
 		var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
 	</script>
-
-<%@ include file ="../footer/footer.jsp"%>
 </body>
 </html>
+<%@ include file ="../footer/footer.jsp"%>

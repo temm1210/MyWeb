@@ -26,6 +26,7 @@ import com.amigo.service.file.FileUpLoad;
 @RequestMapping("/club")
 public class ClubController {
 
+	private static final String CLUB_IMAGES_FOLER = "club_images";
 	@Inject
 	private ClubService service;
 	
@@ -41,7 +42,7 @@ public class ClubController {
 	@RequestMapping(value="/clubMake.amg",method= {RequestMethod.GET,RequestMethod.POST})
 	public String clubMake(Principal principal) {
 		System.out.println("유저체크 :"+principal.getName());
-		return "/club/club_make";
+		return "club/club_make";
 	}
 	
 	@RequestMapping(value="/insertClub.amg",method=RequestMethod.POST)
@@ -52,7 +53,7 @@ public class ClubController {
 						   @RequestParam Map<String,Object> map) {
 		/*파일업로드후 경로반환*/
 		FileUpLoad ful = new FileUpLoad();
-		String picName = ful.fileForm(file,request,"club_images");
+		String picName = ful.fileForm(file,request,CLUB_IMAGES_FOLER);
 
 		System.out.println("map확인:"+map);
 		/*동호회 만드는 사람의 아이디 확인(동호회장)*/

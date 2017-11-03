@@ -4,7 +4,7 @@
 <html>
 <head>
 <%@ include file="../header/topMenu.jsp" %>
-<link rel="stylesheet" href="<c:url value="/resources/css/club.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/club/club.css"/>">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title><style>
 	#main_img{ 
@@ -105,13 +105,7 @@
 			<a href="#"><span class="paging_num">1 2 3 4 5 6 7 8 9 10</span></a>			
 		</div>
 	</div>
-
-	<%@ include file="../footer/footer.jsp" %>
 </div>
 </body>
-<style>
-	#footer{
-		top:200px;
-	}
-</style>
 </html>
+<%@ include file="../footer/footer.jsp" %>

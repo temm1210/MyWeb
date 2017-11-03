@@ -5,8 +5,8 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <c:set var="location" value="${pageContext.request.contextPath}"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link rel="stylesheet" href="<c:url value="/resources/css/reset.css"/>">
-<link rel="stylesheet" href="<c:url value="/resources/css/top-menu.css" />">
+<link rel="stylesheet" href="<c:url value="/resources/css/util/reset.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/header/top-menu.css" />">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script>
@@ -86,8 +86,8 @@
 
 			<li><a href="#Link" title="Link">고객센터</a>
 				<ul>
-					<li><a href="${location}/qna/freQuestion.amg" title="Link">F&Q</a></li>
-					<li><a href="${location}/qna//qna.amg" title="Link">1:1질문</a></li>
+					<li><a href="${location}/qna/faq.amg" title="Link">F&Q</a></li>
+					<li><a href="${location}/qna/qna.amg" title="Link">1:1질문</a></li>
 				</ul>
 			</li>
 			

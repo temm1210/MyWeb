@@ -3,8 +3,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<%@ include file="header/topMenu.jsp" %>
-<link rel="stylesheet" href="<c:url value="/resources/css/fre_question.css" />">
+<%@ include file="qna_header.jsp" %>
+<link rel="stylesheet" href="<c:url value="/resources/css/qna/faq.css" />">
 <title>Insert title here</title>
 <script>
 	$(document).ready(function(){
@@ -19,38 +19,10 @@
 		})
 	})
 </script>
-<style>
-	
-#main_img{
-	padding-top:440px;
-	background-image: url("<c:url value="/resources/images/question1.jpg"/>");
-	background-position: center;
-	background-size: cover;
-	background-repeat: no-repeat; 
-	opacity: 0.8;
-	width:100%;
-	height:100px; 
-}
-</style>
 </head>
 <body>
 	<div id="container">
-		<div id="main_img">
-			<h2>궁금한게 있으시면 무엇이든 물어보세요</h2>
-		</div>
-
-		<div id="content">	
-			<div id="aside">
-				<ul>
-					<li><span>고객센터</span>
-						<ul class="sub_ul">
-							<li><a href="${location}/qna/freQuestion.amg"><i class="fa fa-server" aria-hidden="true"></i>F&Q</a></li>
-							<li><a href="#"><i class="fa fa-server" aria-hidden="true"></i>1:1문의</a></li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-			
+		<div id="content">			
 			<div class="article" id="use_site">
 				<h2>이용관련</h2>
 				<ul>
@@ -92,13 +64,7 @@
 				</ul>
 			</div>
 		</div>
-		<%@ include file="footer/footer.jsp" %>
-		<style>
-			#footer{
-				top:0;
-				clear:both;
-			}
-		</style>
 	</div>
 </body>
 </html>
+<%@ include file="../footer/footer.jsp" %>

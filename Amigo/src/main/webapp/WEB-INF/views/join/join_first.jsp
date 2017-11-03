@@ -6,7 +6,7 @@
 <%@ include file="join_header.jsp" %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="<c:url value="/resources/css/join_first.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/join/join_first.css"/>">
 <script src="<c:url value="/resources/script/join_first.js"/>"></script>
 <script>
 	$(document).ready(function(){

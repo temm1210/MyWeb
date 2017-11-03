@@ -19,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.amigo.service.club.ClubService;
-import com.amigo.util.file.FileUpLoad;
+import com.amigo.service.file.FileUpLoad;
 
 
 @Controller

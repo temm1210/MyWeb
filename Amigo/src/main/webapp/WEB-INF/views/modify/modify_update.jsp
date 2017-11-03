@@ -3,7 +3,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<%@ include file="header/topMenu.jsp" %>
+<meta id="_csrf" name="_csrf" content="${_csrf.token}"/>
+<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}"/>
+<%@ include file="../header/topMenu.jsp" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script src="<c:url value="/resources/script/information_check.js"/>"></script>
 <script src="<c:url value="/resources/script/checkEffect.js"/>"></script>
@@ -11,8 +13,34 @@
 <title>Insert title here</title>
 <script>
 	$(document).ready(function(){
+		/* pdateFileName = this.files[0].name;파일명 가져오기  */
+		var prev_profile = "${member.mPic}";
+		var isChange = false;
+		
+		var email = "${member.mEmail}";
+		var position = email.indexOf('@');
+		
+		/* @를기준으로 앞에아이디, 뒤에 주소를 가져오기 */
+		var emailId = email.substring(0,position);
+		var emailLoc = email.substring(position+1,email.length);
+
+		/* 프로필 사진이 한번이라도 변경됐을시 */
+		$("#pic").change(function(){
+			isChange=true;
+		})
+		/* select박스에 변경이 생길시 뒤에 주소에 자동입력 */
+		$("#email_box").stop().change(function(){		
+			selectEmailCheck(this);
+		})
+		
+		/* 현재유저의 이메일을 화면에 보여줌 */
+		$("#first_email").attr("value",emailId)
+		$("#last_email").attr("value",emailLoc)
+	
+
 		/* 이미지 업로드 클릭시 */
 		$(".sel_pic").click(function(){
+			/* 파일업르도 버튼 강제로 클릭이벤트발생 */
 			$("#pic").trigger("click");
 		})
 		
@@ -21,8 +49,10 @@
 			readURL(this);
 		})
 		
-		/* 업로드 취소버튼 클릭시 */
+		/* 업로드 삭제버튼 클릭시 */
 		$("#cancelPic").click(function(){
+			
+			isChange=true;
 			/* 미리보기 삭제 */
 			$("#pro_pic").attr('src','').css("display","none");
 			
@@ -32,34 +62,6 @@
 			$("#pic").val("");
 		})
 		
-		function readURL(input){
-			if(input.files && input.files[0]){
-				var reader = new FileReader();
-				
-				reader.onload = function(e){
-					$("#pro_pic").attr('src',e.target.result).css("display","inline-block");
-					$("#profile").css("display","none")
-				}
-				reader.readAsDataURL(input.files[0]);
-			}
-		}
-		
-		var email = "${member.mEmail}";
-		var position = email.indexOf('@');
-		
-		/* @를기준으로 앞에아이디, 뒤에 주소를 가져오기 */
-		var emailId = email.substring(0,position);
-		var emailLoc = email.substring(position+1,email.length);
-
-		/* select박스에 변경이 생길시 뒤에 주소에 자동입력 */
-		$("#email_box").stop().change(function(){		
-			selectEmailCheck(this);
-		})
-		
-		/* 현재유저의 이메일을 화면에 보여줌 */
-		$("#first_email").attr("value",emailId)
-		$("#last_email").attr("value",emailLoc)
-		
 		/* 수정버튼 눌렀을때 */
 		$("#modifyBtn").click(function(){
 			var icons = $(".fa-check");
@@ -67,13 +69,19 @@
 			
 			$("#mEmail").val($("#first_email").val()+"@"+$("#last_email").val())
 			
+			/* 모두 올바르게 입력했는지 체크 */
 			$.each(icons,function(index,value){
 				if( $(value).hasClass("view") )
 					i++;
 			})
+			
 			if(i == icons.length ){
-				if(confirm("수정하시겠습니까?"))
-					$("#modify_form").attr("action","${location}/member/modify_ok.amg?${_csrf.parameterName}=${_csrf.token}").submit();
+				if(confirm("수정하시겠습니까?")){
+					if(isChange){
+						$("#prev_pic").attr("value",prev_profile);
+					}
+					$("#modify_form").attr("action","${location}/member/modify_ok.amg?${_csrf.parameterName}=${_csrf.token}").submit(); 
+				}
 			}
 			else
 				alert("모두 올바르게 입력 하셔야 합니다.");
@@ -85,6 +93,19 @@
 				$("#modify_form").attr("method","get").attr("action","/index.jsp").submit();  
 		})
 	})
+			
+	/* 이미지미리보기  */
+	function readURL(input){
+		if(input.files && input.files[0]){
+			var reader = new FileReader();
+			
+			reader.onload = function(e){
+				$("#pro_pic").attr('src',e.target.result).css("display","inline-block");
+				$("#profile").css("display","none")
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
 </script>
 </head>
 <body>
@@ -124,7 +145,7 @@
 						<label for="mpic">프로필사진 </label>			
 							<span class="wraper_img">
 								<c:choose>
-									<c:when test="${user.mPic != null}">
+									<c:when test="${member.mPic != null}">
 										<img id="pro_pic" src="<c:url value='/resources/images/member_images/${member.mPic}'/>" >
 										<i class="fa fa-user-circle" id="profile" aria-hidden="true"></i>
 									</c:when>
@@ -138,6 +159,7 @@
 							<span class="sel_pic">파일선택</span>
 							<input type="button" value="삭제" id="cancelPic" name="cancelPic">
 							<input type="file" style="border:none;" id="pic" name="pic">
+							<input type="hidden" id="prev_pic" name="prev_pic" value="">
 						</span>
 						
 					</div>
@@ -192,12 +214,11 @@
 			</div>
 		</div>
 	</div>
-<%@ include file="footer/footer.jsp" %>
+<%@ include file="../footer/footer.jsp" %>
 </body>
 <style>
 	#footer{
 		top:0;
 	}
 </style>
-
 </html>

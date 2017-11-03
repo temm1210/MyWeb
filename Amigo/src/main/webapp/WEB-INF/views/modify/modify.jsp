@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%@ include file="header/topMenu.jsp" %>
+<%@ include file="../header/topMenu.jsp" %>
 <link rel="stylesheet" href="<c:url value="/resources/css/modify.css" />">
 <title>Insert title here</title>
 <style>
@@ -57,7 +57,7 @@
 		</div>
 
 	</div>
-	<%@ include file="footer/footer.jsp" %>
+	<%@ include file="../footer/footer.jsp" %>
 </div>
 </body>
 <style>

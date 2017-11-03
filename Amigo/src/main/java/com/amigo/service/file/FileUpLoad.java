@@ -1,10 +1,13 @@
-package com.amigo.util.file;
+package com.amigo.service.file;
 
 import java.io.File;
 import java.io.IOException;
+
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+@Service
 public class FileUpLoad {
 	
 	public FileUpLoad() {};
@@ -28,6 +31,14 @@ public class FileUpLoad {
 		
 		System.out.println("경로확인:"+uploadPath);
 		return saveFileName;
+	}
+	public void deleteFile(MultipartHttpServletRequest request,String folderName,String deleteFileName) {
+		String deletePath = getSaveLocation(request, folderName)+deleteFileName;
+		File file = new File(deletePath);
+		
+		if(file.exists() == true){
+			file.delete();
+		}
 	}
 	
 	private String getSaveLocation(MultipartHttpServletRequest request,String folderName){

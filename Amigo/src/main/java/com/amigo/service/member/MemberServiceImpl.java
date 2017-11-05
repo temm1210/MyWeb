@@ -1,6 +1,7 @@
 package com.amigo.service.member;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.amigo.dao.authority.AuthorityDAO;
@@ -9,11 +10,16 @@ import com.amigo.vo.member.MemberVO;
 
 @Service
 public class MemberServiceImpl implements MemberService {
+
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+	
 	@Autowired
 	private AuthorityDAO authorDao;
 	
 	@Autowired
 	private MemberDAO memberDao;
+	
 	
 	/*AOP 트랜잭션 처리*/
 	@Override
@@ -32,12 +38,10 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void updateMember(MemberVO member) {
 		// TODO Auto-generated method stub
+		String dbPwd = member.getPassword();
+		member.setPassword(passwordEncoder.encode(dbPwd));
 		memberDao.updateMember(member);
+		
 	}
 
-	@Override
-	public int deleteMember(String username) {
-		// TODO Auto-generated method stub
-		return memberDao.deleteMember(username);
-	}
 }

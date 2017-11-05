@@ -7,5 +7,4 @@ public interface MemberDAO {
 	public void insertMember(MemberVO member);
 	public MemberVO selectMember(String mid);
 	public void updateMember(MemberVO member);
-	public int deleteMember(String username);
 }

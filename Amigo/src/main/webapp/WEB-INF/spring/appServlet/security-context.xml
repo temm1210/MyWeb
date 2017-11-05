@@ -25,14 +25,14 @@
 			login-page="/member/login.amg"
 			login-processing-url="/member/login_proccess.amg"
 			always-use-default-target="true"
-			authentication-failure-url="/member/login.amg?state=login_fail"
+			authentication-failure-url="/member/login.amg?state=fail"
 			authentication-success-handler-ref="LoginSuccessHandler"
 			username-parameter="username"
 			password-parameter="password"/>
 			
 		<logout delete-cookies="jsessionid" 
                invalidate-session="true"
-               logout-url="/member/logOut.amg"
+               logout-url="/member/logOut.amg" 
                logout-success-url="/member/login.amg"/>
                
 		<session-management>

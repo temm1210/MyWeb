@@ -7,14 +7,14 @@
 	    </layout>
 	  </appender>
 	    
-	  <!-- <logger name="com.amigo.controller" level="info"/> -->
+	  <logger name="com.stw" level="info"/>
 <!-- 	  <logger name="java.sql" level="error" />
 	  <logger name="jdbc.sqlonly" level="debug" /> 
 	  <logger name="jdbc.sqltiming" level="debug" /> 
 	  <logger name="jdbc.audit" level="error" /> 
 	  <logger name="jdbc.resultset" level="error" /> -->
  
-	  <root level="info">
+	  <root level="debug">
 	    <appender-ref ref="STDOUT" />
 	  </root>
 </configuration>

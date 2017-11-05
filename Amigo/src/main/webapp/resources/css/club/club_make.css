@@ -43,6 +43,7 @@
 #club_form > .club_row > select{
 	width:120px;
 	height:30px;
+	margin-left:10px;
 }
 .submit_group{
 	margin-top:20px;

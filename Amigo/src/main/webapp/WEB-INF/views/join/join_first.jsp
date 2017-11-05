@@ -7,7 +7,24 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="<c:url value="/resources/css/join/join_first.css"/>">
-<script src="<c:url value="/resources/script/join/join_first.js"/>"></script>
+<script src="<c:url value="/resources/script/join_first.js"/>"></script>
+<script>
+	$(document).ready(function(){
+		/*동의버튼 클릭시*/
+		$("#agree_link").click(function(){
+			if( $("#first-check").hasClass('change_color') && $("#second-check").hasClass('change_color') && $("#third-check").hasClass('change_color'))
+				location.href="${location}/member/joinSecond.amg";
+			else
+				alert("약관에 모두 동의하셔야 합니다.");
+		})
+		/*취소클릭시*/
+		$("#disAgree_link").click(function(){
+			if(confirm("이 페이지에서 나가시겠습니까?")){
+				location.href="../../../index.jsp";
+			}
+		})
+	})
+</script>
 </head>
 <body>
 	<div id="content">
@@ -320,8 +337,8 @@
 이메일 주소 : privacy@amiGo.com</textarea>
 			</div>
 			<div class="link_group">
-				<a class="link" id="agree_link" onclick="nextPage('${location}/member/joinSecond.amg')">동의</a>
-				<a class="link" id="disAgree_link" onclick="exitPage('${location}/main.amg')">비동의</a>
+				<a class="link" id="agree_link">동의</a>
+				<a class="link" id="disAgree_link">비동의</a>
 			</div>
 		</form>
 	</div>

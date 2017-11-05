@@ -13,6 +13,7 @@ public class MemberDAOImpl implements MemberDAO {
 	@Inject
 	private SqlSession sqlSession;
 
+	
 	@Override
 	public void insertMember(MemberVO member) {
 		// TODO Auto-generated method stub
@@ -31,9 +32,4 @@ public class MemberDAOImpl implements MemberDAO {
 		sqlSession.update("updateMember", member);
 	}
 
-	@Override
-	public int deleteMember(String username) {
-		// TODO Auto-generated method stub
-		return sqlSession.delete("deleteMember", username);
-	}
 }

@@ -16,7 +16,7 @@
 			$("#login_form").attr("method","get").attr("action","${location}/member/joinFirst.amg");
 		})
 		
-		if(${state == 'fail'})
+		if(${state == 'login_fail'})
 			$("#stateCh").html("로그인정보가 틀립니다.다시입력해주세요");
 		else
 			$("#stateCh").html("");

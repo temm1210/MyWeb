@@ -11,10 +11,11 @@
   	
   	<select id="selectMember" resultType="MemberVO">
   		SELECT 
-  			mid as username,mpwd as password,mpic,mname,mtel,memail,mgender,mregdate,mage										       
+  			mid as username,mpwd as password,mpic,mname,mtel,memail,mgender,mregdate,mage,mupdatedate										       
   		FROM
   			amigo_member
-  		where mid=#{mid} 
+  		WHERE
+  			mid=#{mid} 
   	</select>
 
   	<update id="updateMember">
@@ -25,8 +26,26 @@
   			mpic=#{mPic},
   			mname=#{mName},
   			mtel=#{mTel},
-  			memail=#{mEmail}
+  			memail=#{mEmail},
+  			mupdatedate=sysdate
   		WHERE
   			mid=#{username}
+  	</update>
+  	
+  	<update id="deleteMember">
+		UPDATE
+			amigo_member
+		SET
+			mpwd=null,
+			mpic=null,
+			mname=null,
+			mtel=null,
+			memail=null,
+			mgender=null,
+			mage=null,
+			enabled='0',
+			mupdatedate=sysdate
+		WHERE
+			mid=#{username}
   	</update>
   </mapper>

@@ -27,5 +27,5 @@
 	}
 </style>
 <div id="header">
-	<a href="${location}/index.jsp">amiGo</a>
+	<a href="${location}/main.amg">amiGo</a>
 </div>

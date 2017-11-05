@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.amigo.vo.member.MemberVO;
 
+/*사용자가 입력한 비밀번호와 DB에 저장된 비밀번호를 비교해주는 Security제공  Handler*/
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
 	@Autowired
@@ -26,8 +27,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		String user_pwd = (String) authentication.getCredentials();
 		
 		MemberVO memberVo = (MemberVO) detailService.loadUserByUsername(user_id);
-		
-		System.out.println("memberVO값 확인:"+memberVo);
 		
 		if(!passwordEncoder.matches(user_pwd, memberVo.getPassword()))
 			throw new BadCredentialsException("비밀번호가 틀립니다");

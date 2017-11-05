@@ -1,0 +1,55 @@
+#container{
+	margin-top: 180px;
+	margin-bottom: 120px;
+}
+
+#content{
+	width: 90%;
+	margin:0 auto;
+}
+.title{
+	border-bottom: 1px solid rgba(0,0,0,.2);
+}
+.title > h2.delete_title{
+	font-size: 25px;
+	font-weight: bold;
+}
+.title > span.delete_sub{
+	display:inline-block;
+	margin:10px;
+}
+.article{
+	margin:70px 0;
+}
+
+.article > h2.article_title{
+	font-size:20px;
+	font-weight: bold;
+}
+
+.article > span.article_sub{
+	margin: 10px;
+	display: inline-block;
+	color: rgba(0,0,0,.6);
+}
+
+div.row_3{
+	padding-bottom: 40px;
+	border-bottom: 1px solid rgba(0,0,0,.2); 
+}
+
+#delete_btn{
+	display: block;
+	margin: 20px auto;
+	text-align: center;
+	width: 90px;
+	height: 40px;
+	background: none;
+	border:1px solid rgba(0,0,0,.5);
+	font-size: 16px;
+	font-weight: bold;
+	cursor: pointer;
+}
+.strong{
+	color:red;
+}

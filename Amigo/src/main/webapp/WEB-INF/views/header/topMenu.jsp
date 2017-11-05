@@ -24,7 +24,7 @@
 	})
 	
 	function logOutCheck(){
-		if(confirm("로그아웃 하시겠씁니까?")){
+		if(confirm("로그아웃 하시겠습니까?")){
 			$("#logOutForm").submit()
 		}
 	}
@@ -39,7 +39,7 @@
 	    </label>
  	</div>
 
-  		<a href="${location}/index.jsp" title="logo" id="logo">
+  		<a href="${location}/main.amg" title="logo" id="logo">
   			<h2>amiGo</h2>
   		</a>
  	    <div class="sub-logo">
@@ -68,8 +68,8 @@
 						</c:otherwise>
 					</c:choose>
 		   		</a>
-		   		
-		   		<form id="logOutForm" action="<c:url value='${location}/member/logOut.amg'/>"method="post">
+		   																		
+		   		<form id="logOutForm" action="<c:url value='${location}/member/logOut.amg?logoutMethod=basic'/>" method="post">
 		   			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		   		</form> 
 			</sec:authorize>	    
@@ -79,7 +79,7 @@
     	<ul class="dropdown">
       		<li ><a href="#Link" title="Link">동호회</a>
       			<ul>
-      				<li><a href="${location}/club/clubMake.amg" title="Link">동호회 창설</a>
+      				<li><a href="${location}/club/clubMake.amg" title="Link">동호회 만들기</a>
       				<li><a href="#Link" title="Link">동호회 보기</a>
       			</ul>
       		</li>
@@ -101,9 +101,8 @@
 			</sec:authorize>
 	    </ul>
   	</nav>
-	  
 </div>
-<script src="<c:url value="/resources/script/script.js"/>"></script> 
+<script src="<c:url value="/resources/script/header/topMenu.js"/>"></script> 
 
 
 

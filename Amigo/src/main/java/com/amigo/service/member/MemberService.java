@@ -7,4 +7,5 @@ public interface MemberService {
 	public void insertMember(MemberVO member,String authority);
 	public MemberVO selectMember(String mid);
 	public void updateMember(MemberVO member);
+	public int deleteMember(String username);
 }

@@ -47,10 +47,11 @@ private static final Logger logger = LoggerFactory.getLogger(MemberQueryTest.cla
 	}
 	
 	@Test
+	@Ignore
 	public void updateMemberTest() {
 		logger.info("updateMember 시작");
 	
-		MemberVO member = service.selectMember("호우");
+		MemberVO member = service.selectMember("aa");
 		
 		logger.info("member의값:{}",member);
 		member.setPassword("qwer1234@");
@@ -59,6 +60,15 @@ private static final Logger logger = LoggerFactory.getLogger(MemberQueryTest.cla
 		member.setmEmail("Real@gmail.com");
 		
 		service.updateMember(member);
+	}
+	
+	@Test
+	public void deleteMemberTest() {
+		logger.info("deleteMember 시작");
+		
+		if(service.deleteMember("Aa") > 0) {
+			logger.info("삭제성공");
+		}
 	}
 	
 }

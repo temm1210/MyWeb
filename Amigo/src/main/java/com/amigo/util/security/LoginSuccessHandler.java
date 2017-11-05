@@ -27,14 +27,7 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
 		logger.info("유저 권한: {}",authentication.getAuthorities().toString());
 		logger.info("유저 Details : {}",authentication.getDetails());
 		logger.info("유저 Principal : {}",authentication.getPrincipal());
-		
-		
-		System.out.println("uri확인:"+request.getRequestURI());
-		System.out.println("RemoteAddr확인:"+request.getRemoteAddr());
-		System.out.println("urL확인:"+request.getRequestURL());
-		
-		
-		
+
 		for(GrantedAuthority a : authentication.getAuthorities()){
 			logger.info(a.getAuthority());
 		}
@@ -43,8 +36,10 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
 		
 		if(session != null) {
 			String path = (String) session.getAttribute("prevpage");
+			
+			/*전페이지가 회원가입 성공페이지일경우 메인으로바꿈*/
 			if(path.contains("joinSuccess.amg"))
-				path = path.replace("member/joinSuccess.amg", "index.jsp");
+				path = path.replace("member/joinSuccess.amg", "/main.amg");
 			
 			if(path != null) {
 				session.removeAttribute("prevpage");

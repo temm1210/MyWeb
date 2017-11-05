@@ -11,6 +11,9 @@
  		 if($('.parallax-window').length){
 			 $('.parallax-window').parallax();
 		 }  
+		
+		if(${msg == "delete_success"})
+			alert("성공적으로 탈퇴되었습니다\n.그동안 이용해주셔서 감사합니다.")
 	});
 	
 </script> 

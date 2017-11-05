@@ -28,3 +28,19 @@ function agreeCheck(sel){
 function toggleColor(sel){
 	$(sel).toggleClass("change_color")
 }
+
+/*동의버튼 클릭시*/
+function nextPage(path){
+	if( $("#first-check").hasClass('change_color') && $("#second-check").hasClass('change_color') && $("#third-check").hasClass('change_color'))
+		location.href=path;
+	else
+		alert("약관에 모두 동의하셔야 합니다.");
+}
+
+
+/*비동의 클릭시*/
+function exitPage(path){
+	if(confirm("이 페이지에서 나가시겠습니까?")){
+		location.href=path;
+	}
+}

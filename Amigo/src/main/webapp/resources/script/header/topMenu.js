@@ -27,25 +27,18 @@ $('ul li:has(ul)');
 
 
 $(function () {
+	/*아이디 크기를 가져와서 아이다크기에따라 넓이지정*/
+	var userIdWidth = $("#user_id").width();
+	
+	if(userIdWidth < 50)
+		userIdWidth = userIdWidth+30;
+	else if(userIdWidth > 50 && userIdWidth < 100)
+		userIdWidth = userIdWidth+20;
+	else
+		userIdWidth = userIdWidth+10;
+	
+	$("#user_id").width(userIdWidth);
+	
     var e = $(document).scrollTop();
     var t = $('.wrapper').outerHeight();
-   /* $(window).scroll(function () {
-        var n = $(document).scrollTop();
-        if ($(document).scrollTop() >= 50) {
-            $('.nav_wrapper').css('position', 'fixed');
-        } else {
-            $('.nav_wrapper').css('position', 'fixed');
-        }
-        if (n > t) {
-            $('.nav_wrapper').addClass('scroll');
-        } else {
-            $('.nav_wrapper').removeClass('scroll');
-        }
-        if (n > e) {
-            $('.nav_wrapper').removeClass('no-scroll');
-        } else {
-            $('.nav_wrapper').addClass('no-scroll');
-        }
-        e = $(document).scrollTop();
-    });*/
 });

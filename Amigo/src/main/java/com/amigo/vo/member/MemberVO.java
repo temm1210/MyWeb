@@ -21,11 +21,19 @@ public class MemberVO implements UserDetails{
 	private String mGender;
 	private String mPic;
 	private Date mRegdate;
+	private Date mUpdatedate;
 	private int mAge;
 	/*사용자가 가진 권한 전부 저장할 변수*/
 	private Collection<? extends GrantedAuthority> authorities;
 	
-	
+	public Date getmUpdatedate() {
+		return mUpdatedate;
+	}
+
+	public void setmUpdatedate(Date mUpdatedate) {
+		this.mUpdatedate = mUpdatedate;
+	}
+
 	public String getmPic() {
 		return mPic;
 	}

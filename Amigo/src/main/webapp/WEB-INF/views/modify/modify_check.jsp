@@ -9,12 +9,11 @@
 <title>Insert title here</title>
 <script>
 	$(document).ready(function(){
-		if(${msg == 'fail'}){
+		if(${msg == 'updateCheck_fail'}){
 			$(".fail_msg").html("비밀번호가 틀립니다.다시입력하세요");
 		}else{
 			$(".fail_msg").html("");
-		}
-			
+		}	
 	});
 </script>
 </head>

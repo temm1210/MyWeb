@@ -106,8 +106,9 @@ public class MemberController {
 						  @RequestParam(value="isChange") String isChange) {
 		
 		String updatePicName=null;
-		String dbPwd = member.getPassword();
+		
 		/*비밀번호 인코딩*/
+		String dbPwd = member.getPassword();
 		member.setPassword(passwordEncoder.encode(dbPwd));
 		
 		/*프로필사진이 변경되었으면*/
@@ -127,9 +128,11 @@ public class MemberController {
 		member.setmPic(updatePicName);;
 		service.updateMember(member);
 		
-		/*수정후의 memberVO객체를 DB로부터 가져와서 시큐리티인증정보를 저장하는 SecurityContextHolder에 넣어서 갱신*/
+		/*수정후의 memberVO객체를 DB로부터 가져와서 시큐리티인증정보를 저장하는 SecurityContextHolder에 넣어주어 바로 갱신하기위 사용*/
 		MemberVO updatedMember = service.selectMember(member.getUsername());
-		SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(updatedMember,null, updatedMember.getAuthorities()));;
+		
+		/*수정된 UserNamePasswordAuthenticationToken객체를 ContextHolder에 저장해서 새로갱신.권한은 변경없으므로 기존권한 가져와 사용*/
+		SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(updatedMember,null, SecurityContextHolder.getContext().getAuthentication().getAuthorities()));
 		return "redirect:/main.amg";
 	}
 	
@@ -142,8 +145,10 @@ public class MemberController {
 		/*프로필 사진 업로드*/
 		String picName = fileUpload.fileForm(file, request, PROFILE_IMAGES_FOLDER);
 		
+		/*비밀번호 인코딩*/
 		String dbPwd = member.getPassword();
 		member.setPassword(passwordEncoder.encode((dbPwd)));
+		
 		/*업로드한 파일 이름 DB에저장*/
 		member.setmPic(picName);
 		service.insertMember(member, authority);

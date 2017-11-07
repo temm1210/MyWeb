@@ -10,9 +10,6 @@
 <script src="<c:url value="/resources/script/join/join_second.js"/>"></script>
 <link rel="stylesheet" href="<c:url value="/resources/css/join/join_second.css"/>">
 </head>
-<style>
-
-</style>
 <body>
 	<div id="container">
 		<h3>기본정보입력</h3>

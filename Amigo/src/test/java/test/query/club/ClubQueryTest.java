@@ -28,6 +28,7 @@ public class ClubQueryTest {
 	private ClubService service;
 	
 	@Test
+	@Ignore
 	public void insertTest() {
 		/*{cContent=테스트입니다, cTitle=테스트, cHobby=영화, cArea1=서울, cArea2=용산구}*/
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -35,31 +36,22 @@ public class ClubQueryTest {
 		map.put("cContent", "테스트입니다");
 		map.put("cTitle", "테스트");
 		map.put("cHobby", "영화");
-		map.put("cArea1", "서울");
-		map.put("cArea2", "용산구");
-		
+		map.put("cAddress", "서울특별시 관악구 신림동");
+
 		String path="D://";
 
-		
 		service.insertClub(map,path);
 		logger.info("Club Insert 확인");
 	}
 	
 	@Ignore
 	@Test
-	public void selectSubAreaTest() {
-		logger.info("selectSubArea 확인,{}",service.selectSubArea("인천"));
-	}
-	
-	@Ignore
-	@Test
-	public void selectAreaTest() {
-		logger.info("가져온 주소값:{}",service.selectArea("서울", "동대문구"));
-	}
-	
-	@Ignore
-	@Test
 	public void selectHobbyTest() {
 		logger.info("가져온 주소값:{}",service.selectHobby("동물/반려견"));
+	}
+	
+	@Test
+	public void selectClubs() {
+		logger.info("존재하는 동호회:"+service.selectClubName("수지"));
 	}
 }

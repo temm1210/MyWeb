@@ -18,7 +18,7 @@
 			<span class="sub_comment">회원탈퇴</span>
 			<a href="${location}/member/modify_delete.amg" class="link_page">
 				<div class="modify_info" id="delete_info">
-					<img src="<c:url value='/resources/images/delete3.jpg'/>" class="modify_page">
+					<img src="${img}/delete3.jpg" class="modify_page">
 				</div>
 			</a>
 		</div>
@@ -27,7 +27,7 @@
 			<span class="sub_comment">회원수정</span>
 			<a href="${location}/member/modify_update.amg" class="link_page">
 				<div class="modify_info" id="udpate_info">
-					<img src="<c:url value='/resources/images/change2.jpg'/>" class="modify_page">
+					<img src="${img}/change2.jpg" class="modify_page">
 				</div>
 			</a>
 		</div>

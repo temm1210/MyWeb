@@ -82,7 +82,7 @@ main {
 }
 #log_Out{
 	padding: 0;
-	margin-right: 20px;
+	margin-right: 50px;
 	margin-top: 30px;
 	font-size: 14px;
 	color: rgba(255,255,255,.7);
@@ -104,7 +104,7 @@ main {
 	float: right;
 	color: rgba(255,255,255,.7);
 	line-height: 120px;
-	font-size: 14px;
+	font-size: 12px;
 }
 #clubs:hover #clubs_list{
 	display:block;
@@ -194,11 +194,11 @@ main {
   display: block;
   text-decoration: none;
   color: #fff;
-  font-size: 17px;
+  font-size: 14px;
 }
 
 .menu ul li a:hover {
-  background: #39484d;
+  /* background: #39484d; */
   color: rgba(0,0,0,.7);
 }
 
@@ -208,7 +208,7 @@ main {
 }
 
 .menu ul li > a { 
-	padding: 52px 32px 30px 32px;   
+	padding: 52px 30px 30px 12px;   
 	color: white;
 }
 

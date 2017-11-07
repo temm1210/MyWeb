@@ -4,27 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.amigo.dao.club">
   	<insert id="insertClub">
-  		INSERT INTO amigo_club(cnum,ctitle,ccontent,cpic,cmaster,carea,chobby)
-  		VALUES(AMIGO_CLUB_MEMBERS_SEQ.CURRVAL,#{cTitle},#{cContent},#{cPic},#{cMaster},#{cArea},#{cHobby})
+  		INSERT INTO amigo_club(cnum,ctitle,ccontent,cpic,cmaster,caddress,chobby)
+  		VALUES
+  			(AMIGO_CLUB_MEMBERS_SEQ.CURRVAL,#{cTitle},#{cContent},#{cPic},#{cMaster},#{cAddress},#{cHobby})
   	</insert>
-  	
-  	<select id="selectSubArea" resultType="String">
-  		SELECT
-  			area2
-  		FROM
-  			amigo_area
-  		WHERE
-  			area1 = #{area1}
-  	</select>
-  	
-  	<select id="selectArea" resultType="int">
-  		SELECT
-  			anum
-  		FROM 
-  			amigo_area
-  		WHERE
-  			area1 = #{area1} AND area2=#{area2}
-  	</select>
   	
   	<select id="selectHobby" resultType="int">
   	  	SELECT
@@ -34,10 +17,14 @@
   		WHERE
   			hobby = #{hobby}
   	</select>
-  	
-  	<select id="selectClub" resultType="ClubVO">
-  		SELECT
-  			
+
+  	<select id="selectClubName" resultType="HashMap">	
+		SELECT 
+			ctitle,cpic 
+		FROM 
+			amigo_club ac, amigo_club_members acm 
+		WHERE 
+			ac.cnum = acm.cnum AND acm.mid=#{username}
   	</select>
   
   </mapper>

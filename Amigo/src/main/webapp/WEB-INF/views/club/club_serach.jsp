@@ -12,6 +12,7 @@
 	<div id="container">
 		<div id="content">
 			<div id="article1">
+				<h2>동호회 검색</h2>
 				<div class="input_box row_1">
 					<label for="keyword">키워드 검색</label>
 					<input type="text" id="keyword" value=${keyword}>
@@ -53,11 +54,16 @@
 	
 			<div id="article2" class="article-clubs">
 				<h2>검색결과</h2>
+				<div class="club_category">
+					<a href="#"><span class="category_row">게시글수</span></a>
+					<a href="#"><span class="category_row">회원수</span></a>
+					<a href="#"><span class="category_row">최신순</span></a>
+				</div>
 				<div class="first-article">
 					<div class="img_box item-box">
 						<a href="#">
 							<!-- <div class="item-box"> -->
-								<img src="images/nature.jpg">
+								<img src="${img}/tour.jpg">
 								<span class="supply-comment">#자연</span>
 							<!-- </div> -->
 						</a>
@@ -68,7 +74,7 @@
 					<div class="img_box item-box">
 						<a href="#">
 							<!-- <div class="item-box"> -->
-								<img src="images/tour.jpg">
+								<img src="${img}/supercar.jpg">
 								<span class="supply-comment">#여행/캠핑</span>
 							<!-- </div> -->
 						</a>
@@ -77,7 +83,7 @@
 					<div class="img_box item-box">
 						<a href="#">
 							<!-- <div class="item-box"> -->
-								<img src="images/supercar.jpg">
+								<img src="${img}/workout.jpg">
 								<span class="supply-comment">#자동차</span>
 							<!-- </div> -->
 						</a>
@@ -86,7 +92,7 @@
 					<div class="img_box item-box">
 						<a href="#">
 							<!-- <div class="item-box"> -->
-								<img src="images/workout.jpg">
+								<img src="${img}/animals.png">
 								<span class="supply-comment">#운동/스포츠</span>
 							<!-- </div> -->
 						</a>
@@ -95,7 +101,7 @@
 					<div class="img_box item-box">
 						<a href="#">
 							<!-- <div class="item-box"> -->
-								<img src="images/animals.png">
+								<img src="${img}/ski.jpg">
 								<span class="supply-comment">#동물/반려견</span>
 							<!-- </div> -->
 						</a>
@@ -104,133 +110,9 @@
 					<div class="img_box item-box">
 						<a href="#">
 							<!-- <div class="item-box"> -->
-								<img src="images/study.jpg">
+								<img src="${img}/study.jpg">
 								<span class="supply-comment">#공부/스터디</span>
 							<!-- </div> -->
-						</a>
-					</div>
-						
-					<div class="img_box item-box">
-						<a href="#">	
-							<!-- <div class="item-box"> -->
-								<img src="images/ski.jpg">
-								<span class="supply-comment">#스키/보드</span>
-							<!-- </div> -->
-						</a>
-					</div>
-					
-					<div class="img_box item-box">
-						<a href="#">
-							<!-- <div class="item-box"> -->
-								<img src="images/bycicle.jpg">
-								<span class="supply-comment">#자전거</span>
-							<!-- </div> -->
-						</a>
-					</div>
-						
-					<div class="img_box item-box">
-						<a href="#">
-							<!-- <div class="item-box"> -->
-								<img src="images/climb.jpg">
-								<span class="supply-comment">#등산</span>
-							<!-- </div> -->
-						</a>
-					</div>
-							
-					<div class="img_box item-box">
-						<a href="#">
-							<!-- <div class="item-box"> -->
-								<img src="images/cocktail.jpg">
-								<span class="supply-comment">#술/칵테일</span>
-							<!-- </div> -->
-						</a>
-					</div>
-					
-					<div class="img_box item-box">
-						<a href="#">
-							<!-- <div class="item-box"> -->
-								<img src="images/concert.jpg">
-								<span class="supply-comment">#공연/전시</span>
-							<!-- </div> -->
-						</a>
-					</div>
-							
-					<div class="img_box item-box">
-						<a href="#">
-							<!-- <div class="item-box"> -->
-								<img src="images/culture.jpg">
-								<span class="supply-comment">#문화</span>
-							<!-- </div> -->
-						</a>
-					</div>
-							
-					<div class="img_box item-box">
-						<a href="#">
-							<!-- <div class="item-box"> -->
-								<img src="images/fashion.jpg">
-								<span class="supply-comment">#패션</span>
-							<!-- </div> -->
-						</a>
-					</div>
-					
-					<div class="img_box item-box">
-						<a href="#">
-							<!-- <div class="item-box"> -->
-								<img src="images/game.jpg">
-								<span class="supply-comment">#게임</span>
-							<!-- </div> -->
-						</a>
-					</div>
-					
-					<div class="img_box item-box">
-						<a href="#">
-							<!-- <div class="item-box"> -->
-								<img src="images/work.jpg">
-								<span class="supply-comment">#전공/직장</span>
-						<!-- 	</div> -->
-						</a>
-					</div>
-						
-					<div class="img_box item-box">
-						<a href="#">
-							<!-- <div class="item-box"> -->
-								<img src="images/movie.jpg">
-								<span class="supply-comment">#영화</span>
-							<!-- </div> -->
-						</a>
-					</div>
-						
-					<div class="img_box item-box">
-						<a href="#">
-							<!-- <div class="item-box"> -->
-								<img src="images/music.jpg">
-								<span class="supply-comment">#음악</span>
-							<!-- </div> -->
-						</a>
-					</div>
-						
-					<div class="img_box item-box">
-						<a href="#">
-							<!-- <div class="item-box"> -->
-								<img src="images/picture.jpg">
-								<span class="supply-comment">#사진</span>
-							<!-- </div> -->
-						</a>
-					</div>
-					
-					<div class="img_box item-box">
-						<a href="#">				
-							<!-- <div class="item-box"> -->
-								<img src="images/read.jpg">
-								<span class="supply-comment">#독서</span>
-						<!-- 	</div> -->
-						</a>
-					</div>
-					
-					<div class="img_box item-box">
-						<a href="#">
-							<img src="images/etc.jpg">
-							<span class="supply-comment">#기타/이색</span>
 						</a>
 					</div>
 				</div>

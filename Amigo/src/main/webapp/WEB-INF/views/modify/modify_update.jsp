@@ -51,7 +51,7 @@
 							<span class="wraper_img">
 								<c:choose>
 									<c:when test="${member.mPic != null}">
-										<img id="pro_pic" src="<c:url value='/resources/images/member_images/${member.mPic}'/>" >
+										<img id="pro_pic" src="${memberImg}/${member.mPic}" >
 										<i class="fa fa-user-circle" id="profile" aria-hidden="true"></i>
 									</c:when>
 									<c:otherwise>

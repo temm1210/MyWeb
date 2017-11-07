@@ -20,9 +20,9 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public MemberVO selectMember(String mid) {
+	public MemberVO selectMember(String username) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("selectMember", mid);
+		return sqlSession.selectOne("selectMember", username);
 	}
 
 	@Override

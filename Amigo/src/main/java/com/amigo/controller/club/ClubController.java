@@ -1,5 +1,5 @@
 package com.amigo.controller.club;
-import java.security.Principal;
+
 import java.util.List;
 import java.util.Map;
 
@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,17 +31,8 @@ public class ClubController {
 	private ClubService service;
 	
 	
-	/*select박스 아작스요청 DB에서 2번째 selectBox에 들어갈 값을 List반환*/
-	@ResponseBody   
-	@RequestMapping(value="/selectBox.amg",method=RequestMethod.POST)
-	public List<String> selectBox(@RequestParam("area") String area) {
-
-		return service.selectSubArea(area);
-	}
-	
 	@RequestMapping(value="/clubMake.amg",method= {RequestMethod.GET,RequestMethod.POST})
-	public String clubMake(Principal principal) {
-		System.out.println("유저체크 :"+principal.getName());
+	public String clubMake() {
 		return "club/club_make";
 	}
 	
@@ -54,16 +45,13 @@ public class ClubController {
 		/*파일업로드후 경로반환*/
 		FileUpLoad ful = new FileUpLoad();
 		String picName = ful.fileForm(file,request,CLUB_IMAGES_FOLER);
-
-		System.out.println("map확인:"+map);
+		String redirectPath = "";
+		
 		/*동호회 만드는 사람의 아이디 확인(동호회장)*/
 		map.put("username", authencation.getName());
 		
 		/*업로드된 파일이 저장된 경로랑,사용자가입력한 정보를 저장한 map객체전달*/
 		int ch_club = service.insertClub(map, picName);
-		
-		
-		String redirectPath = "";
 		
 		if(ch_club > 0) {
 			rdr.addAttribute("msg", "success" );
@@ -90,12 +78,6 @@ public class ClubController {
 		return "club/club";
 	}
 	
-	
-	@RequestMapping("/clubRead.amg/{num}")
-	public String clubReead(@PathVariable("num") int num) {
-		return "club/club";
-	}
-	
 	@RequestMapping("/clubSearch.amg")
 	public ModelAndView clubSearch(@RequestParam(value="keyword",defaultValue="") String keyword) {
 		ModelAndView mav = new ModelAndView();
@@ -105,5 +87,16 @@ public class ClubController {
 		
 		return mav;
 	}
-
+	
+	@RequestMapping(value="clubsGet.amg",method=RequestMethod.POST,produces="application/json; charset=utf-8") 
+	public @ResponseBody List<Map<String,Object>> clubsGet(@RequestBody Map<String,Object> map){
+		/*해당아이디로 가입된 동호회의 사진이랑 이름을 가져와서 json형태로 리턴*/
+		List<Map<String,Object>> listMap = service.selectClubName((String) map.get("username"));
+		System.out.println("현재유저:"+(String) map.get("username"));
+		for(Map<String,Object> map2 : listMap) {
+			System.out.println("값확인:"+map2.get("CTITLE"));
+			System.out.println("값확인:"+map2.get("CPIC"));
+		}
+		return listMap;
+	}
 }

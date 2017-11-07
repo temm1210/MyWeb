@@ -15,7 +15,7 @@
 		padding-top: 200px;
 		padding-bottom: 120px;
 		text-align: center;
-		background-image: url("<c:url value="/resources/images/club_form.jpg"/>");
+		background-image: url("${img}/club_form.jpg");
 		background-position: center;
 		background-size: cover;
 		background-repeat: no-repeat; 
@@ -58,26 +58,9 @@
 				
 					<div id="area_field" class="club_row">
 						<label for="area">활동 지역</label>
-						<select name="cArea1" id="area1">
-							<option value="서울">서울</option>
-							<option value="경기">경기</option>
-							<option value="인천">인천</option>
-							<option value="대전">대전</option>
-							<option value="부산">부산</option>
-							<option value="대구">대구</option>
-							<option value="광주">광주</option>
-							<option value="울산">울산</option>
-						</select>
-								
-						<select name="cArea2" id="area2">
-							<option value="관악구">관악구</option>
-							<option value="강남구">강남구</option>
-							<option value="용산구">용산구</option>
-							<option value="강서구">강서구</option>
-							<option value="금천구">금천구</option>
-							<option value="송파구">송파구</option>
-						</select>		
-						<span class="input_check"></span>				
+						<input type="text" name="cAddress" id="sample5_address" placeholder="주소" onclick="linkToBtn()">
+						<input type="button" id="addr_btn" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
+						<div id="map" style="width:600px;height:300px;margin:10px 0 0 120px;display:none"></div>
 					</div>
 					
 					<div id="hobby_field" class="club_row">
@@ -115,5 +98,78 @@
 		</div>
 	</div>
 </body>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0566b98b4e17dad7a8f0f0aff91a2908&libraries=services"></script>
+<script>
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+        mapOption = {
+            center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
+            level: 5 // 지도의 확대 레벨
+        };
+
+    //지도를 미리 생성
+    var map = new daum.maps.Map(mapContainer, mapOption);
+    //주소-좌표 변환 객체를 생성
+    var geocoder = new daum.maps.services.Geocoder();
+    //마커를 미리 생성
+    var marker = new daum.maps.Marker({
+        position: new daum.maps.LatLng(37.537187, 127.005476),
+        map: map
+    });
+
+	function linkToBtn(){
+		$("#addr_btn").trigger("click")
+	}
+    function sample5_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var fullAddr = data.address; // 최종 주소 변수
+                var extraAddr = ''; // 조합형 주소 변수
+
+                // 기본 주소가 도로명 타입일때 조합한다.
+                if(data.addressType === 'R'){
+                    //법정동명이 있을 경우 추가한다.
+                    if(data.bname !== ''){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있을 경우 추가한다.
+                    if(data.buildingName !== ''){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                    fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+                }
+
+                // 주소 정보를 해당 필드에 넣는다.
+                document.getElementById("sample5_address").value = fullAddr;
+                // 주소로 상세 정보를 검색
+                geocoder.addressSearch(data.address, function(results, status) {
+                    // 정상적으로 검색이 완료됐으면
+                    if (status === daum.maps.services.Status.OK) {
+
+                        var result = results[0]; //첫번째 결과의 값을 활용
+
+                        // 해당 주소에 대한 좌표를 받아서
+                        var coords = new daum.maps.LatLng(result.y, result.x);
+                        
+                        alert(result.y);
+                        alert(result.x);
+                        
+                        // 지도를 보여준다.
+                        mapContainer.style.display = "block";
+                        map.relayout();
+                        // 지도 중심을 변경한다.
+                        map.setCenter(coords);
+                        // 마커를 결과값으로 받은 위치로 옮긴다.
+                        marker.setPosition(coords)
+                    }
+                });
+            }
+        }).open();
+    }
+</script>
 </html>
+
 <%@ include file="../footer/footer.jsp" %>

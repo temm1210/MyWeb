@@ -33,23 +33,28 @@
 	font-size: 20px;
 	
 }
-
-#club_form > .club_row > input{
+input[type="file"]{
+	height:30px;
+	font-family: 'Jeju Gothic', serif;
+}
+#club_form > .club_row > input[type="text"]{
 	width:300px;
 	height:30px;
 	font-family: 'Jeju Gothic', serif;
 }
-
-#club_form > .club_row > select{
-	width:120px;
-	height:30px;
+#club_form > .club_row > input[type="button"]{
+	font-family: 'Jeju Gothic', serif;
+	height:35px;
 }
 .submit_group{
 	margin-top:20px;
 	margin-bottom:40px;
 	text-align: center;
 }
-
+#hobby{
+	height: 30px;
+	font-family: inherit;
+}
 .submit_group > input[type="button"]{
 	margin:10px auto;
 	width: 20%;

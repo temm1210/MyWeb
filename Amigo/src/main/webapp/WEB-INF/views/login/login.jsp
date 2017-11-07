@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <%@ include file="../header/topMenu.jsp" %>
@@ -8,6 +8,8 @@
 <title>Insert title here</title>
 <script>
 	$(document).ready(function(){
+		var state = "${state}";
+		
 		$("#loginBtn").click(function(){
 			/* c:url value 현재 url값(controller/member)뒤에 login_process.amg를붙인다. */
 			$("#login_form").attr("method","post").attr('action','<c:url value="login_proccess.amg"/>');
@@ -16,7 +18,7 @@
 			$("#login_form").attr("method","get").attr("action","${location}/member/joinFirst.amg");
 		})
 		
-		if(${state == 'login_fail'})
+		if(state == 'login_fail')
 			$("#stateCh").html("로그인정보가 틀립니다.다시입력해주세요");
 		else
 			$("#stateCh").html("");

@@ -10,7 +10,6 @@ import com.amigo.dao.clubmember.ClubMemberDAO;
 import com.amigo.vo.club.ClubVO;
 import com.amigo.vo.clubmember.ClubMemberVO;
 
-
 @Service
 public class ClubServiceImpl implements ClubService {
 
@@ -19,7 +18,6 @@ public class ClubServiceImpl implements ClubService {
 	
 	@Inject
 	private ClubMemberDAO clubMemberDao; 
-	
 	
 	/*AOP 트랜잭션 처리*/
 	@Override
@@ -39,13 +37,6 @@ public class ClubServiceImpl implements ClubService {
 		/*동호회 객체 셋팅*/
 		ClubVO club = new ClubVO();
 		
-		System.out.println("닉네임확인:"+clubMember.getNickName());
-		String area1 = (String) map.get("cArea1");
-		String area2 = (String) map.get("cArea2");
-		
-		/*주소가 저장된 DB로부터 고유번호값을 가져옴*/
-		int aNum = selectArea(area1, area2);
-		
 		/*취미가 저장된 DB로부터 고유번호값을 가져옴*/
 		int hNum = selectHobby((String)map.get("cHobby"));
 
@@ -53,7 +44,7 @@ public class ClubServiceImpl implements ClubService {
 		club.setcContent((String)map.get("cContent"));
 		club.setcPic(picPath);
 		club.setcMaster((String)map.get("cNickname"));
-		club.setcArea(aNum);
+		club.setcAddress((String)map.get("cAddress"));
 		club.setcHobby(hNum);
 		
 		int ch_club = clubDao.insertClub(club);
@@ -64,24 +55,17 @@ public class ClubServiceImpl implements ClubService {
 		else
 			return 0;
 	}
-
-	@Override
-	public List<String> selectSubArea(String area1) {
-		// TODO Auto-generated method stub
-		return clubDao.selectSubArea(area1);
-	}
-
-	@Override
-	public int selectArea(String area1, String area2) {
-		// TODO Auto-generated method stub
-		return clubDao.selectArea(area1, area2);
-	}
-
+	
+	/*취미에 해당하는 고유 번호가져오기 스키마{1 . 자연} 자연이라면 1번을가져옴*/
 	@Override
 	public int selectHobby(String hobby) {
 		// TODO Auto-generated method stub
 		return clubDao.selectHobby(hobby);
 	}
-
-
+	/*해당아이디로 가입된 동호회의 사진이랑 이름을 가져옴*/
+	@Override
+	public List<Map<String,Object>> selectClubName(String username) {
+		// TODO Auto-generated method stub
+		return clubDao.selectClubName(username);
+	}
 }

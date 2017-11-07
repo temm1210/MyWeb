@@ -52,7 +52,7 @@
 		$("#subBtn").click(function(){
 			$("#aside").toggleClass("marginLeft")
 			$(".caret").toggleClass("top")
-			$(".caret").toggleClass("none") 
+			$(".caret").toggleClass("opacityZero") 
 		})
 
 	});
@@ -80,24 +80,17 @@
 			success:function(clubs){
 				/* 가입한 동호회가 없다면 */
 				var str="";
-				
-				if(clubs.lengt == 0)
-					$("#join_clubs").siblings("a").text("가입동호회없음")
+				$.each(clubs,function(index){
+					str+='<li><a href="${location}/#" >'
+					str+='<img src="${clubImg}/'+clubs[index].CPIC+'">'
+					str+='<span id="deco_text">'
+					str+=clubs[index].CTITLE
+					str+='</span>'
+					str+='</a></li>' 
 					
-	 			else{
-					$.each(clubs,function(index){
-						str+='<li><a href="${location}/#" >'
-						str+='<img src="${clubImg}/'+clubs[index].CPIC+'">'
-						str+='<span id="deco_text">'
-						str+=clubs[index].CTITLE
-						str+='</span>'
-						str+='</a></li>' 
-						
-						$("#join_clubs").append(str)
-						str="";
-					})
-				} 
-
+					$("#join_clubs").append(str)
+					str="";
+				})
 			},
 			error:function(request,error){
 		        alert("code:"+request.status+"\n"+"error:"+error);
@@ -135,7 +128,7 @@
 	}
 	
 	#aside > .clubsWrap{
-		margin-top: -25px;
+		margin-top: -10px;
 	}
 	
 	#aside > #subBtn{
@@ -175,8 +168,8 @@
 	.inlineBlock{
 		display: inline-block;
 	}
-	.none{
-		opacity:0;
+	.opacityZero{
+		opacity: 0;
 	}
 	.top{
 		top:0;
@@ -191,7 +184,7 @@
 		display: block;
 		border-bottom: 1px solid;
 		left: 0;
-		top: -25px;
+		top: -10px;
 		text-align: center;
 	}
 	.fa-align-justify{
@@ -222,7 +215,7 @@
 	  		<sec:authentication property="principal" var="user"/> 	
 	  		<div id="aside">
 	  			<i class="fa fa-align-justify caret" aria-hidden="true"></i>
-	  			<i class="fa fa-times caret none" id="close" aria-hidden="true"><span class="clubs_list">가입동호회리스트</span></i>	  
+	  			<i class="fa fa-times caret opacityZero" id="close" aria-hidden="true"><span class="clubs_list">가입동호회리스트</span></i>	  
 		  		<input id="subBtn" type="button">
 				<div class="clubsWrap">
 					<ul id="join_clubs">

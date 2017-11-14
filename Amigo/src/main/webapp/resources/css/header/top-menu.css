@@ -32,6 +32,96 @@ nav { width: 100%; }
 .sub-logo{
 	height:0;
 }
+
+#aside_club{
+	position: absolute;
+	width: 200px;
+	background: rgba(0,0,0,.7);
+	left: 100%;
+	top: 100px;
+	-webkit-transition: margin 0.7s; /* Safari 3.1 to 6.0 */
+  		transition: margin 0.7s;
+}
+#aside_club .caret{
+	position: relative;
+	margin-left: 20px;
+	font-size: 30px;
+	color: white;
+	cursor: pointer;
+	-webkit-transition: all 0.6s; /* Safari 3.1 to 6.0 */
+  	transition: all 0.6s;
+}
+
+#aside_club > .wrap_fa{
+	border-bottom: 1px solid white;
+	margin-top: -30px;
+}
+#aside_club .clubs_list{
+	display: block;
+	font-size: 15px;
+	font-family: 'Jeju Gothic', serif;
+	padding: 20px 0 20px 20px;
+	vertical-align: 5px;
+	display: inline-block;
+}
+
+#aside_club > #subBtn{
+	display: none;
+}
+
+#join_clubs{
+	min-width:100%;
+	text-align: left;
+}
+
+#join_clubs img{
+	margin-left: 20px;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	
+}
+#join_clubs > li{
+	text-align: left;
+	border-bottom: 1px solid rgba(255,255,255,.5);
+	padding:15px 0;
+}
+
+#join_clubs > li > a > span{
+	position: absolute;
+	margin-top: 19px;
+	left: 80px;
+	display: inline-block;
+	font-size: 13px;
+}
+
+.marginLeft{
+	margin-left: -200px;
+}
+.inlineBlock{
+	display: inline-block;
+}
+.opacityZero{
+	opacity: 0;
+}
+
+#deco_text{
+	color:white;
+	font-size: 14px;
+}
+i#close{
+	left: 0;
+	text-align: center;
+}
+i.fa.fa-align-justify.caret.opacityZero{
+	left: 5999px;
+}
+
+.fa-align-justify{
+	left: -55px;
+	top: -55px;
+}
+
 .btn {
   padding: 10px 1%;
   margin: 5px;
@@ -100,7 +190,6 @@ main {
 #user_id{
 	font-weight: bold;
 	margin-left: 5px;
-	/* width: 80px; */
 	float: right;
 	color: rgba(255,255,255,.7);
 	line-height: 120px;
@@ -208,7 +297,7 @@ main {
 }
 
 .menu ul li > a { 
-	padding: 52px 30px 30px 12px;   
+	padding: 51px 30px 34px 12px;   
 	color: white;
 }
 

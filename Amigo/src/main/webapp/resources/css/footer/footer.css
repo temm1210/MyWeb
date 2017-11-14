@@ -17,14 +17,12 @@ div.fir-foot > ul.first-foot{
 }
 
 div.fir-foot > ul.first-foot > li{
-	/* flex: 1 1 200px; */
 	flex:4 4 285px;
 }
 
 ul.first-foot > li {
 	margin-bottom: 15px;
 	border-right:1px solid white;
-
 }
 
 ul.first-foot > li > a:hover{
@@ -47,7 +45,6 @@ div.second-foot{
 	margin:0 auto;
 	width: 90%;
 	margin-top:40px;
-	
 }	
 
 div.second-foot > .item_list{
@@ -55,20 +52,15 @@ div.second-foot > .item_list{
 	padding-left: 100px;
 }
 
-
 ul.item > li{
 	color: white;
-
-}		
+}	
+	
 ul.item > li:nth-child(2){
 	color: rgba(200,200,200,.6);
-	margin-left:30px;
-	margin-bottom: 10px;
+	margin:5px 0 10px 30px;
+	font-size: 12px;
 }
-
-/* div.row_4 > ul.item > li:nth-child(2){
-	width:260px;
-} */
 
 .right{
 	display: inline-block;
@@ -82,5 +74,4 @@ ul.item > li:nth-child(2){
 	ul.first-foot > li:last-child{
 		border-right:1px solid white;
 	}
-	
 }

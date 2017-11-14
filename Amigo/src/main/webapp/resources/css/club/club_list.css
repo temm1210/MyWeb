@@ -1,0 +1,119 @@
+div.first-article{
+	display:flex;
+	flex-flow:row wrap;
+	margin:0 auto;
+}
+div.item-box{
+	margin:10px 12px 40px 12px;
+	flex:4 4 400px;
+	width:100%;
+}
+
+div.item-box .club_row{
+	position: relative;
+	z-index:1;
+	overflow:hidden;
+	box-shadow: 2px 2px 6px rgba(0,0,0,.5);
+	box-sizing: border-box;
+}
+
+div.item-box .club-box{
+	height: 450px;
+	overflow: hidden;
+}
+
+div.item-box .item_comment{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index:100;
+	top: 360px;
+	padding-top: 20px;
+	text-align: center;
+	color: rgba(255,255,255,.88);
+	background: rgba(11,16,12,.9);
+	opacity: 0.8;
+	-webkit-transition: all 0.3s ease-in-out; /* Safari 3.1 to 6.0 */
+    transition: all 0.3s ease-in-out;
+}
+
+div.item-box .item_comment > p.club_title{
+	font-size: 28px;
+	margin-top: 15px;
+}
+
+div.club_row:hover div.item_comment{
+	padding-top: 60px;
+	opacity: 1;
+	top:0;
+}
+div.item_comment > p{
+	margin-bottom: 10px;
+}
+
+div.item_comment > p.club_master{
+	position: relative;
+	margin-top: 6px;
+}
+div.item_comment > p.club_intro{
+	font-size: 20px;
+	margin-bottom: 40px;
+}
+i.clubs_datail{
+	margin: 10px;
+	margin-right: 0;
+	float: right;
+}
+.master_pic{
+	height: 100px;
+	width: 100px;
+	border-radius: 50%;
+	float: none;
+	padding: 0;
+	margin: 0;
+}
+span.club_masterPic{
+	position: absolute;
+	display: inline-block;
+	margin-left: 5px;
+	top: 40px;
+	font-size: 24px;
+}
+.total_count{
+	margin-left: 24px;
+}
+
+div.club_page{
+	text-align: center;
+	margin-bottom: 30px;
+	font-size: 23px;
+}
+
+div.club_page > span{
+	display: inline-block;
+	width: 27px;
+	height: 19px;
+	padding-top: 5px;
+	color: rgba(0,0,250,.66);
+	border: 1px solid rgba(0,0,250,.66);
+	vertical-align: 3px;
+} 
+div.club_page > .page_num{
+	margin: 0 5px;
+	font-size: 15px;
+	vertical-align: 3px;
+}
+div.club_page i{
+	font-size: 22px;
+	width: 25px;
+	border: 1px solid rgba(150,150,150,.4);
+	background: #eee;
+}
+#img_club{
+	padding-top :230px; 
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 100%;
+	height: 220px; 
+}   

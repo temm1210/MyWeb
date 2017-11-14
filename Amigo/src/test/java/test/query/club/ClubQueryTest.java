@@ -15,6 +15,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.amigo.service.club.ClubService;
+import com.amigo.util.ClubSearchCriteria;
+import com.amigo.util.PagingHandler;
 
 import test.amigo.oracle.OracleTest;
 
@@ -50,8 +52,38 @@ public class ClubQueryTest {
 		logger.info("가져온 주소값:{}",service.selectHobby("동물/반려견"));
 	}
 	
+	@Ignore
 	@Test
-	public void selectClubs() {
-		logger.info("존재하는 동호회:"+service.selectClubName("수지"));
+	public void selectClubNameTest() {
+		logger.info("존재하는 동호회:{}",service.selectClubName("수지"));
+	}
+	
+	@Ignore
+	@Test
+	public void selectClubsTest() {
+		ClubSearchCriteria criteria = new ClubSearchCriteria();
+		criteria.setTitleSearch("");
+		criteria.setHobbySearch("공연전시");
+		criteria.setAddressSearch("");
+		criteria.setOrderByCriteria("date");
+		
+		PagingHandler handler = new PagingHandler(1, service.selectClubCount(criteria), 5, 5);
+		
+		logger.info("동호회 리스트:"+service.selectClubs(criteria,handler));
+	}
+	@Ignore
+	@Test
+	public void selectClubCountTest() {
+		ClubSearchCriteria criteria = new ClubSearchCriteria();
+		criteria.setTitleSearch("");
+		criteria.setHobbySearch("공연전시");
+		criteria.setAddressSearch("");
+		criteria.setOrderByCriteria("date");
+		logger.info("현재 존재하는 총 동호회수:{}",service.selectClubCount(criteria));
+	}
+	
+	@Test
+	public void selectClubTest() {
+		logger.info("가지고온 동호회:{}",service.selectClub("다시한번만들어보자"));
 	}
 }

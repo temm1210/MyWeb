@@ -46,7 +46,8 @@ input[type="button"]{
 	border-radius:2px;
 	border:1px solid rgba(0,0,0,.6);
 }
-.input_box > #category{
+.input_box > #hobbySearch{
+	font-family: 'Jeju Gothic', serif;
 	width:173px;
 	height:40px;
 	border-radius: 2px;
@@ -58,76 +59,29 @@ input[type="button"]{
 	top:0;
 	width:100%;
 }
-#article2 > div.club_category{
-	margin-left: 20px;
-	margin-bottom: 10px;
-}
-
-#article2 > div.club_category > a > span.category_row{
-	color: rgba(0,0,0,.5);
-	border-right: 1px solid rgba(0,0,0,.5);
-	padding: 0 5px;
-}
-
-#article2 > div.club_category > a:last-child > span.category_row{
-	border: none;
-}
-
-#article2 > div.club_category > a:hover > span.category_row{
-	color:rgba(0,0,0,.8);	
-}
-
-#article2 > div.first-article{
-	display:flex;
-	flex-flow:row wrap;
-	margin:0 auto;
-	text-align:center;
-}
-#article2 > div.first-article > .img_box{
-	margin:10px 12px 40px 12px;
-	flex:4 4 400px;
-	width:100%;
-}
-
-#article2 > div.first-article > .item-box{
-	position:relative;
-	z-index:1;
-	overflow:hidden;
-	box-shadow:0 1px 1px #332c2c, 
-			   1px 2px 2px #4a4949, 
-			   2px 3px 4px #807c7c;
-	box-sizing: border-box;
-}
-
-#article2 > div.first-article > .item-box img{
-	display:block;
-	width:100%;
-	opacity:0.85;
-}
-
 #article2 > h2{
 	text-align: center;
 	font-weight: bold;
 	font-size: 30px;
 }
 
-div.item-box:hover{
-	background:rgba(0,0,0,.9);
-}  
-	
+div.club_category{
+	margin-left: 20px;
+	margin-bottom: 10px;
+}
 
-.supply-comment{
-	position:absolute;
-	top:45%;
-	left:40%;
-	z-index:1;
-	font-weight:bold;
-	font-size:1.4em;
-	color:rgba(255,255,255,.9);
-}	
+div.club_category > a > span.category_row{
+	color: rgba(0,0,0,.5);
+	border-right: 1px solid rgba(0,0,0,.5);
+	padding: 0 5px;
+}
 
-.test{
-	background-color: white;
+div.club_category > a:last-child > span.category_row{
+	border: none;
+}
+
+div.club_category > a:hover > span.category_row{
+	color:rgba(0,0,0,.8);	
 }
 input:-webkit-autofill { -webkit-box-shadow: 0 0 0 1000px white inset!important;}
 input:-webkit-autofill { transition: background-color 5000s ease-in-out 0s;}

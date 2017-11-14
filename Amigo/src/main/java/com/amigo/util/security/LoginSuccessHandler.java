@@ -41,6 +41,10 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
 			if(path.contains("joinSuccess.amg"))
 				path = path.replace("member/joinSuccess.amg", "/main.amg");
 			
+			else if(path.contains("club.amg"))
+				path = path.replace("club/club.amg", "/main.amg");
+				
+			
 			if(path != null) {
 				session.removeAttribute("prevpage");
 				getRedirectStrategy().sendRedirect(request, response, path);

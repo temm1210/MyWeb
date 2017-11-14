@@ -9,17 +9,28 @@
 <title>Insert title here</title>
 <script>
 	$(document).ready(function(){
-		if(${msg == 'success'})
+		if( ${msg == "success"} ){
 			alert("축하합니다! 동호회가 개설되었습니다.");
+		}
 	})
-
 </script>
+<style>
+   	#img_wrap{
+		margin-top: 80px;
+		padding-top :440px;
+		background-image: url("<c:url value='/resources/images/club_images/${club.cPic}'/>");
+		background-position: center;
+		opacity: 0.9;
+		width: 100%;
+		height: 230px; 
+	}    
+</style>
 </head>
 <body>
 <div id="container">
 	<div id="img_wrap">
-		<h2>${cName}</h2>
-		<img id="main_img" src="<c:url value='/resources/images/club_images/${picName}'/>">
+		<h2>${club.cTitle}</h2>
+		<%-- <img id="main_img" src="<c:url value='/resources/images/club_images/${picName}'/>"> --%>
 	</div>	
 	<div id="aside">
 		<ul>

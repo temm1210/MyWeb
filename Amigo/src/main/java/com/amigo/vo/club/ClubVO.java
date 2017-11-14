@@ -9,13 +9,19 @@ public class ClubVO {
 	private String cContent;
 	private String cPic;
 	private String cMaster;
+	private String cMasterPic;
 	private String cAddress;
 	private Date cRegdate;
 	private int cHobby;
 	
 	public ClubVO() {}
 	
-	
+	public String getcMasterPic() {
+		return cMasterPic;
+	}
+	public void setcMasterPic(String cMasterPic) {
+		this.cMasterPic = cMasterPic;
+	}
 	public String getcAddress() {
 		return cAddress;
 	}
@@ -65,11 +71,11 @@ public class ClubVO {
 	public void setcHobby(int cHobby) {
 		this.cHobby = cHobby;
 	}
+
 	@Override
 	public String toString() {
 		return "ClubVO [cNum=" + cNum + ", cTitle=" + cTitle + ", cContent=" + cContent + ", cPic=" + cPic
-				+ ", cMaster=" + cMaster + ", cAddress=" + cAddress + ", cRegdate=" + cRegdate + ", cHobby=" + cHobby
-				+ "]";
+				+ ", cMaster=" + cMaster + ", cMasterPic=" + cMasterPic + ", cAddress=" + cAddress + ", cRegdate="
+				+ cRegdate + ", cHobby=" + cHobby + "]";
 	}
-	
 }

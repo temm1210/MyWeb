@@ -31,14 +31,14 @@
 					<span>*모두 빠짐없이 입력하셔야 합니다.</span>
 					<div id="title_field" class="club_row">
 						<label for="title">동호회 제목 </label>
-						<input type="text" id="title" name="cTitle" placeholder="동호회제목 입력(5자이상)">
+						<input type="text" id="title" name="cTitle" placeholder="동호회제목 입력(3자이상)">
 						<span class="input_check"></span>
 						<i class="fa fa-check ch" aria-hidden="true"></i>						
 					</div>
 					
 					<div id="content_field" class="club_row">
 						<label for="content">동호회 소개글 </label>
-						<input type="text" id="content" name="cContent" placeholder="소개글 입력(10자이상)">
+						<input type="text" id="content" name="cContent" placeholder="소개글 입력(8자이상)">
 						<span class="input_check"></span>	
 						<i class="fa fa-check ch" aria-hidden="true"></i>					
 					</div>
@@ -53,7 +53,8 @@
 					<div id="cpic_field" class="club_row">
 						<label for="cpic">동호회 대표사진 </label>
 						<input type="file" id="cpic" name="cpic" value="사진" >
-						<span class="input_check"></span>						
+						<span class="input_check"></span>				
+						<i class="fa fa-check ch" aria-hidden="true"></i>		
 					</div>
 				
 					<div id="area_field" class="club_row">
@@ -67,25 +68,25 @@
 						<label for="hobby">관심사</label>
 						<select name="cHobby" id="hobby">
 							<option value="자연" selected>자연</option>
-							<option value="여행/캠핑">여행/캠핑</option>
+							<option value="여행캠핑">여행/캠핑</option>
 							<option value="자동차">자동차</option>
-							<option value="운동/스포츠">운동/스포츠</option>
-							<option value="동물/반려견">동물/반려견</option>
-							<option value="공부/스터디">공부/스터디</option>
-							<option value="스키/보드">스키/보드</option>
+							<option value="운동스포츠">운동/스포츠</option>
+							<option value="동물반려견">동물/반려견</option>
+							<option value="공부스터디">공부/스터디</option>
+							<option value="스키보드">스키/보드</option>
 							<option value="자전거">자전거</option>
 							<option value="등산">등산</option>
-							<option value="술/칵테일">술/칵테일</option>
-							<option value="공연/전시">공연/전시</option>
+							<option value="술칵테일">술/칵테일</option>
+							<option value="공연전시">공연/전시</option>
 							<option value="문화">문화</option>
 							<option value="패션">패션</option>
 							<option value="게임">게임</option>
-							<option value="전공/직장">전공/직장</option>
+							<option value="전공직장">전공/직장</option>
 							<option value="영화">영화</option>
 							<option value="음악">음악</option>
 							<option value="사진">사진</option>
 							<option value="독서">독서</option>
-							<option value="기타">기타/이색</option>
+							<option value="기타이색">기타/이색</option>
 						</select>
 						<span class="input_check"></span>
 					</div>
@@ -153,9 +154,6 @@
 
                         // 해당 주소에 대한 좌표를 받아서
                         var coords = new daum.maps.LatLng(result.y, result.x);
-                        
-                        alert(result.y);
-                        alert(result.x);
                         
                         // 지도를 보여준다.
                         mapContainer.style.display = "block";

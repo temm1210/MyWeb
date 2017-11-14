@@ -2,16 +2,21 @@ $(document).ready(function(){
 	 
 	/* 동호회 제목 체크 */
 	$("#title").stop().blur(function(){
-		 checkValue(this,"이름을 입력하세요",5)
+		 checkValue(this,"이름을 입력하세요",2)
 	})
 	/* 소개글체크 */
 	$("#content").stop().blur(function(){
-		 checkValue(this,"소개글을 입력하세요",10)
+		 checkValue(this,"소개글을 입력하세요",8)
 	})
 	/*닉네임 체크*/
 	$("#cNickname").stop().blur(function(){
 		 checkValue(this,"닉네임을 입력하세요",2)
 	})
+	/*동호회사진 체크*/
+	$("#cpic").stop().blur(function(){
+		 checkValue(this,"사진을 등록하세요");
+	})
+	
 })
 
 /* 만들기 버튼 클릭시 */

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
 <meta id="_csrf" name="_csrf" content="${_csrf.token}"/>
 <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}"/>
 
@@ -26,42 +26,16 @@
 	        xhr.setRequestHeader(header, token);
 	    });
 	    /* --------------------------------------------------- */
-	    
-		var prevHtml;
-		var userName;
+
 		var userName = "${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}";
 		
 		/* 로그인된 상태라면  */
 		if( userName!=''){
  			clubsGet(userName); 
  		}
-		
- 		$("#user_id").mouseover(function(){
-			prevHtml = $("#user_id").html();
-			$("#user_id").html(' Mypage');
-		})
-		
-		$("#user_id").mouseout(function(){
-			$("#user_id").html(prevHtml);
-		}) 
-		
-		$(".caret").click(function(){
-			$("#subBtn").trigger("click")
-		})
-		
-		$("#subBtn").click(function(){
-			$("#aside").toggleClass("marginLeft")
-			$(".caret").toggleClass("top")
-			$(".caret").toggleClass("opacityZero") 
-		})
 
 	});
-	
-	function logOutCheck(){
-		if(confirm("로그아웃 하시겠습니까?")){
-			$("#logOutForm").submit()
-		}
-	}
+
 	
   	function clubsGet(username){
   		
@@ -78,11 +52,11 @@
 				"Content-Type" : "application/json; charset=UTF-8"
 			},
 			success:function(clubs){
-				/* 가입한 동호회가 없다면 */
+				/* 가입한 동호회가 있다면 */
 				var str="";
 				$.each(clubs,function(index){
-					str+='<li><a href="${location}/#" >'
-					str+='<img src="${clubImg}/'+clubs[index].CPIC+'">'
+					str+='<li><a href=${location}/club/club.amg?cTitle='+clubs[index].CTITLE+' >'
+					str+='<img src=${clubImg}/'+clubs[index].CPIC+'>'
 					str+='<span id="deco_text">'
 					str+=clubs[index].CTITLE
 					str+='</span>'
@@ -98,100 +72,6 @@
 		}); 
 	} 
 </script>
-<style>
-
-	#aside{
-		position: absolute;
-		width: 200px;
-		background: rgba(0,0,0,.7);
-		left: 100%;
-		top: 100px;
-		-webkit-transition: margin 0.7s; /* Safari 3.1 to 6.0 */
-   		transition: margin 0.7s;
-	}
-	#aside > .caret{
-		position: relative;
-		font-size: 30px;
-		color: white;
-		cursor: pointer;
-		-webkit-transition: all 0.6s; /* Safari 3.1 to 6.0 */
-   		transition: all 0.6s;
-	}
-	
-	#aside .clubs_list{
-		display: block;
-		font-size: 15px;
-		font-family: 'Jeju Gothic', serif;
-		padding: 20px 0 20px 20px;
-		vertical-align: 5px;
-		display: inline-block;
-	}
-	
-	#aside > .clubsWrap{
-		margin-top: -10px;
-	}
-	
-	#aside > #subBtn{
-		display: none;
-	}
-	
-	#join_clubs{
-		min-width:100%;
-		text-align: left;
-	}
-	
-	#join_clubs img{
-		margin-left: 20px;
-		width: 50px;
-		height: 50px;
-		border-radius: 50%;
-		
-	}
-	#join_clubs > li{
-		text-align: left;
-		border-bottom: 1px solid rgba(255,255,255,.5);
-		padding:15px 0;
-	}
-	
-	#join_clubs > li > a > span{
-		position: absolute;
-		margin-top: 19px;
-		left: 80px;
-		display: inline-block;
-		font-size: 13px;
-	}
-
-	
-	.marginLeft{
-		margin-left: -200px;
-	}
-	.inlineBlock{
-		display: inline-block;
-	}
-	.opacityZero{
-		opacity: 0;
-	}
-	.top{
-		top:0;
-	}
-	
-	#deco_text{
-		color:white;
-		font-size: 14px;
-	}
-
-	.fa-times{
-		display: block;
-		border-bottom: 1px solid;
-		left: 0;
-		top: -10px;
-		text-align: center;
-	}
-	.fa-align-justify{
-		left: -36px;
-		top: -55px;
-	}
-</style>
 <div class="nav_wrapper"> 
     <div class="spinner-master">
 	    <input type="checkbox" id="spinner-form" />
@@ -213,9 +93,13 @@
 	
 	  	<sec:authorize access="isAuthenticated()"> 
 	  		<sec:authentication property="principal" var="user"/> 	
-	  		<div id="aside">
+	  		<div id="aside_club">
 	  			<i class="fa fa-align-justify caret" aria-hidden="true"></i>
-	  			<i class="fa fa-times caret opacityZero" id="close" aria-hidden="true"><span class="clubs_list">가입동호회리스트</span></i>	  
+	  			<div class="wrap_fa">
+		  			<i class="fa fa-times caret opacityZero" id="close" aria-hidden="true">
+		  				<span class="clubs_list">가입동호회리스트</span>
+		  			</i>	  
+	  			</div>
 		  		<input id="subBtn" type="button">
 				<div class="clubsWrap">
 					<ul id="join_clubs">
@@ -253,7 +137,7 @@
       		<li ><a href="#Link" title="Link">동호회</a>
       			<ul>
       				<li><a href="${location}/club/clubMake.amg">동호회 만들기</a>
-      				<li><a href="#Link">동호회 보기</a>
+      				<li><a href="${location}/club/clubSearch.amg">동호회 찾기</a>
       			</ul>
       		</li>
 

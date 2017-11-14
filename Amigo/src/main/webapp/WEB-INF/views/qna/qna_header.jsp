@@ -6,14 +6,15 @@
 <title>Insert title here</title>
 <style>
 	#main_img{
-		padding-top:440px;
+		margin-top: 80px;
+		padding-top :440px;
 		background-image: url("<c:url value="/resources/images/question1.jpg"/>");
 		background-position: center;
 		background-size: cover;
 		background-repeat: no-repeat; 
 		opacity: 0.8;
-		width:100%;
-		height:100px; 
+		width: 100%;
+		height: 100px; 
 	}
 </style>
 <div id="main_img">

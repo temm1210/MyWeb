@@ -55,7 +55,7 @@
 		    <artifactId>spring-security-taglibs</artifactId>
 		    <version>${org.springsecurity-version}</version>
 		</dependency>
-		
+
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>

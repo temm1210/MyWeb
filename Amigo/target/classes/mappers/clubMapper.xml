@@ -26,5 +26,85 @@
 		WHERE 
 			ac.cnum = acm.cnum AND acm.mid=#{username}
   	</select>
+  	
+  	<select id="selectClub" resultType="ClubVO">
+  		SELECT
+  			cmaster, ctitle, ccontent, cpic, cregdate, chobby, caddress
+  		FROM 
+  			amigo_club
+  		WHERE 
+  			ctitle = #{cTitle}
+  	</select>
+  	
+  	<!-- 총 동호회수 -->
+  	<select id="selectClubCount" resultType="int">
+  		SELECT
+  			COUNT(*)
+  		FROM
+  			amigo_club
+  		<include refid="clubSearchByWord"/>
+  	</select>
+  	
+  	<!-- 동호회리스트 페이징처리 -->
+  	<select id="selectClubs" resultType="ClubVO">
+  		<include refid="clubBeforePaging"/>
+  		SELECT
+  			c.cnum,c.cmaster,c.ctitle,c.ccontent,c.cpic,c.cregdate,c.chobby,c.caddress,m.mpic as cmasterpic
+  		FROM
+  			 amigo_club c,amigo_member m,amigo_club_members cm
+  		<include refid="clubSearchByWord"/>
+  		<include refid="clubSearchMpic"/>
+  		<include refid="clubOrderBy"/>
+  		<include refid="clubAfterPaging"></include>
+  	</select>
+  	 
+  	<!-- 동적 정렬. 선택키워드에 따라 최신순,게시글순,회원순으로 정렬해줌.  -->
+  	
+  	<sql id="clubOrderBy">
+  		<trim prefix="ORDER BY">
+  			<if test="criteria.orderByCriteria == 'date'">
+  				cregdate desc
+  			</if>
+  			<if test="criteria.orderByCriteria == 'memberCount'">
+  				
+  			</if>
+  			<if test="criteria.orderByCriteria == 'boardCount'">
+  			</if>
+  		</trim>
+  	</sql>
+
+  	<!-- 동적 검색. 선택키워드에 따라 동호회를 보여줌.  -->
+  	<sql id="clubSearchByWord">
+  		<choose>
+  			<when test="criteria.hobbySearch == 'all' ">
+		  		WHERE  		   				
+	  			   (ctitle like '%'||#{criteria.titleSearch}||'%'
+	  			   AND caddress like '%'||#{criteria.addressSearch}||'%')	
+		  	</when>
+		  	
+		  	<otherwise>
+		  		WHERE
+		  		    (ctitle like '%'||#{criteria.titleSearch}||'%'
+		  		    AND chobby = (SELECT hnum FROM amigo_hobby WHERE hobby like '%'||#{criteria.hobbySearch}||'%')
+		  		    AND caddress like '%'||#{criteria.addressSearch}||'%')
+		  	</otherwise>
+  		</choose>
+  	</sql>
+  	
+ 	<sql id="clubSearchMpic">
+ 		AND c.cnum = cm.cnum  AND c.cmaster = cm.cnickname AND m.mid = cm.mid 
+ 	</sql>
+  	
+  	<!--페이징처리 헤더부분  -->
+  	<sql id="clubBeforePaging">
+  		SELECT * FROM(
+  				SELECT ROWNUM rnum, A.* FROM(
+  	</sql>
+  	
+  	<!--페이징처리 풋터부분  -->
+  	<sql id="clubAfterPaging">
+  				)A
+  		)WHERE rnum BETWEEN #{start} AND #{end}
+  	</sql>
   
   </mapper>

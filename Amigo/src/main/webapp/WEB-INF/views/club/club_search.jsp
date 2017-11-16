@@ -74,5 +74,6 @@
 			</div> <!-- articl2 -->
 		</div>	<!-- content -->
 	</div>	<!-- container -->
+	<input type="hidden" id="page" value="${page}">
 </body>
 </html>

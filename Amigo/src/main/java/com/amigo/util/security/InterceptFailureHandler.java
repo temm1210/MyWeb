@@ -20,8 +20,23 @@ public class InterceptFailureHandler implements AuthenticationEntryPoint {
 		
 		response.setContentType("text/html; charset=EUC-KR");
 		PrintWriter out = response.getWriter();
+		String output = null;
 		
-		out.println("<script>alert('로그인을 하셔야 이용가능합니다.'); history.go(-1);</script>");
+		output+="<script>";
+		
+		output+="if( confirm('로그인후 이용가능한 서비스입니다. 로그인 하시겠습니까?') )";
+		output+="{";
+		output+="location.href='/member/login.amg'";
+		output+="}";
+		
+		output+="else";
+		output+="{";
+		output+="history.back()";
+		output+="}";
+		
+		output+="</script>";
+		/*out.println("<script> if(confirm('로그인후 이용가능한 서비스입니다.로그인 하시겠습니까?')){ location.href='/member/login.amg';}</script>");*/
+		out.println(output);
 
 		out.flush();
 

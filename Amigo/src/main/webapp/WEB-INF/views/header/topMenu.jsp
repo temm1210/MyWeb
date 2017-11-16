@@ -137,7 +137,7 @@
       		<li ><a href="#Link" title="Link">동호회</a>
       			<ul>
       				<li><a href="${location}/club/clubMake.amg">동호회 만들기</a>
-      				<li><a href="${location}/club/clubSearch.amg">동호회 찾기</a>
+      				<li><a href="${location}/club/clubSearch.amg?page=1">동호회 찾기</a>
       			</ul>
       		</li>
 

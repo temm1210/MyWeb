@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
-
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -82,16 +81,25 @@ public class ClubController {
 		return "club/club";
 	}
 	
+	/*history.pushState에서 새로운 url값을 만들어내는데, 이때 새로고침하면 404페이지가 뜬다.
+	    이 현상을 해결하기위해 서버단에서 page라는 변수를 하나더 받아서 적절한 페이지를 띄워주도록한다
+	  ( spa(싱글페이지) 동작시, 클라이언트단에서 (club_search.js) history.pushState으로인해
+	    기존 url+ ?page='페이지' 가 자동으로 생성됨.) 
+	*/
 	@RequestMapping("/clubSearch.amg")
-	public ModelAndView clubSearch(@RequestParam(value="keyword",defaultValue="") String keyword) {
-		ModelAndView mav = new ModelAndView();
+	public ModelAndView clubSearch(@RequestParam(value="keyword",defaultValue="") String keyword,
+								   @RequestParam(value="page",defaultValue="0") String page) {
 		
+		ModelAndView mav = new ModelAndView();
+		System.out.println("page의값은:"+page);
 		mav.addObject("keyword", keyword);
+		mav.addObject("page", page);
 		mav.setViewName("club/club_search");
 		
 		return mav;
 	}
 	
+	/*탑메뉴에 로그인한 아이디로 가입된 동회회 리스트를 보여주기위해*/
 	@RequestMapping(value="clubsGet.amg",method=RequestMethod.POST,produces="application/json; charset=utf-8") 
 	public @ResponseBody List<Map<String,Object>> clubsGet(@RequestBody Map<String,Object> map){
 		/*해당아이디로 가입된 동호회의 사진이랑 이름을 가져와서 json형태로 리턴*/

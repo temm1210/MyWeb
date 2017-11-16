@@ -62,12 +62,12 @@
 <div class="club_page">
 	<!-- 처음페이지로가기 -->
 	<c:if test="${map.pager.curBlock > 1 }">
-		<a href="javascript:moveForPage('1')"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
+		<a href="javascript:getClubsAjax('1')"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
 	</c:if>
 
 	<!-- 이전페이지 -->
 	<c:if test="${map.pager.curBlock > 1 }">
-		<a href="javascript:moveForPage('${map.pager.prevBlockPage}')"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+		<a href="javascript:getClubsAjax('${map.pager.prevBlockPage}')"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
 	</c:if>
 	
 	<c:forEach var="num" begin="${map.pager.startPageNo}" end="${map.pager.endPageNo}">
@@ -77,7 +77,7 @@
 			</c:when>
 				
 			<c:otherwise>
-				<a class="page_num" href="javascript:moveForPage('${num}')">${num}</a>
+				<a class="page_num" href="javascript:getClubsAjax('${num}')">${num}</a>
 			</c:otherwise>
 			
 		</c:choose>
@@ -85,12 +85,12 @@
 
 	<!-- 다음페이지 -->
 	<c:if test="${map.pager.curBlock < map.pager.totalBlock}">
-		<a href="javascript:moveForPage('${map.pager.nextBlockPage}')"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+		<a href="javascript:getClubsAjax('${map.pager.nextBlockPage}')"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
 	</c:if>
 	
 	<!-- 마지막페이지 가기 -->
 	<c:if test="${map.pager.curBlock < map.pager.totalBlock}">
-		<a href="javascript:moveForPage('${map.pager.totalPage}')"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+		<a href="javascript:getClubsAjax('${map.pager.totalPage}')"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
 	</c:if>
 </div>
 

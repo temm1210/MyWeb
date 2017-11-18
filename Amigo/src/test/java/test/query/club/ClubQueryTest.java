@@ -84,6 +84,6 @@ public class ClubQueryTest {
 	
 	@Test
 	public void selectClubTest() {
-		logger.info("가지고온 동호회:{}",service.selectClub("다시한번만들어보자"));
+		logger.info("가지고온 동호회:{}",service.selectClub(46));
 	}
 }

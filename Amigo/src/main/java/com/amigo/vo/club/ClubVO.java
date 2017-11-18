@@ -5,6 +5,8 @@ import java.util.Date;
 public class ClubVO {
 
 	private int cNum;
+	private int boardCount;
+	private int cHobby;
 	private String cTitle;
 	private String cContent;
 	private String cPic;
@@ -12,7 +14,6 @@ public class ClubVO {
 	private String cMasterPic;
 	private String cAddress;
 	private Date cRegdate;
-	private int cHobby;
 	
 	public ClubVO() {}
 	
@@ -71,11 +72,16 @@ public class ClubVO {
 	public void setcHobby(int cHobby) {
 		this.cHobby = cHobby;
 	}
-
+	public int getBoardCount() {
+		return boardCount;
+	}
+	public void setBoardCount(int boardCount) {
+		this.boardCount = boardCount;
+	}
 	@Override
 	public String toString() {
-		return "ClubVO [cNum=" + cNum + ", cTitle=" + cTitle + ", cContent=" + cContent + ", cPic=" + cPic
-				+ ", cMaster=" + cMaster + ", cMasterPic=" + cMasterPic + ", cAddress=" + cAddress + ", cRegdate="
-				+ cRegdate + ", cHobby=" + cHobby + "]";
+		return "ClubVO [cNum=" + cNum + ", boardcount=" + boardCount + ", cHobby=" + cHobby + ", cTitle=" + cTitle
+				+ ", cContent=" + cContent + ", cPic=" + cPic + ", cMaster=" + cMaster + ", cMasterPic=" + cMasterPic
+				+ ", cAddress=" + cAddress + ", cRegdate=" + cRegdate + "]";
 	}
 }

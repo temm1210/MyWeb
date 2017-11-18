@@ -7,7 +7,6 @@ import java.util.Map;
 import javax.inject.Inject;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -71,14 +70,17 @@ public class ClubController {
 	}
 	
 	@RequestMapping("/club.amg")
-	public String club(@RequestParam(value="cTitle",defaultValue="") String cTitle,
-					   Model model) {
+	public ModelAndView club(@RequestParam(value="cNum",required=false) int cNum) {
 	
-		System.out.println("동호회이름:"+cTitle);
-		ClubVO club = service.selectClub(cTitle);
-		model.addAttribute("club",club);
+		ModelAndView mav = new ModelAndView();
+		System.out.println("동호회번호:"+cNum);
+		ClubVO club = service.selectClub(cNum);
 		
-		return "club/club";
+		mav.addObject("club",club);
+		mav.addObject("cNum",cNum);
+		mav.setViewName("club/club");
+		
+		return mav;
 	}
 	
 	/*history.pushState에서 새로운 url값을 만들어내는데, 이때 새로고침하면 404페이지가 뜬다.
@@ -88,10 +90,10 @@ public class ClubController {
 	*/
 	@RequestMapping("/clubSearch.amg")
 	public ModelAndView clubSearch(@RequestParam(value="keyword",defaultValue="") String keyword,
-								   @RequestParam(value="page",defaultValue="0") String page) {
+								   @RequestParam(value="page",defaultValue="1") String page) {
 		
 		ModelAndView mav = new ModelAndView();
-		System.out.println("page의값은:"+page);
+
 		mav.addObject("keyword", keyword);
 		mav.addObject("page", page);
 		mav.setViewName("club/club_search");
@@ -100,7 +102,7 @@ public class ClubController {
 	}
 	
 	/*탑메뉴에 로그인한 아이디로 가입된 동회회 리스트를 보여주기위해*/
-	@RequestMapping(value="clubsGet.amg",method=RequestMethod.POST,produces="application/json; charset=utf-8") 
+	@RequestMapping(value="/clubsGet.amg",method=RequestMethod.POST,produces="application/json; charset=utf-8") 
 	public @ResponseBody List<Map<String,Object>> clubsGet(@RequestBody Map<String,Object> map){
 		/*해당아이디로 가입된 동호회의 사진이랑 이름을 가져와서 json형태로 리턴*/
 		return service.selectClubName((String) map.get("username"));
@@ -131,7 +133,7 @@ public class ClubController {
 
 	}*/
 	
-	@RequestMapping(value="clubsList.amg",method=RequestMethod.POST)
+	@RequestMapping(value="/clubsList.amg",method=RequestMethod.POST)
 	public ModelAndView clubsList(@RequestBody ClubSearchCriteria criteria) {
 		
 		ModelAndView mav = new ModelAndView();
@@ -139,7 +141,6 @@ public class ClubController {
 		
 		/*총 동호회수 가져오기*/
 		int totalClubCount = service.selectClubCount(criteria);
-		
 		
 		System.out.println("총동호회수:"+totalClubCount);
 		/*현재 페이지 가져오기*/
@@ -158,6 +159,12 @@ public class ClubController {
 		
 		return mav;
 	}
+	
+	@RequestMapping("/clubJoin.amg")
+	public String clubJoin() {
+		return "club/club_join";
+	}
+
 }
 
 

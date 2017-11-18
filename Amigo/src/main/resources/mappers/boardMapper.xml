@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.amigo.dao.board">
+  
+	<!-- 게시판 페이징처리  -->
+  	<select id="selectBoards" resultType="BoardVO">
+  		<include refid="boardBeforePaging"/>
+  		SELECT 
+  			bnum,btitle,bcontent,breadcnt,bregdate,bupdate,blike,bwriter,bcategory
+  		FROM
+  			amigo_board
+  		<include refid="selectByCategory"/>
+  		ORDER BY 
+  			bregdate desc,bnum desc
+  		<include refid="boardAfterPaging"/>
+  	</select>
+  	
+  	<sql id="selectByCategory">
+  		<choose>
+  			<when test="category == 0">
+  				WHERE
+  					cnum = #{cNum}
+  			</when>
+  			
+  			<otherwise>
+  				WHERE
+  					cnum = #{cNum} AND bcategory = #{category}
+  			</otherwise>
+  		</choose>
+  	</sql>
+  	
+  	<sql id="boardBeforePaging">
+  		SELECT * FROM(
+  				SELECT ROWNUM rnum, A.* FROM(
+  	</sql>
+  	
+  	<sql id="boardAfterPaging">
+  			)A
+  		)WHERE rnum BETWEEN ${start} AND #{end}
+  	</sql>
+  	
+  	<!-- 게시글 총 개수가져오기 -->
+  	<select id="selectBoardCount" resultType="int">
+  		SELECT COUNT(*)
+  		FROM
+  			amigo_board
+  		<include refid="selectByCategory"/>
+  	</select>
+  </mapper>

@@ -38,7 +38,7 @@ div.item-box .item_comment{
 }
 
 div.item-box .item_comment > p.club_title{
-	font-size: 28px;
+	font-size: 22px;
 	margin-top: 15px;
 }
 
@@ -57,30 +57,32 @@ div.item_comment > p.club_master{
 }
 div.item_comment > p.club_intro{
 	font-size: 20px;
-	margin-bottom: 40px;
+	margin-bottom: 70px;
+	height: 20px;
 }
-i.clubs_datail{
+i.clubs_detail{
 	margin: 10px;
 	margin-right: 0;
 	float: right;
 }
 .master_pic{
-	height: 100px;
-	width: 100px;
+	height: 70px;
+	width: 70px;
 	border-radius: 50%;
 	float: none;
 	padding: 0;
 	margin: 0;
 }
 span.club_masterPic{
-	position: absolute;
-	display: inline-block;
+	display: block;
+	text-shadow:0 1px 1px rgba(200,200,200,.3);
 	margin-left: 5px;
-	top: 40px;
-	font-size: 24px;
+	margin-top: 14px;
+	font-size: 14px;
 }
 .total_count{
 	margin-left: 24px;
+	font-size: 13px;
 }
 
 div.club_page{

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <%@ include file="../header/topMenu.jsp" %>
@@ -8,106 +8,83 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script>
-	$(document).ready(function(){
-		if( ${msg == "success"} ){
-			alert("축하합니다! 동호회가 개설되었습니다.");
-		}
-	})
+	$(document).ready(function(){	
+		/* 처음시작과 동시에 게시판을 사용자에게 보여줌. 강제로 클릭이벤트 실행 */
+		$(".sub_ul > li:first-child > a").get(0).click(); 
+		
+	/* 	if( ${msg == "success" } )
+			alert("축하합니다! 동호회가 개설되었습니다."); */
+		
+		$(window).on('popstate', function(event) {
+			  var data = event.originalEvent.state;
+			  
+			  if(data!=null)
+			  	  $('#club_content').html(data.content);
+			  else
+				  history.back();
+		});
+			
+   		 $(".sub_ul > li > a").click(function(){
+			$(".sub_ul > li > a").removeClass("click");
+			$(this).addClass("click");
+			  
+		})    
+			
+	});
+
+	function getContentAjax(url){
+		
+		var path = url.substring(url.lastIndexOf('?')+1 , url.length);
+		/* alert(path);  */
+		$.ajax({
+			type:"GET",
+			url:url,
+			success:function(content){
+		
+				$("#club_content").html(content);
+				$(window).scrollTop(0); 
+				/* 컨트롤러의 기본페이지(club.amg)에서 받는 파라미터 값을 여기에 그대로 적어줘야 뒤로가기 눌렀을때 원하는 결과가나옴 */
+				history.pushState({ content:content },'','?'+path)
+			}
+		});	
+	}
 </script>
 <style>
    	#img_wrap{
-		margin-top: 80px;
-		padding-top :440px;
 		background-image: url("<c:url value='/resources/images/club_images/${club.cPic}'/>");
 		background-position: center;
+		background-size: contain;
 		opacity: 0.9;
 		width: 100%;
-		height: 230px; 
-	}    
+		height: 400px; 
+	}
 </style>
 </head>
 <body>
 <div id="container">
-	<div id="img_wrap">
-		<h2>${club.cTitle}</h2>
-		<%-- <img id="main_img" src="<c:url value='/resources/images/club_images/${picName}'/>"> --%>
-	</div>	
+	<div id="club_pic">
+		<div id="img_wrap">
+			<h2>${club.cTitle}</h2>
+		</div>	
+	</div>
 	<div id="aside">
 		<ul>
 			<li><span>자유게시판</span>
 				<ul class="sub_ul">
-					<li><a href="#"><i class="fa fa-server" aria-hidden="true"></i>전체글보기</a></li>
-					<li><a href="#"><i class="fa fa-server" aria-hidden="true"></i>자기소개</a></li>
-					<li><a href="#"><i class="fa fa-server" aria-hidden="true"></i>자유게시판</a></li>
-					<li><a href="#"><i class="fa fa-server" aria-hidden="true"></i>QnA</a></li>
-					<li><a href="#"><i class="fa fa-server" aria-hidden="true"></i>등업</a></li>
+					<li><a class="click" href="javascript:getContentAjax('${location}/club/board/boardListAll.amg?cNum=${cNum}&curPage=1')" onclick=><i class="fa fa-server" aria-hidden="true"></i>전체글보기</a></li>
+					<li><a href="javascript:getContentAjax('${location}/club/board/boardListAll.amg?cNum=${cNum}&curPage=1&category=1')"><i class="fa fa-server" aria-hidden="true"></i>자기소개</a></li>
+					<li><a href="javascript:getContentAjax('${location}/club/board/boardListAll.amg?cNum=${cNum}&curPage=1&category=4')"><i class="fa fa-server" aria-hidden="true"></i>자유게시판</a></li>
+					<li><a href="javascript:getContentAjax('${location}/club/board/boardListAll.amg?cNum=${cNum}&curPage=1&category=2')"><i class="fa fa-server" aria-hidden="true"></i>QnA</a></li>
+					<li><a href="javascript:getContentAjax('${location}/club/board/boardListAll.amg?cNum=${cNum}&curPage=1&category=3') "><i class="fa fa-server" aria-hidden="true"></i>등업</a></li>
 				</ul>
 			</li>
 			<li><span><a href="#">멤버리스트보기</a></span></li>
+			<li><span><a href="javascript:getContentAjax('${location}/club/clubJoin.amg')">동호회 가입하기</a></span></li>
 		</ul>
 	</div>
 	
-	<div id="board_container">
-		<h2>게시판</h2>	
-		<div id="board_content">
-			<table>
-				<tr>
-					<td>번호</td>
-					<td class="td_title">제목</td>
-					<td>작성자</td>
-					<td>작성일</td>
-					<td>수정일</td>
-					<td>조회</td>
-					<td>좋아요</td>
-				</tr>	
-					
-				<tr><td colspan="6" class="boardLine"></td></tr>	
-				<!-- C태그 반복문 -->
-				<tr>
-					<td>1</td>
-					<td class="td_title"><a href="#" class="title_link">테스트용입니다</a></td>
-					<td>테스트</td>
-					<td>2017.10.17</td>
-					<td>2017.10.18</td>
-					<td>200</td>
-					<td>46</td>
-				</tr>
-				
-				<tr><td colspan="6" class="boardLine"></td></tr>
-				
-				<tr>
-					<td>2</td>
-					<td><a href="#" class="title_link">테스트용입니다2</a></td>
-					<td>테스트2</td>
-					<td>2017.10.17</td>
-					<td>100</td>
-					<td>52</td>
-				</tr>
-				
-				<tr><td colspan="6" class="boardLine"></td></tr>
-				
-				<tr>
-					<td>3</td>
-					<td><a href="#" class="title_link">테스트용입니다3</a></td>
-					<td>테스트3</td>
-					<td>2017.10.17</td>
-					<td>81</td>
-					<td>42</td>
-				</tr>
-				
-				<tr><td colspan="6" class="boardLine"></td></tr>
-				
-				<tr>
-					<td>4</td>
-					<td><a href="#" class="title_link">테스트용입니다4</a></td>
-					<td>테스트4</td>
-					<td>2017.10.17</td>
-					<td>112</td>
-					<td>42</td>
-				</tr>	
-			</table>
-			<a href="#"><span class="paging_num">1 2 3 4 5 6 7 8 9 10</span></a>			
-		</div>
+	<div id="club_content">
+
 	</div>
 </div>
 </body>

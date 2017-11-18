@@ -55,7 +55,7 @@
 				/* 가입한 동호회가 있다면 */
 				var str="";
 				$.each(clubs,function(index){
-					str+='<li><a href=${location}/club/club.amg?cTitle='+clubs[index].CTITLE+' >'
+					str+='<li><a href=${location}/club/club.amg?cNum='+clubs[index].CNUM+' >'
 					str+='<img src=${clubImg}/'+clubs[index].CPIC+'>'
 					str+='<span id="deco_text">'
 					str+=clubs[index].CTITLE

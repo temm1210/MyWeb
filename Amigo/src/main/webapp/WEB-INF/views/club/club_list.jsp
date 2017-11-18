@@ -7,25 +7,13 @@
 <c:url var="clubImg" value="/resources/images/club_images" />
 <c:url var="memberImg" value="/resources/images/member_images" />
 <c:set var="location" value="${pageContext.request.contextPath}"/>
-<script>
-	$(document).ready(function(){
-/* 		var club = $(".item-box");
-		var size = club.length;
-		var clubs = 3;
-		
-		if(size < 3 || size > )
-		$.each(club,function(index){
-			
-			alert(index);
-		}) */
-	})
-</script>
+
 <span class="total_count">동호회수:${map.totalClubCount}</span>
 <div class="first-article">
 	<c:forEach var="clubList" items="${map.clubList}">
 		<div class="item-box">
 			<div class="club_row">
-				<a href="${location}/club/club.amg?cTitle=${clubList.cTitle}">
+				<a href="${location}/club/club.amg?cNum=${clubList.cNum}">
 					<div class="club-box"> 
 						<div id="img_club" style="background-image:url('${clubImg}/${clubList.cPic}')" ></div>
 					</div>  
@@ -38,7 +26,7 @@
 						<p class="club_master">
 							<c:choose>
 								<c:when test="${clubList.cMasterPic == null}">
-									<i class="fa fa-user-circle master_pic" style="font-size:100px;" aria-hidden="true"></i>				
+									<i class="fa fa-user-circle master_pic" style="font-size:70px;" aria-hidden="true"></i>				
 								</c:when>	
 												
 								<c:otherwise>
@@ -53,8 +41,8 @@
 					</div>
 				</a>
 			</div>
-		<i class="fa fa-user clubs_datail" aria-hidden="true"> 40</i>
-		<i class="fa fa-folder clubs_datail" aria-hidden="true"> 20</i>
+		<i class="fa fa-user clubs_detail" aria-hidden="true"> 40</i>
+		<i class="fa fa-folder clubs_detail" aria-hidden="true"> ${clubList.boardCount}</i>
 		</div>
 	</c:forEach>
 </div>
@@ -62,12 +50,12 @@
 <div class="club_page">
 	<!-- 처음페이지로가기 -->
 	<c:if test="${map.pager.curBlock > 1 }">
-		<a href="javascript:getClubsAjax('1')"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
+		<a href="javascript:getClubsAjax(1)"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
 	</c:if>
 
 	<!-- 이전페이지 -->
 	<c:if test="${map.pager.curBlock > 1 }">
-		<a href="javascript:getClubsAjax('${map.pager.prevBlockPage}')"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+		<a href="javascript:getClubsAjax(${map.pager.prevBlockPage})"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
 	</c:if>
 	
 	<c:forEach var="num" begin="${map.pager.startPageNo}" end="${map.pager.endPageNo}">
@@ -77,7 +65,7 @@
 			</c:when>
 				
 			<c:otherwise>
-				<a class="page_num" href="javascript:getClubsAjax('${num}')">${num}</a>
+				<a class="page_num" href="javascript:getClubsAjax(${num})">${num}</a>
 			</c:otherwise>
 			
 		</c:choose>
@@ -85,12 +73,12 @@
 
 	<!-- 다음페이지 -->
 	<c:if test="${map.pager.curBlock < map.pager.totalBlock}">
-		<a href="javascript:getClubsAjax('${map.pager.nextBlockPage}')"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+		<a href="javascript:getClubsAjax(${map.pager.nextBlockPage})"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
 	</c:if>
 	
 	<!-- 마지막페이지 가기 -->
 	<c:if test="${map.pager.curBlock < map.pager.totalBlock}">
-		<a href="javascript:getClubsAjax('${map.pager.totalPage}')"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+		<a href="javascript:getClubsAjax(${map.pager.totalPage})"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
 	</c:if>
 </div>
 

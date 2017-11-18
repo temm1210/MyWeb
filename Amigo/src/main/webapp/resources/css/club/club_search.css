@@ -62,7 +62,7 @@ input[type="button"]{
 #article2 > h2{
 	text-align: center;
 	font-weight: bold;
-	font-size: 30px;
+	font-size: 20px;
 }
 
 div.club_category{
@@ -70,18 +70,23 @@ div.club_category{
 	margin-bottom: 10px;
 }
 
-div.club_category > a > span.category_row{
+div.club_category > a.category_row{
 	color: rgba(0,0,0,.5);
 	border-right: 1px solid rgba(0,0,0,.5);
+	font-size: 12px;
 	padding: 0 5px;
 }
 
-div.club_category > a:last-child > span.category_row{
+div.club_category > a.category_row:last-child {
 	border: none;
 }
 
-div.club_category > a:hover > span.category_row{
+div.club_category > a.category_row:hover{
 	color:rgba(0,0,0,.8);	
+}
+.click{
+	font-weight: bold;
+	color:black !important;
 }
 input:-webkit-autofill { -webkit-box-shadow: 0 0 0 1000px white inset!important;}
 input:-webkit-autofill { transition: background-color 5000s ease-in-out 0s;}

@@ -20,7 +20,7 @@
 
   	<select id="selectClubName" resultType="HashMap">	
 		SELECT 
-			ctitle,cpic 
+			ac.cnum,ac.ctitle,ac.cpic 
 		FROM 
 			amigo_club ac, amigo_club_members acm 
 		WHERE 
@@ -29,11 +29,11 @@
   	
   	<select id="selectClub" resultType="ClubVO">
   		SELECT
-  			cmaster, ctitle, ccontent, cpic, cregdate, chobby, caddress
+  			cnum, cmaster, ctitle, ccontent, cpic, cregdate, chobby, caddress
   		FROM 
   			amigo_club
   		WHERE 
-  			ctitle = #{cTitle}
+  			cnum = #{cNum}
   	</select>
   	
   	<!-- 총 동호회수 -->
@@ -49,7 +49,8 @@
   	<select id="selectClubs" resultType="ClubVO">
   		<include refid="clubBeforePaging"/>
   		SELECT
-  			c.cnum,c.cmaster,c.ctitle,c.ccontent,c.cpic,c.cregdate,c.chobby,c.caddress,m.mpic as cmasterpic
+  			c.cnum,c.cmaster,c.ctitle,c.ccontent,c.cpic,c.cregdate,c.chobby,c.caddress,m.mpic as cmasterpic,
+  			(SELECT COUNT(*) FROM amigo_board ab WHERE c.cnum = ab.cnum) boardcount
   		FROM
   			 amigo_club c,amigo_member m,amigo_club_members cm
   		<include refid="clubSearchByWord"/>
@@ -62,13 +63,14 @@
   	
   	<sql id="clubOrderBy">
   		<trim prefix="ORDER BY">
-  			<if test="criteria.orderByCriteria == 'date'">
+  			<if test="criteria.orderByCriteria == '최신순'">
   				cregdate desc
   			</if>
-  			<if test="criteria.orderByCriteria == 'memberCount'">
+  			<if test="criteria.orderByCriteria == '회원수'">
   				
   			</if>
-  			<if test="criteria.orderByCriteria == 'boardCount'">
+  			<if test="criteria.orderByCriteria == '게시글수'">
+  				boardcount desc
   			</if>
   		</trim>
   	</sql>

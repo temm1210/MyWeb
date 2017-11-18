@@ -51,8 +51,8 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 	@Override
-	public ClubVO selectClub(String cTitle) {
+	public ClubVO selectClub(int cNum) {
 		// TODO Auto-generated method stub
-		return clubDao.selectClub(cTitle);
+		return clubDao.selectClub(cNum);
 	}
 }

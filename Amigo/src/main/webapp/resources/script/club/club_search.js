@@ -1,5 +1,3 @@
-var orderByCriteria='date';
-
 $(document).ready(function(){
 	/*요청페이지를 가져옴*/
 	var curPage = $("#page").val();
@@ -18,11 +16,7 @@ $(document).ready(function(){
 	})  
 	
 	$("#btn_search").click(function(){
-		var titleSearch = $("#titleSearch").val();
-		var hobbySearch = $("#hobbySearch").val();
-		var addressSearch = $("#addressSearch").val();
-		
-		alert(titleSearch+","+hobbySearch+","+addressSearch)
+		getClubsAjax(curPage);
 	})
 	
 	/* 뒤로가기 버튼눌렀을때 Ajax요청으로 가져온 이전 부분만 출력 (SPA랑비슷) */
@@ -39,16 +33,13 @@ $(document).ready(function(){
 	  else
 		  history.back();
 	});
+	
+	$(".club_category > a").click(function(){
+		$(".club_category > a").removeClass("click");
+		$(this).addClass("click");
+		getClubsAjax(1)
+	})
 })
-
-function getOrderByWord(word){
-	orderByCriteria = word;
-	getClubsAjax();
-}
-
-function moveForPage(movePage){
-	getClubsAjax(movePage);
-}
 
 /* 제목검색,취미검색,주소검색,페이지를 넘겨서 아작스방식으로 동호회리스트를 가져옴 */
 function getClubsAjax(curPage){
@@ -56,6 +47,7 @@ function getClubsAjax(curPage){
 	var titleSearch = $("#titleSearch").val();
 	var hobbySearch = $("#hobbySearch").val();
 	var addressSearch = $("#addressSearch").val();
+	var orderByCriteria =$(".click").text();
 	var curPage = curPage;
 
 	/* 넘어온 파라미터들을 JSON형식으로 파싱 */

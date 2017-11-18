@@ -13,5 +13,5 @@ public interface ClubService {
 	public List<Map<String,Object>> selectClubName(String username);
 	public List<ClubVO> selectClubs(ClubSearchCriteria criteria,PagingHandler pager);
 	public int selectClubCount(ClubSearchCriteria criteria);
-	public ClubVO selectClub(String cTitle);
+	public ClubVO selectClub(int cNum);
 }

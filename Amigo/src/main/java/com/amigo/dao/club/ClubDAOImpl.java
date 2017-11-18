@@ -33,7 +33,7 @@ public class ClubDAOImpl implements ClubDAO {
 		
 		clubMember.setNickName((String)map.get("cNickname"));
 		clubMember.setMid((String)map.get("username"));
-		clubMember.setcGrade("»∏¿Â");
+		clubMember.setcGrade((String)map.get("cGrade"));
 		
 		int ch_clubMember = clubMemberDao.insertClubMember(clubMember);
 		/*------------------------------------------------------------*/
@@ -94,8 +94,8 @@ public class ClubDAOImpl implements ClubDAO {
 	}
 
 	@Override
-	public ClubVO selectClub(String cTitle) {
+	public ClubVO selectClub(int cNum) {
 		// TODO Auto-generated method stub
-		return session.selectOne("selectClub",cTitle);
+		return session.selectOne("selectClub",cNum);
 	}
 }

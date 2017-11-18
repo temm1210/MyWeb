@@ -94,6 +94,8 @@
 						<input type="button" id="joinBtn" value="만들기" onclick="makeClub('${location}/club/insertClub.amg?${_csrf.parameterName}=${_csrf.token}')">
 						<input type="button" id="cancelBtn" value="취소" onclick="exitPage('${location}/main.amg')">
 					</div>
+					
+					<input type="hidden" name="cGrade" value="회장">
 				</form>
 			</div>
 		</div>

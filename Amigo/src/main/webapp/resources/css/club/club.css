@@ -4,6 +4,9 @@
 	padding:0;
 	font-family: 'Jeju Gothic', serif;
 }
+#club_pic{
+	text-align: center;
+}
 #img_wrap{
 	position: relative;
 	margin-top: 80px;
@@ -11,23 +14,23 @@
 }
 
 #img_wrap > h2{
-	position: absolute;
+	position: relative;
 	top: 40%;
-	left: 40%;
 	font-weight: bold;
 	font-size: 50px;
 }
+
 #main_img{
 	min-width: 100%;
 	max-width: 100%;
 	min-height: 200px;
-/* 	max-height: 700px; */
 }
+
 #aside{
 	display: inline-block;
 	margin: 60px 30px 0 15px;
 	height: 400px;
-	background: #eee;
+	background: rgba(110,110,110,.1);
 	padding: 20px;
 	border: 1px solid rgba(0,0,0,.2);
 	border-radius: 6px;
@@ -76,66 +79,18 @@ ul.sub_ul .fa{
 	color: rgba(50,50,50,.8);
 	font-size: 13px;
 }
-#board_container{
+#club_content{
 	width: 100%;
 	height: 100%;
 	padding: 0;
 	margin: 0;
-	margin:-450px 0 200px 250px;
+	margin:-450px 0 300px 250px;
 }
-
-#board_content{
-	max-width: 60%;
-	min-width: 950px;
-}
-
-#board_content > h2{
-	font-size: 35px;
-	font-weight: bold;
-	color:black;
-	
-}
-#board_content > table {
-	border-top: 1px solid rgba(0,0,0,.4);
-	border-bottom: 1px solid rgba(0,0,0,.4);
-	width:100%;
-	text-align: center;
-	padding: 20px;
-	margin-right: 20px;
-}
- 
-#board_content > table tr:nth-child(2n+1) td{
-	padding:10px 0;
-}
-
-a.title_link:hover{
-	color:rgba(0,0,0,.6);
-}
-.td_title{
-	width:250px;
-}
-
-#footer{
-	background: red;
-}
-.boardLine{
-	border:1px solid #dad8d7;
-	padding:0;
-}
-.paging_num{
-	display: block;
-	text-align: center;
-}
-#content{
-	margin-top:80px;
-	float:right;
-}
-
-#footer{
-	clear:both;
+.click{
+	color: black !important;
 }
 @media all and (max-width: 787px) {
 	#img_wrap > h2{
 		font-size: 20px;
-}
+	}
 }

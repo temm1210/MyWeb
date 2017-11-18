@@ -40,9 +40,6 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
 			/*전페이지가 회원가입 성공페이지일경우 메인으로바꿈*/
 			if(path.contains("joinSuccess.amg"))
 				path = path.replace("member/joinSuccess.amg", "/main.amg");
-			
-			else if(path.contains("club.amg"))
-				path = path.replace("club/club.amg", "/main.amg");
 				
 			
 			if(path != null) {

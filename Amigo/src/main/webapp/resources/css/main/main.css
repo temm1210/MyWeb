@@ -71,8 +71,8 @@ video#vid {
 /* 첫번째 본문 스타일리스트  끝*/
 .img_caption{
 	opacity:1;
-	-webkit-transition: transform 0.4s ease-out; 
-   	transition: transform 0.4s ease-out; 
+	-webkit-transition: transform 0.2s ease-out; 
+   	transition: transform 0.2s ease-out; 
 	width:100%;
 	position:absolute;
 	top:35%;
@@ -118,14 +118,13 @@ video#vid {
 	background:black;
 }
 
-
 #first-sub,
 #second-sub{
-    -webkit-transition: transform 0.4s ease-out; /* Safari */
-   	transition: transform 0.4s ease-out;
+    -webkit-transition: transform 0.2s ease-out; /* Safari */
+   	transition: transform 0.2s ease-out;
    	opacity: 0.4;
    	box-sizing: border-box;
-   }
+}
 
 #article_2 > .parallax-window > .img-text_2{
 	flex:2 2 300px;
@@ -135,8 +134,8 @@ video#vid {
    	height: 700px;
    	z-index:150;
    	overflow: hidden;
-   }
-   
+}
+
 #article_2 > .parallax-window > .img-text_2 > a{
   	width:100%;
   	height:100%;
@@ -242,20 +241,21 @@ video#vid {
 }
 
 #article_4 > .first-article > .item-box{
-	position:relative;
-	z-index:1;
-	overflow:hidden;
-	box-shadow:0 1px 1px #332c2c, 
-			   1px 2px 2px #4a4949, 
-			   2px 3px 4px #807c7c;
+	position: relative;
+	z-index: 1;
+	overflow: hidden;
+	box-shadow: 0 1px 1px #332c2c, 
+			    1px 2px 2px #4a4949, 
+			    2px 3px 4px #807c7c;
 	box-sizing: border-box;
 }
 
 #article_4 > .first-article > .item-box img{
-	display:block;
-	width:100%;
-	opacity:0.85;
-	transition: transform 0.3s ease;
+	display: block;
+	width: 100%;
+	height: 100%;
+	opacity: 0.85;
+	transition: transform 0.2s;
 }
 
 #article_4 > h2{
@@ -266,22 +266,17 @@ video#vid {
 }
 
 div.item-box:hover img{
-	-webkit-transform: scale(1.07); /* Safari */
-  	 transform: scale(1.07);
+	-webkit-transform: scale(1.1); /* Safari */
+  	 transform: scale(1.1);
 }
 
 div.item-box:hover{
 	background:rgba(0,0,0,.9);
 }  
 
- div.item-box:hover .border-line{
-	border: 1.5px solid #b49759;
-} 
-
 .supply-comment{
-	position:absolute;
-	top:32%;
-	left:41%;
+	position:relative;
+	top:-170px;
 	z-index:1;
 	font-weight:bold;
 	font-size:1.4em;

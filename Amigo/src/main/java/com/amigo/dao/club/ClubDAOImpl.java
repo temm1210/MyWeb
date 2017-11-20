@@ -21,6 +21,7 @@ public class ClubDAOImpl implements ClubDAO {
 
 	@Inject
 	private SqlSession session;
+	
 	@Inject
 	private ClubMemberDAO clubMemberDao; 
 
@@ -31,7 +32,7 @@ public class ClubDAOImpl implements ClubDAO {
 		/*동호회 가입 멤버객체 셋팅(동호회에 어떤 회원이 가입하고있는지 정보를 저장하기 위한객체)*/
 		ClubMemberVO clubMember = new ClubMemberVO();
 		
-		clubMember.setNickName((String)map.get("cNickname"));
+		clubMember.setcNickname((String)map.get("cNickname"));
 		clubMember.setMid((String)map.get("username"));
 		clubMember.setcGrade((String)map.get("cGrade"));
 		

@@ -3,7 +3,7 @@ package com.amigo.vo.clubmember;
 public class ClubMemberVO {
 	
 	private int cNum;
-	private String nickName;
+	private String cNickname;
 	private String mid;
 	private String cGrade;
 	
@@ -13,11 +13,12 @@ public class ClubMemberVO {
 	public void setcNum(int cNum) {
 		this.cNum = cNum;
 	}
-	public String getNickName() {
-		return nickName;
+	
+	public String getcNickname() {
+		return cNickname;
 	}
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
+	public void setcNickname(String cNickname) {
+		this.cNickname = cNickname;
 	}
 	public String getMid() {
 		return mid;
@@ -33,6 +34,7 @@ public class ClubMemberVO {
 	}
 	@Override
 	public String toString() {
-		return "ClubMemberVO [cNum=" + cNum + ", nickName=" + nickName + ", mid=" + mid + ", cGrade=" + cGrade + "]";
+		return "ClubMemberVO [cNum=" + cNum + ", cNickname=" + cNickname + ", mid=" + mid + ", cGrade=" + cGrade + "]";
 	}
+	
 }

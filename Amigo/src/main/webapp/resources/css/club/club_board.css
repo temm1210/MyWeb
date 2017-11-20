@@ -1,0 +1,82 @@
+#board_content{
+	max-width: 80%;
+	min-width: 950px;
+}
+#board{
+	padding-bottom: 40px;
+	border-bottom: 1px solid rgba(0,0,0,.4);
+}
+#board h2{
+	font-size: 25px;
+	font-weight: bold;
+	color:black;
+	
+}
+#board table {
+	border-top: 1px solid rgba(0,0,0,.4);
+	width:100%;
+	text-align: center;
+	padding: 20px;
+	margin-right: 20px;
+}
+ 
+#board table tr:nth-child(2n+1) td{
+	padding:10px 0;
+}
+
+a.title_link:hover{
+	color:rgba(0,0,0,.6);
+}
+
+.td_title{
+	width:450px;
+}
+
+.boardLine{
+	border:1px solid #dad8d7;
+	padding:0;
+}
+
+.paging_num{
+	display: block;
+	text-align: center;
+}
+
+#btnWrite{
+	float: right;
+	padding: 10px;
+	margin-right: 20px;
+	margin-top: -15px;
+	font-weight: bold;
+	background: none;
+	border: 1px solid rgba(0,0,0,.3);
+	cursor: pointer;
+}
+
+div.board_page{
+	text-align: center;
+	margin-top: 10px;
+	font-size: 23px;
+}
+
+div.board_page i{
+	font-size: 22px;
+	width: 25px;
+	border: 1px solid rgba(150,150,150,.4);
+	background: #eee;
+}
+
+div.board_page > span{
+	display: inline-block;
+	width: 27px;
+	height: 19px;
+	padding-top: 5px;
+	color: rgba(0,0,250,.66);
+	border: 1px solid rgba(0,0,250,.66);
+	vertical-align: 3px;
+} 
+div.board_page > .page_num{
+	margin: 0 5px;
+	font-size: 15px;
+	vertical-align: 3px;
+}

@@ -28,4 +28,23 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.selectBoardCount(cNum, category);
 	}
 
+	@Override
+	public int insertBoard(BoardVO board) {
+		// TODO Auto-generated method stub
+		return boardDao.insertBoard(board);
+		
+	}
+
+	@Override
+	public BoardVO selectBoard(int bNum, int cNum) {
+		// TODO Auto-generated method stub
+		return boardDao.selectBoard(bNum, cNum);
+	}
+
+	@Override
+	public int updateBoard(BoardVO board) {
+		// TODO Auto-generated method stub
+		return boardDao.updateBoard(board);
+	}
+
 }

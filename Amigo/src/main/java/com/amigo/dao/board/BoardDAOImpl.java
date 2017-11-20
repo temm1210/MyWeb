@@ -40,4 +40,28 @@ public class BoardDAOImpl implements BoardDAO {
 		return session.selectOne("selectBoardCount",map);
 	}
 
+	@Override
+	public int insertBoard(BoardVO board) {
+		// TODO Auto-generated method stub
+		return session.insert("insertBoard", board);
+		
+	}
+
+	@Override
+	public BoardVO selectBoard(int bNum, int cNum) {
+		// TODO Auto-generated method stub
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		map.put("bNum", bNum);
+		map.put("cNum", cNum);
+		return session.selectOne("selectBoard", map);
+	}
+
+	@Override
+	public int updateBoard(BoardVO board) {
+		// TODO Auto-generated method stub
+		System.out.println("°ªÃ¼Å©:"+board);
+		return session.update("updateBoard", board);
+	}
+
 }

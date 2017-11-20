@@ -7,5 +7,14 @@
   		INSERT INTO amigo_club_members(cnum,cnickname,mid,cgrade)
   		VALUES(AMIGO_CLUB_MEMBERS_SEQ.NEXTVAL,#{nickName},#{mid},#{cGrade})
   	</insert>
+  	
+  	<select id="selectNickname" resultType="ClubMemberVO">
+  		SELECT 
+  			cnum,cnickname,mid,cgrade 
+  		FROM 
+  			amigo_club_members 
+  		WHERE 
+  			mid = #{username} AND cnum = #{cNum}
+  	</select>
   
   </mapper>

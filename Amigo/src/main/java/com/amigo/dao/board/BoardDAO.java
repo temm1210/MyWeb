@@ -9,4 +9,7 @@ public interface BoardDAO {
 
 	public List<BoardVO> selectBoards(PagingHandler pager,int cNum,int category);
 	public int selectBoardCount(int cNum,int category);
+	public int insertBoard(BoardVO board);
+	public BoardVO selectBoard(int bNum, int cNum);
+	public int updateBoard(BoardVO board);
 }

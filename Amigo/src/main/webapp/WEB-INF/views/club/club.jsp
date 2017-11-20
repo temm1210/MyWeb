@@ -9,11 +9,12 @@
 <title>Insert title here</title>
 <script>
 	$(document).ready(function(){	
-		/* 처음시작과 동시에 게시판을 사용자에게 보여줌. 강제로 클릭이벤트 실행 */
-		$(".sub_ul > li:first-child > a").get(0).click(); 
 		
-	/* 	if( ${msg == "success" } )
-			alert("축하합니다! 동호회가 개설되었습니다."); */
+		getUser();
+		$(".sub_ul > li:first-child > a").get(0).click();
+		
+	 	if( ${msg == "success" } )
+			alert("축하합니다! 동호회가 개설되었습니다."); 
 		
 		$(window).on('popstate', function(event) {
 			  var data = event.originalEvent.state;
@@ -27,26 +28,55 @@
    		 $(".sub_ul > li > a").click(function(){
 			$(".sub_ul > li > a").removeClass("click");
 			$(this).addClass("click");
-			  
-		})    
-			
+		})   
 	});
+	
+	 
+	
+	function getUser(){
+		var data={
+				userName:"${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}",
+				cNum:${cNum}
+		};
 
-	function getContentAjax(url){
+		$.ajax({
+			type:"POST",
+			url:"${location}/clubMember/getNickname.amg",
+		 	headers:{
+				"Content-Type":"application/json; charset=UTF-8"
+			},
+			data:JSON.stringify(data), 
+			success:function(clubMember){
 		
+				/* 동호회 유저가 아니라면 */
+				if(clubMember == '')
+					sessionStorage.setItem('isMember',"none");
+				
+				/* 동호회 유저라면  */
+				else
+					sessionStorage.setItem('isMember',JSON.stringify(clubMember));		
+			},
+			error:function(request,status,error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		})
+	}
+	
+	function getContentAjax(url){
 		var path = url.substring(url.lastIndexOf('?')+1 , url.length);
-		/* alert(path);  */
+			
 		$.ajax({
 			type:"GET",
 			url:url,
 			success:function(content){
 		
 				$("#club_content").html(content);
-				$(window).scrollTop(0); 
+				/* $(window).scrollTop(200); */ 
 				/* 컨트롤러의 기본페이지(club.amg)에서 받는 파라미터 값을 여기에 그대로 적어줘야 뒤로가기 눌렀을때 원하는 결과가나옴 */
 				history.pushState({ content:content },'','?'+path)
 			}
-		});	
+		});
+		
 	}
 </script>
 <style>
@@ -71,15 +101,15 @@
 		<ul>
 			<li><span>자유게시판</span>
 				<ul class="sub_ul">
-					<li><a class="click" href="javascript:getContentAjax('${location}/club/board/boardListAll.amg?cNum=${cNum}&curPage=1')" onclick=><i class="fa fa-server" aria-hidden="true"></i>전체글보기</a></li>
+					<li><a class="click" href="javascript:getContentAjax('${location}/club/board/boardListAll.amg?cNum=${cNum}&curPage=1')"><i class="fa fa-server" aria-hidden="true"></i>전체글보기</a></li>
 					<li><a href="javascript:getContentAjax('${location}/club/board/boardListAll.amg?cNum=${cNum}&curPage=1&category=1')"><i class="fa fa-server" aria-hidden="true"></i>자기소개</a></li>
 					<li><a href="javascript:getContentAjax('${location}/club/board/boardListAll.amg?cNum=${cNum}&curPage=1&category=4')"><i class="fa fa-server" aria-hidden="true"></i>자유게시판</a></li>
 					<li><a href="javascript:getContentAjax('${location}/club/board/boardListAll.amg?cNum=${cNum}&curPage=1&category=2')"><i class="fa fa-server" aria-hidden="true"></i>QnA</a></li>
-					<li><a href="javascript:getContentAjax('${location}/club/board/boardListAll.amg?cNum=${cNum}&curPage=1&category=3') "><i class="fa fa-server" aria-hidden="true"></i>등업</a></li>
+					<li><a href="javascript:getContentAjax('${location}/club/board/boardListAll.amg?cNum=${cNum}&curPage=1&category=3')"><i class="fa fa-server" aria-hidden="true"></i>등업</a></li>
 				</ul>
 			</li>
 			<li><span><a href="#">멤버리스트보기</a></span></li>
-			<li><span><a href="javascript:getContentAjax('${location}/club/clubJoin.amg')">동호회 가입하기</a></span></li>
+			<li><span><a href="javascript:getContentAjax('${location}/club/joinClub.amg?cNum=${cNum}')">동호회 가입하기</a></span></li>
 		</ul>
 	</div>
 	

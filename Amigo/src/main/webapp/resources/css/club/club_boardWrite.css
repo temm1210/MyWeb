@@ -1,0 +1,52 @@
+#boardContent{
+	border: 1px solid rgba(0,0,0,.2);
+	padding: 50px;
+	padding-top: 0;
+	width: 750px;
+}
+#boardContent h2{
+	margin-top: 20px;
+	margin-bottom: 50px;
+	font-weight: 700;
+	font-size: 21px;
+}
+.write_row{
+	margin-top: 10px;
+}
+
+.write_row > #bCategory{
+	font-family: 'Jeju Gothic', serif;
+	height: 25px;
+}
+.write_row > input{
+	font-family: 'Jeju Gothic', serif;
+	height: 20px;
+}
+
+.write_row > label{
+	display: inline-block;
+	width: 100px;
+}
+
+.button_wrap{
+	text-align: center;
+	margin-top: 30px;
+}
+
+.button_wrap > input{
+	background: none;
+	margin-right: 10px;
+	border: 1px solid rgba(0,0,0,.3);
+	width: 80px;
+	height: 40px;
+	font-size: 15px;
+	cursor: pointer;
+}
+#uptLabel{
+	margin-left: 150px;
+	width: 70px;
+}
+
+#uptDate{
+	font-size: 14px;
+}

@@ -160,13 +160,12 @@ public class ClubController {
 		return mav;
 	}
 	
-	@RequestMapping("/clubJoin.amg")
-	public String clubJoin() {
-		return "club/club_join";
+	@RequestMapping("/joinClub.amg")
+	public ModelAndView clubJoin() {
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("club/club_boardUserCheck");
+		return mav;
 	}
 
 }
-
-
-
-

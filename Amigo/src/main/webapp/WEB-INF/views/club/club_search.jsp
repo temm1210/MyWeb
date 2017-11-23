@@ -4,7 +4,6 @@
 <html>
 <head>
 <%@ include file="../header/topMenu.jsp"%>
-<script src="<c:url value="/resources/script/jquery.cookie.js"/>"></script>
 <script src="<c:url value="/resources/script/club/club_search.js"/>"></script>
 <link rel="stylesheet" href="<c:url value="/resources/css/club/club_search.css"/>">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

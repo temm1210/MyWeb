@@ -161,7 +161,7 @@ main {
 	letter-spacing:4px;
 	color:#b49759;
 }
-#log > i,#join > i,.fa-user-circle,#clubs,#log_Out{
+#log > i,#join > i,.user_font,#clubs,#log_Out{
 	float:right;
 	line-height: 55px;
     padding: 30px 15px;
@@ -227,7 +227,7 @@ main {
 #mypage:hover #user_id{
 	color: #efa666;
 }
-.fa-user-circle{
+.user_font{
 	padding-right: 4px;
 	position: relative;
 	color:rgba(255,255,255,1);

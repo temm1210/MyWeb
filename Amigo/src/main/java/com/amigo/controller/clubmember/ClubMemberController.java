@@ -4,16 +4,15 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.amigo.service.clubmember.ClubMemberService;
 import com.amigo.vo.clubmember.ClubMemberVO;
 
-@Controller
+@RestController
 @RequestMapping("/clubMember")
 public class ClubMemberController {
 
@@ -21,13 +20,34 @@ public class ClubMemberController {
 	private ClubMemberService service;
 	
 	@RequestMapping(value = "/getNickname.amg", method=RequestMethod.POST)
-	public @ResponseBody ClubMemberVO getNickName(@RequestBody Map<String,Object> map ) {
+	public ClubMemberVO getNickName(@RequestBody Map<String,Object> map ) {
 			
 		String username = (String) map.get("userName");
 		int cNum = (int) map.get("cNum");
+
+ 		return service.selectClubMember(username,cNum);
+	}
+	
+	@RequestMapping(value="/checkNickname.amg", method=RequestMethod.POST)
+	public String checkNickname(@RequestBody Map<String,Object> map) {
 		
-		ClubMemberVO clubMember = service.selectNickname(username,cNum);
+		boolean ch = service.selectNickname(map);
 		
-		return clubMember;
+		return (ch==true)?"success_check":"fail_check";
+	}
+	
+	@RequestMapping(value="/joinClub.amg", method=RequestMethod.POST,produces = "application/text; charset=utf8")
+	public String joinClub(@RequestBody ClubMemberVO clubMember) {
+		
+		int ch = service.joinClub(clubMember);
+		return (ch>0)?"동호회 가입에 성공 하였습니다.":"동호회 가입에 실패 하였습니다";
+	}
+	
+	@RequestMapping(value="/leaveClub.amg",method=RequestMethod.DELETE,produces = "application/text; charset=utf8")
+	public String leaveClub(@RequestBody Map<String,Object> map) {
+		
+		int ch = service.deleteClub(map);
+		
+		return (ch>0)?"정상적으로 탈퇴 되었습니다.":"탈퇴에 실패 하였습니다";
 	}
 }

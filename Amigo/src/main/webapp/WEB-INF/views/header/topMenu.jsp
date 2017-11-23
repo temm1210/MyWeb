@@ -17,6 +17,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script>
+	/* 현재로그인한 유저 아이디 */
+	var userName = "${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}";
+	
 	$(document).ready(function(){
 		/* 스프링 시큐리티의 CSRF라는 기능으로 인해 POST방식으로 보낼때 CSRF처리를 해줘야함. AJAX에서 POST요청을함으로 로딩과 동시에 CSRF처리 */
 		var token = $("meta[name='_csrf']").attr("content");
@@ -27,16 +30,12 @@
 	    });
 	    /* --------------------------------------------------- */
 
-		var userName = "${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}";
-		
 		/* 로그인된 상태라면  */
 		if( userName!=''){
  			clubsGet(userName); 
  		}
-
 	});
 
-	
   	function clubsGet(username){
   		
   		var id = {
@@ -116,7 +115,7 @@
 				
 				<c:choose>
 					<c:when test="${user.mPic == null}">
-						<i class="fa fa-user-circle" style="font-size:40px;" aria-hidden="true"></i>				
+						<i class="fa fa-user-circle user_font" style="font-size:40px;" aria-hidden="true"></i>				
 					</c:when>							
 					<c:otherwise>
 						<div id="profile_pic">

@@ -72,6 +72,7 @@ input[type='button']:hover{
 
 .view{
 	display: inline-block;
+	color: green;
 }
 
 .detail{

@@ -6,17 +6,15 @@
 	padding-bottom: 40px;
 	border-bottom: 1px solid rgba(0,0,0,.4);
 }
-#board h2{
-	font-size: 25px;
-	font-weight: bold;
-	color:black;
-	
+.boardCount{
+	font-size: 13px;
 }
 #board table {
 	border-top: 1px solid rgba(0,0,0,.4);
 	width:100%;
 	text-align: center;
 	padding: 20px;
+	font-size: 13px;
 	margin-right: 20px;
 }
  
@@ -30,6 +28,9 @@ a.title_link:hover{
 
 .td_title{
 	width:450px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .boardLine{
@@ -79,4 +80,28 @@ div.board_page > .page_num{
 	margin: 0 5px;
 	font-size: 15px;
 	vertical-align: 3px;
+}
+.searchForm{
+	text-align: center;
+	margin: 20px 0;
+}
+#searchOption{
+	height: 25px;
+	font-family: 'Jeju Gothic', serif;
+}
+
+#searchWord{
+	height: 19px;
+	font-family: 'Jeju Gothic', serif;
+}
+#searchBtn{
+	background: none;
+	border: 1px solid rgba(0,0,0,.3);
+	height: 25px;
+	font-family: 'Jeju Gothic', serif;
+	cursor: pointer;
+}
+.notice{
+	background: rgba(100,90,90,.2);
+	color: forestgreen;
 }

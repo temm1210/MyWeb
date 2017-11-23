@@ -17,6 +17,10 @@ $(document).ready(function(){
 		 checkValue(this,"사진을 등록하세요");
 	})
 	
+	$("#cAddress").stop().blur(function(){
+		checkValue(this,"활동지역을 설정하세요")
+	})
+	
 })
 
 /* 만들기 버튼 클릭시 */
@@ -40,6 +44,7 @@ function exitPage(path){
 	if(confirm("이 페이지에서 나가시겠습니까?"))
 		$("#club_form").attr("method","get").attr("action",path).submit(); 
 }
+
 function checkValue(sel,errorStr,condition){
 	 var value =$(sel).val();
 	 var $sel_parent = $(sel).parent();

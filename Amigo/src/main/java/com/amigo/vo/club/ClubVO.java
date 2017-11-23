@@ -6,6 +6,7 @@ public class ClubVO {
 
 	private int cNum;
 	private int boardCount;
+	private int memberCount;
 	private int cHobby;
 	private String cTitle;
 	private String cContent;
@@ -17,6 +18,12 @@ public class ClubVO {
 	
 	public ClubVO() {}
 	
+	public int getMemberCount() {
+		return memberCount;
+	}
+	public void setMemberCount(int memberCount) {
+		this.memberCount = memberCount;
+	}
 	public String getcMasterPic() {
 		return cMasterPic;
 	}
@@ -65,7 +72,6 @@ public class ClubVO {
 	public void setcRegdate(Date cRegdate) {
 		this.cRegdate = cRegdate;
 	}
-
 	public int getcHobby() {
 		return cHobby;
 	}
@@ -80,8 +86,8 @@ public class ClubVO {
 	}
 	@Override
 	public String toString() {
-		return "ClubVO [cNum=" + cNum + ", boardcount=" + boardCount + ", cHobby=" + cHobby + ", cTitle=" + cTitle
-				+ ", cContent=" + cContent + ", cPic=" + cPic + ", cMaster=" + cMaster + ", cMasterPic=" + cMasterPic
-				+ ", cAddress=" + cAddress + ", cRegdate=" + cRegdate + "]";
+		return "ClubVO [cNum=" + cNum + ", boardCount=" + boardCount + ", memberCount=" + memberCount + ", cHobby="
+				+ cHobby + ", cTitle=" + cTitle + ", cContent=" + cContent + ", cPic=" + cPic + ", cMaster=" + cMaster
+				+ ", cMasterPic=" + cMasterPic + ", cAddress=" + cAddress + ", cRegdate=" + cRegdate + "]";
 	}
 }

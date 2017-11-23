@@ -27,13 +27,24 @@
 			ac.cnum = acm.cnum AND acm.mid=#{username}
   	</select>
   	
+  	<!-- 특정 동호회 가져오기 -->
   	<select id="selectClub" resultType="ClubVO">
   		SELECT
-  			cnum, cmaster, ctitle, ccontent, cpic, cregdate, chobby, caddress
+  			c.cnum, c.cmaster, c.ctitle, c.ccontent, c.cpic, c.cregdate, c.chobby, c.caddress,m.mpic as cmasterpic
   		FROM 
-  			amigo_club
+  			amigo_club c,amigo_member m,amigo_club_members cm
   		WHERE 
-  			cnum = #{cNum}
+  			c.cnum = #{cNum} 
+  		<include refid="clubSearchMpic"/>
+  	</select>
+  	
+  	<select id="selectCnum" resultType="int">
+  		SELECT
+  			cnum
+  		FROM
+  			amigo_club
+  		WHERE
+  			ctitle = #{cTitle}
   	</select>
   	
   	<!-- 총 동호회수 -->
@@ -50,9 +61,10 @@
   		<include refid="clubBeforePaging"/>
   		SELECT
   			c.cnum,c.cmaster,c.ctitle,c.ccontent,c.cpic,c.cregdate,c.chobby,c.caddress,m.mpic as cmasterpic,
-  			(SELECT COUNT(*) FROM amigo_board ab WHERE c.cnum = ab.cnum) boardcount
+  			(SELECT COUNT(*) FROM amigo_board ab WHERE c.cnum = ab.cnum AND ab.bcategory != 6) as boardcount,
+  			(SELECT COUNT(*) FROM amigo_club_members WHERE cnum=c.cnum ) as membercount
   		FROM
-  			 amigo_club c,amigo_member m,amigo_club_members cm
+  			 amigo_club c, amigo_member m, amigo_club_members cm
   		<include refid="clubSearchByWord"/>
   		<include refid="clubSearchMpic"/>
   		<include refid="clubOrderBy"/>
@@ -60,17 +72,18 @@
   	</select>
   	 
   	<!-- 동적 정렬. 선택키워드에 따라 최신순,게시글순,회원순으로 정렬해줌.  -->
-  	
   	<sql id="clubOrderBy">
   		<trim prefix="ORDER BY">
   			<if test="criteria.orderByCriteria == '최신순'">
-  				cregdate desc
+  				cregdate desc, c.cnum desc
   			</if>
+  					  
   			<if test="criteria.orderByCriteria == '회원수'">
-  				
+  				membercount desc, c.cnum desc
   			</if>
+  			
   			<if test="criteria.orderByCriteria == '게시글수'">
-  				boardcount desc
+  				boardcount desc, c.cnum desc
   			</if>
   		</trim>
   	</sql>

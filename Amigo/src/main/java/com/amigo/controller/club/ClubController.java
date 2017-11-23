@@ -44,8 +44,7 @@ public class ClubController {
 						   RedirectAttributes rdr,
 						   Authentication authencation,
 						   @RequestParam Map<String,Object> map) {
-		/*파일업로드후 경로반환*/
-
+		
 		FileUpLoad ful = new FileUpLoad();
 		String picName = ful.fileForm(file,request,CLUB_IMAGES_FOLER);
 		String redirectPath = "";
@@ -54,15 +53,17 @@ public class ClubController {
 		map.put("username", authencation.getName());
 		
 		/*업로드된 파일이 저장된 경로랑,사용자가입력한 정보를 저장한 map객체전달*/
-		int ch_club = service.insertClub(map, picName);
+		int cNum = service.insertClub(map, picName);
 	
-		if(ch_club > 0) {
+		if(cNum > 0) {
 			/*msg는 한번만쓰고 삭제*/
 			rdr.addFlashAttribute("msg", "success");
-			/*동호회 이름저장*/
-			rdr.addAttribute("cTitle",(String)map.get("cTitle"));
+			rdr.addAttribute("cNum", cNum);
+			
+			/*동호회 홈페이지로 이동*/
 			redirectPath="/club/club.amg";
 		}else {
+			
 			rdr.addFlashAttribute("msg","fail");
 			redirectPath="/club/clubMake.amg";
 		}
@@ -70,10 +71,9 @@ public class ClubController {
 	}
 	
 	@RequestMapping("/club.amg")
-	public ModelAndView club(@RequestParam(value="cNum",required=false) int cNum) {
+	public ModelAndView club(@RequestParam(value="cNum") int cNum) {
 	
 		ModelAndView mav = new ModelAndView();
-		System.out.println("동호회번호:"+cNum);
 		ClubVO club = service.selectClub(cNum);
 		
 		mav.addObject("club",club);
@@ -141,8 +141,7 @@ public class ClubController {
 		
 		/*총 동호회수 가져오기*/
 		int totalClubCount = service.selectClubCount(criteria);
-		
-		System.out.println("총동호회수:"+totalClubCount);
+
 		/*현재 페이지 가져오기*/
 		int curPage = criteria.getCurPage();
 	
@@ -160,12 +159,32 @@ public class ClubController {
 		return mav;
 	}
 	
+	/*동호회 가입양식을 띄워줌*/
 	@RequestMapping("/joinClub.amg")
-	public ModelAndView clubJoin() {
+	public ModelAndView clubJoin(@RequestParam(value="cNum") int cNum) {
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("club/club_boardUserCheck");
+		mav.setViewName("club/club_join");
+		mav.addObject("cNum", cNum);
 		return mav;
 	}
-
+	
+	/*동호회 회원이 아닌데 서비스 이용할경우*/
+	@RequestMapping("/checkMember.amg")
+	public ModelAndView checkMember(@RequestParam(value="cNum") int cNum) {
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("club/board/club_boardUserCheck");
+		mav.addObject("cNum", cNum);
+		return mav;
+	}
+	
+	/*동호회 탈퇴 클릭시*/
+	@RequestMapping("/laeveClub.amg")
+	public ModelAndView laeveClub(@RequestParam(value="cNum") int cNum) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("club/club_leave");
+		mav.addObject("cNum", cNum);
+		return mav;
+	}
 }

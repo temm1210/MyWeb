@@ -23,13 +23,35 @@ public class ClubMemberDAOImpl implements ClubMemberDAO {
 	}
 
 	@Override
-	public ClubMemberVO selectNickname(String username, int cNum) {
+	public ClubMemberVO selectClubMember(String username, int cNum) {
 		// TODO Auto-generated method stub
 		Map<String,Object> map = new HashMap<String,Object>();
 		
 		map.put("username", username);
 		map.put("cNum", cNum);
 		
-		return sqlSession.selectOne("selectNickname", map);
+		return sqlSession.selectOne("selectClubMember", map);
+	}
+
+	@Override
+	public boolean selectNickname(Map<String,Object> map) {
+		// TODO Auto-generated method stub
+		
+		ClubMemberVO clubMember = sqlSession.selectOne("selectNickname", map);
+		return (clubMember == null)?true:false;
+	}
+
+	@Override
+	public int joinClub(ClubMemberVO clubMember) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("joinClub", clubMember);
+	}
+
+	@Override
+	public int deleteClub(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		int ch = sqlSession.delete("deleteClub", map);
+		
+		return ch;
 	}
 }

@@ -15,7 +15,6 @@ import com.amigo.util.PagingHandler;
 import com.amigo.vo.club.ClubVO;
 import com.amigo.vo.clubmember.ClubMemberVO;
 
-
 @Repository
 public class ClubDAOImpl implements ClubDAO {
 
@@ -25,6 +24,7 @@ public class ClubDAOImpl implements ClubDAO {
 	@Inject
 	private ClubMemberDAO clubMemberDao; 
 
+	/*AOP 트랜잭션 처리*/
 	@Override
 	public int insertClub(Map<String, Object> map,String picPath) {
 		// TODO Auto-generated method stub
@@ -56,7 +56,7 @@ public class ClubDAOImpl implements ClubDAO {
 		/*------------------------------------------------------------*/
 		
 		if(ch_clubMember > 0 && ch_club > 0)
-			return 2;
+			return selectCnum((String)map.get("cTitle"));
 		else
 			return 0;
 	}
@@ -98,5 +98,11 @@ public class ClubDAOImpl implements ClubDAO {
 	public ClubVO selectClub(int cNum) {
 		// TODO Auto-generated method stub
 		return session.selectOne("selectClub",cNum);
+	}
+
+	@Override
+	public int selectCnum(String cTitle) {
+		// TODO Auto-generated method stub
+		return session.selectOne("selectCnum", cTitle);
 	}
 }

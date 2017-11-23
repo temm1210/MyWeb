@@ -7,8 +7,9 @@ public class BoardVO {
 	private int bNum;
 	private int bReadcnt;
 	private int bLike;
-	private int bCategory;
 	private int cNum;
+	private int bCategory;
+	private int replyCount;
 	
 	private String bTitle;
 	private String bContent;
@@ -16,6 +17,12 @@ public class BoardVO {
 	private Date bUpdate;
 	private String bWriter;
 	
+	public int getReplyCount() {
+		return replyCount;
+	}
+	public void setReplyCount(int replyCount) {
+		this.replyCount = replyCount;
+	}
 	public int getbNum() {
 		return bNum;
 	}
@@ -33,12 +40,6 @@ public class BoardVO {
 	}
 	public void setbLike(int bLike) {
 		this.bLike = bLike;
-	}
-	public int getbCategory() {
-		return bCategory;
-	}
-	public void setbCategory(int bCategory) {
-		this.bCategory = bCategory;
 	}
 	public int getcNum() {
 		return cNum;
@@ -76,10 +77,16 @@ public class BoardVO {
 	public void setbWriter(String bWriter) {
 		this.bWriter = bWriter;
 	}
+	public int getbCategory() {
+		return bCategory;
+	}
+	public void setbCategory(int bCategory) {
+		this.bCategory = bCategory;
+	}
 	@Override
 	public String toString() {
-		return "BoardVO [bNum=" + bNum + ", bReadcnt=" + bReadcnt + ", bLike=" + bLike + ", bCategory=" + bCategory
-				+ ", cNum=" + cNum + ", bTitle=" + bTitle + ", bContent=" + bContent + ", bRegdate=" + bRegdate
-				+ ", bUpdate=" + bUpdate + ", bWriter=" + bWriter + "]";
+		return "BoardVO [bNum=" + bNum + ", bReadcnt=" + bReadcnt + ", bLike=" + bLike + ", cNum=" + cNum
+				+ ", bCategory=" + bCategory + ", replyCount=" + replyCount + ", bTitle=" + bTitle + ", bContent="
+				+ bContent + ", bRegdate=" + bRegdate + ", bUpdate=" + bUpdate + ", bWriter=" + bWriter + "]";
 	}
 }

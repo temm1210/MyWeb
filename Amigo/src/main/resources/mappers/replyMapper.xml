@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.amigo.dao.reply">
+  	<insert id="insertReply">
+  		INSERT INTO amigo_board_reply(rnum, rwriter, cnum, bnum, rcontent)
+  		VALUES(AMIGO_BOARD_REPLY_SEQ.NEXTVAL,#{rWriter},#{cNum},#{bNum},#{rContent})
+  	</insert>
+  	
+  	<!-- 해당게시글의 댓글리스트 가져오기 -->
+  	<select id="selectReplys" resultType="ReplyVO">
+  		SELECT   
+  			br.rnum, br.rwriter, br.cnum, br.bnum, br.rcontent, br.reregdate, m.mpic
+  		FROM 
+  			amigo_board_reply br, amigo_member m, amigo_club_members cm
+  		WHERE
+  			br.cnum = #{cNum} AND br.bnum = #{bNum}
+  			<include refid="searchMpic"/>
+  	</select>
+  	
+  	<sql id="searchMpic">
+  		AND br.rwriter = cm.cnickname AND m.mid = cm.mid AND br.cnum = cm.cnum
+  	</sql>
+  	
+  	<!-- 해당게시글의 댓글 총 갯수 가져오기  -->
+  	<select id="selectReplyCount" resultType="int">
+  		SELECT COUNT(*)
+  			FROM amigo_board_reply
+  		WHERE
+  			cnum=#{cNum} AND bnum=#{bNum}
+  	</select>
+  	
+  	<update id="updateReply">
+  		UPDATE amigo_board_reply
+  		SET
+  			rcontent = #{rContent}
+  		WHERE
+  			rnum = #{rNum}
+  	</update>
+  	
+  	<delete id="deleteReply">
+  		DELETE FROM amigo_board_reply
+  		WHERE
+  			rnum = #{rNum}
+  	</delete>
+  	
+  </mapper>

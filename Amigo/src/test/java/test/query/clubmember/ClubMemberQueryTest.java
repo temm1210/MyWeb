@@ -22,6 +22,6 @@ public class ClubMemberQueryTest {
 	
 	@Test 
 	public void selectNickname() {
-		logger.info("selectNickname테스트: {}",service.selectNickname("설현", 56));
+		logger.info("selectNickname테스트: {}",service.selectClubMember("설현", 56));
 	}
 }

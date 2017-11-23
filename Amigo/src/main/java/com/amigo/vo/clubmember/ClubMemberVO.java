@@ -6,14 +6,20 @@ public class ClubMemberVO {
 	private String cNickname;
 	private String mid;
 	private String cGrade;
+	private String mPic;
 	
+	public String getmPic() {
+		return mPic;
+	}
+	public void setmPic(String mPic) {
+		this.mPic = mPic;
+	}
 	public int getcNum() {
 		return cNum;
 	}
 	public void setcNum(int cNum) {
 		this.cNum = cNum;
 	}
-	
 	public String getcNickname() {
 		return cNickname;
 	}
@@ -34,7 +40,7 @@ public class ClubMemberVO {
 	}
 	@Override
 	public String toString() {
-		return "ClubMemberVO [cNum=" + cNum + ", cNickname=" + cNickname + ", mid=" + mid + ", cGrade=" + cGrade + "]";
+		return "ClubMemberVO [cNum=" + cNum + ", cNickname=" + cNickname + ", mid=" + mid + ", cGrade=" + cGrade
+				+ ", mPic=" + mPic + "]";
 	}
-	
 }

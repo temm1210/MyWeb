@@ -9,6 +9,7 @@
   		VALUES(#{username},#{password},#{mPic},#{mName},#{mTel},#{mEmail},#{mGender},#{mAge},'1')
   	</insert>
   	
+  	<!-- 특정회원가져오기 -->
   	<select id="selectMember" resultType="MemberVO">
   		SELECT 
   			mid as username,mpwd as password,mpic,mname,mtel,memail,mgender,mregdate,mage,mupdatedate										       
@@ -18,6 +19,7 @@
   			mid=#{mid} 
   	</select>
 
+	<!-- 회원수정시  -->
   	<update id="updateMember">
   		UPDATE 
   			amigo_member
@@ -32,6 +34,7 @@
   			mid=#{username}
   	</update>
   	
+  	<!-- 회원삭제시  -->
   	<update id="deleteMember">
 		UPDATE
 			amigo_member

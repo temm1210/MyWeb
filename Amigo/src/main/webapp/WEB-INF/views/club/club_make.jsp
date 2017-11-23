@@ -59,9 +59,10 @@
 				
 					<div id="area_field" class="club_row">
 						<label for="area">활동 지역</label>
-						<input type="text" name="cAddress" id="sample5_address" placeholder="주소" onclick="linkToBtn()">
-						<input type="button" id="addr_btn" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
-						<div id="map" style="width:100%;height:300px;margin:10px 0;display:none"></div>
+						<input type="text" name="cAddress" id="cAddress" placeholder="주소입력:여기를 클릭해주세요" readonly="readonly" onfocus="linkToBtn()" onclick="linkToBtn()">
+						<!-- <input type="button" id="addr_btn" onclick="sample5_execDaumPostcode()" value="주소 검색"> --> 
+						<i class="fa fa-check ch" aria-hidden="true"></i><br>
+						<div id="map" style="width:100%;height:300px;margin:10px 0;display:none"></div>	
 					</div>
 					
 					<div id="hobby_field" class="club_row">
@@ -95,7 +96,7 @@
 						<input type="button" id="cancelBtn" value="취소" onclick="exitPage('${location}/main.amg')">
 					</div>
 					
-					<input type="hidden" name="cGrade" value="회장">
+					<input type="hidden" name="cGrade" value="매니저">
 				</form>
 			</div>
 		</div>
@@ -121,9 +122,10 @@
     });
 
 	function linkToBtn(){
-		$("#addr_btn").trigger("click")
+		/* $("#addr_btn").trigger("click") */
+		getPostcode()
 	}
-    function sample5_execDaumPostcode() {
+    function getPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
                 // 각 주소의 노출 규칙에 따라 주소를 조합한다.
@@ -146,7 +148,7 @@
                 }
 
                 // 주소 정보를 해당 필드에 넣는다.
-                document.getElementById("sample5_address").value = fullAddr;
+                document.getElementById("cAddress").value = fullAddr;
                 // 주소로 상세 정보를 검색
                 geocoder.addressSearch(data.address, function(results, status) {
                     // 정상적으로 검색이 완료됐으면

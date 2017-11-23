@@ -8,45 +8,93 @@
   	<select id="selectBoards" resultType="BoardVO">
   		<include refid="boardBeforePaging"/>
   		SELECT 
-  			bnum,btitle,bcontent,breadcnt,bregdate,bupdate,blike,bwriter,bcategory
+  			b.bnum,b.btitle,b.bcontent,b.breadcnt,b.bregdate,b.bupdate,b.blike,b.bwriter,b.bcategory,
+			(SELECT COUNT(*) 
+			 FROM 
+			 	amigo_board_reply br  		
+			  WHERE
+			  	br.cnum=#{cNum} AND br.bnum = b.bnum) as replyCount
+  			
   		FROM
-  			amigo_board
-  		<include refid="selectByCategory"/>
-  		ORDER BY 
-  			bregdate desc,bnum desc
+  			amigo_board b
+  		<include refid="whereByWord"/>
+		<include refid="boardOrderBy"></include>
   		<include refid="boardAfterPaging"/>
   	</select>
   	
-  	<sql id="selectByCategory">
-  		<choose>
-  			<when test="category == 0">
-  				WHERE
-  					cnum = #{cNum}
-  			</when>
+  	<!-- 공지사항글은 1을 부여해서 정렬시 가장 앞으로 오도록 설정 -->
+  	<sql id="boardOrderBy">
+  		<trim prefix="ORDER BY CASE WHEN">
+  			<if test="orderByWord == '최신순'"> 
+  				b.bcategory = 5 then 1 end, b.bregdate desc, b.bnum desc
+  			</if> 
   			
-  			<otherwise>
-  				WHERE
-  					cnum = #{cNum} AND bcategory = #{category}
-  			</otherwise>
-  		</choose>
+  			<if test="orderByWord == '조회수'">
+  				b.bcategory = 5 then 1 end, b.breadcnt desc, b.bnum desc
+  			</if>
+  			
+  			<if test="orderByWord == '좋아요수'">
+  				b.bcategory = 5 then 1 end, b.blike desc, b.bnum desc
+  			</if>
+  		</trim>
   	</sql>
   	
+  	<!-- WHERE문 동적처리 -->
+  	<sql id="whereByWord">
+  		<trim prefix="WHERE" prefixOverrides="AND |OR">
+			<if test="category != null">
+				b.cnum = #{cNum} AND b.bcategory != 6
+			</if> 
+			
+			<if test="category > 0">
+				AND  b.bcategory = #{category}
+			</if> 
+			
+			<if test="searchOption == 'all'">
+  				AND	(b.bwriter like '%'||#{searchWord}||'%'
+  				OR	b.bcontent like'%'||#{searchWord}||'%'
+  				OR	b.btitle like '%'||#{searchWord}||'%')			
+			</if>
+			
+			<if test="searchOption != 'all' and searchOption != null">
+				AND ${searchOption} like '%'||#{searchWord}||'%'
+			</if>	
+			
+			<!-- 사용자가 검색키워드를 입력하면 공지사항은 제외시키고 검색 -->
+			<if test="searchWord != ''">
+				AND b.bcategory != 5
+			</if>
+  		</trim>
+  	</sql>
+
   	<sql id="boardBeforePaging">
   		SELECT * FROM(
   				SELECT ROWNUM rnum, A.* FROM(
   	</sql>
   	
+  	
+  	<!-- 첫페이지에서만 공지사항을 보여주고, 설정한 갯수만큼 게시글보여줌. -->
   	<sql id="boardAfterPaging">
-  			)A
-  		)WHERE rnum BETWEEN ${start} AND #{end}
+  		<choose>
+  			<when test="category == 0 and start == 1">
+  					)A
+  				)WHERE rnum BETWEEN ${start} AND (#{end}+( SELECT COUNT(*) FROM amigo_board WHERE bcategory = 5))
+  			</when>
+  			
+  			<otherwise>
+  					  )A
+  				)WHERE rnum BETWEEN ${start} AND #{end}
+  			</otherwise>
+  		</choose>
   	</sql>
+  	<!-- 페이징끝 -->
   	
   	<!-- 게시글 총 개수가져오기 -->
   	<select id="selectBoardCount" resultType="int">
   		SELECT COUNT(*)
   		FROM
-  			amigo_board
-  		<include refid="selectByCategory"/>
+  			amigo_board b
+  		<include refid="whereByWord"/>
   	</select>
   	
   	<!-- 게시글 입력  -->
@@ -57,7 +105,7 @@
   			((select nvl(max(bnum+1),1) from amigo_board where cnum=#{cNum}),#{bTitle},#{bContent},#{bWriter},#{bCategory},#{cNum})
   	</insert>
   	
-  	<!-- 게시글 가져오기 -->
+  	<!-- 특정 게시글 가져오기 -->
   	<select id="selectBoard" resultType="BoardVO">
   		SELECT
   			bnum,cnum,btitle,bcontent,breadcnt,bregdate,bupdate,blike,bwriter,bcategory
@@ -75,4 +123,44 @@
   		WHERE
   			cnum=#{cNum} AND bnum=#{bNum}
   	</update>
+  	
+  	<!-- 좋아요 버튼 클릭시 -->
+  	<update id="updateLike">
+  		UPDATE amigo_board 
+  		SET 
+  			blike=blike+1 
+  		WHERE 
+  			cnum=#{cNum} AND bnum=#{bNum}
+  	</update>
+  	
+  	<!-- 좋아요클릭후 바로가져오기 -->
+  	<select id="selectLike" resultType="int">
+  		SELECT 
+  			blike 
+  		FROM 
+  			amigo_board 
+  		WHERE 
+  			cnum=#{cNum} AND bnum=#{bNum}
+  	</select>
+  	
+  	<!--조회수 증가 -->
+  	<update id="updateReadcnt">
+  		UPDATE amigo_board 
+  		SET 
+  			breadcnt=breadcnt+1 
+  		WHERE 
+  			cnum=#{cNum} AND bnum=#{bNum}
+  	</update>
+  	
+  	<!-- 글삭제시  -->
+  	<update id="deleteBoard">
+  		UPDATE
+  			amigo_board
+  		SET
+  			btitle=#{bTitle},bcontent=#{bContent}, bupdate=sysdate, bcategory=#{bCategory}
+  		WHERE
+  			bnum=#{bNum} AND cnum=#{cNum}
+  	</update>
+  	
+  	<!-- 카테고리별로  -->
   </mapper>

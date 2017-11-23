@@ -69,7 +69,7 @@ function getClubsAjax(curPage){
 		success:function(clubs){
 		
  			$(".club-wrap").html(clubs);
- 			$(window).scrollTop(0); 
+ 			$(window).scrollTop(85); 
  			
  			/* 새로고침을 눌렀을시에는 현재페이지를 history에 저장하지 않음 */
  			if(sessionStorage.getItem('isRefresh') == "true"){

@@ -41,7 +41,7 @@
 					</div>
 				</a>
 			</div>
-		<i class="fa fa-user clubs_detail" aria-hidden="true"> 40</i>
+		<i class="fa fa-user clubs_detail" aria-hidden="true"> ${clubList.memberCount}</i>
 		<i class="fa fa-folder clubs_detail" aria-hidden="true"> ${clubList.boardCount}</i>
 		</div>
 	</c:forEach>

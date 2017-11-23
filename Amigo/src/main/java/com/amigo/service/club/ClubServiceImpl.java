@@ -16,7 +16,6 @@ public class ClubServiceImpl implements ClubService {
 	@Inject
 	private ClubDAO clubDao;
 	
-	/*AOP 트랜잭션 처리*/
 	@Override
 	public int insertClub(Map<String, Object> map,String picPath) {
 		// TODO Auto-generated method stub

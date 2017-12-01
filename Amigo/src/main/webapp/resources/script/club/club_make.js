@@ -51,6 +51,7 @@ function checkValue(sel,errorStr,condition){
 	 
 	 if(value == '' || value.length < condition)
 		 errorCheckEffect(errorStr,$sel_parent);
-	 else
+	 else{
 		 successCheckEffect($sel_parent);
+	 }
 }

@@ -1,6 +1,7 @@
 package com.amigo.dao.clubmember;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -53,5 +54,11 @@ public class ClubMemberDAOImpl implements ClubMemberDAO {
 		int ch = sqlSession.delete("deleteClub", map);
 		
 		return ch;
+	}
+
+	@Override
+	public List<ClubMemberVO> selectClubmembers(int cNum) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("selectClubmembers", cNum);
 	}
 }

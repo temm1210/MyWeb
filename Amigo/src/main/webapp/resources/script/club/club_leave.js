@@ -1,7 +1,6 @@
 var isChecked = false;
 $(document).ready(function(){
 	
-	$(window).scrollTop(180);
 	$("#agree_leave").click(function(){
 		if($("#agree_leave").is(":checked"))
 			isChecked=true;

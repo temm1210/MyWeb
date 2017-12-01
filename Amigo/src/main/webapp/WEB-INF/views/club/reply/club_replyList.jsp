@@ -64,26 +64,58 @@
 	.viewNone{
 		display: none !important;
 	}
+	
+	div.reply_page{
+		text-align: center;
+		margin-top: 10px;
+		margin-bottom: 20px;
+		font-size: 23px;
+	}
+	
+	div.reply_page i{
+		font-size: 18px;
+		width: 25px;
+		border: 1px solid rgba(150,150,150,.4);
+		background: #eee;
+	}
+	
+	div.reply_page > span{
+		display: inline-block;
+		width: 22px;
+		height: 15px;
+		padding-top: 5px;
+		color: rgba(0,0,250,.66);
+		border: 1px solid rgba(0,0,250,.66);
+		vertical-align: 3px;
+	} 
+	div.reply_page > .page_num{
+		margin: 0 2px;
+		font-size: 12px;
+		vertical-align: 1px;
+	}
 </style>
 <script>
 	$(document).ready(function(){
-		var obj = JSON.parse(sessionStorage.getItem('isMember'))
-		
 		/* 댓글개수 셋팅 */
-		$(".replyCount").text("${map.count}")
+		$(".replyCount").text("${map.count}")	
 		
-		/* 수정후, 수정클릭하는 버튼 숨김 */
-		$(".replyText").addClass("viewNone");
 		
  		var replyWriter = $(".replyWriter")
+ 		
+ 		if(userName=="STW")
+ 			$(".modifyLinkWrap").removeClass("viewNone")
+ 			
+		if(sessionStorage.getItem('isMember')!= "none"){
+			var obj = JSON.parse(sessionStorage.getItem('isMember'))
 		
-		/*   현재로그인한 동호회 유저랑 댓글작성한 유저랑 같으면 수정,삭제 버튼 활성화   */
-		$.each(replyWriter,function(index,element){
-			/*   댓글작성자랑, 로그인한 동호회 유저가 같을시 버튼활성화  */
-			if( $(element).text() == obj.cNickname ){
-				$(element).siblings(".modifyLinkWrap").removeClass("viewNone")
-			}	
-		})  
+			//현재로그인한 동호회 유저랑 댓글작성한 유저랑 같으면 수정,삭제 버튼 활성화  
+			$.each(replyWriter,function(index,element){
+				/*   댓글작성자랑, 로그인한 동호회 유저가 같을시 버튼활성화  */
+				if( $(element).text() == obj.cNickname){
+					$(element).siblings(".modifyLinkWrap").removeClass("viewNone")
+				}	
+			})  
+		}
 	});
 	
 	/* 댓글 수정, 삭제 처리 */
@@ -96,9 +128,8 @@
 			},
 			data:JSON.stringify(data),
 			success:function(msg){
-				alert(msg)
 				/*  동호회 리스트보기  */
-				getListReplyAjax()
+				getListReplyAjax(${map.pager.curPage})
 			}
 		}) 
 	}
@@ -168,7 +199,7 @@
 					<a class="deleteLink" href="javascript:void(0)" onclick="deleteLink(this)">삭제</a>
 				</span>
 				
-				<div class="replyText">
+				<div class="replyText viewNone">
 					<textarea class="replyContent rContent" cols="80" rows="4" name="rContent">${reply.rContent}</textarea>
 					<input type="button" onclick="updateReply(this)" class="replyModifyBtn" value="수정">
 				</div>
@@ -178,4 +209,38 @@
 			</li>
 		</c:forEach>
 	</ul>
+	
+	<div class="reply_page">
+		<!-- 처음페이지로가기 -->
+		<c:if test="${map.pager.curBlock > 1 }">
+			<a href="javascript:getListReplyAjax(1)"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
+		</c:if>
+		
+		<!-- 이전페이지로가기 -->
+		<c:if test="${map.pager.curBlock > 1 }">
+			<a href="javascript:getListReplyAjax(${map.pager.prevBlockPage})"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+		</c:if>
+		
+		<c:forEach var="num" begin="${map.pager.startPageNo}" end="${map.pager.endPageNo}">
+			<c:choose>
+				<c:when test="${map.pager.curPage == num}">
+					<span class="page_num">${num}</span>
+				</c:when>
+				
+				<c:otherwise>
+					<a href="javascript:getListReplyAjax(${num})" class="page_num">${num}</a>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		
+		<!-- 다음페이지로가기  -->
+		<c:if test="${map.pager.curBlock < map.pager.totalBlock}">
+			<a href="javascript:getListReplyAjax(${map.pager.nextBlockPage})"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+		</c:if>
+		
+		<!-- 마지막페이지로가기 -->
+		<c:if test="${map.pager.curBlock < map.pager.totalBlock}">
+			<a href="javascript:getListReplyAjax(${map.pager.totalPage})"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+		</c:if>
+	</div>
 </div>

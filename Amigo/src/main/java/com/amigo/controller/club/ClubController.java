@@ -23,6 +23,7 @@ import com.amigo.util.ClubSearchCriteria;
 import com.amigo.util.PagingHandler;
 import com.amigo.vo.club.ClubVO;
 
+
 @Controller
 @RequestMapping("/club")
 public class ClubController {
@@ -71,13 +72,16 @@ public class ClubController {
 	}
 	
 	@RequestMapping("/club.amg")
-	public ModelAndView club(@RequestParam(value="cNum") int cNum) {
+	public ModelAndView club(@RequestParam(value="cNum") int cNum,
+							 @RequestParam(value="bNum",defaultValue="0") int bNum
+							 /*BoardSearchCriteria criteria*/) {
 	
 		ModelAndView mav = new ModelAndView();
 		ClubVO club = service.selectClub(cNum);
 		
 		mav.addObject("club",club);
 		mav.addObject("cNum",cNum);
+		/*mav.addObject("criteria",criteria);*/
 		mav.setViewName("club/club");
 		
 		return mav;
@@ -141,7 +145,7 @@ public class ClubController {
 		
 		/*총 동호회수 가져오기*/
 		int totalClubCount = service.selectClubCount(criteria);
-
+		System.out.println("값확인2:"+criteria.getClubNumList());
 		/*현재 페이지 가져오기*/
 		int curPage = criteria.getCurPage();
 	
@@ -149,7 +153,7 @@ public class ClubController {
 		PagingHandler pager = new PagingHandler(curPage, totalClubCount, 2, 4);
 		
 		map.put("totalClubCount", totalClubCount);
-		map.put("clubList",service.selectClubs(criteria, pager) );
+		map.put("clubList",service.selectClubs(criteria, pager));
 		
 		map.put("pager", pager);
 
@@ -186,5 +190,21 @@ public class ClubController {
 		mav.setViewName("club/club_leave");
 		mav.addObject("cNum", cNum);
 		return mav;
+	}
+	
+	//동호회 주소를 가져옴
+	@ResponseBody
+	@RequestMapping(value="/getClubAddress.amg",method=RequestMethod.POST,produces = "application/json; charset=utf8")
+	public List<ClubVO> getClubAddress(@RequestBody ClubSearchCriteria criteria){
+		List<ClubVO> list = service.selectAddress(criteria);
+		return list;
+	}
+	
+	//동호회 삭제
+	@ResponseBody
+	@RequestMapping(value="/deleteClub.amg",method=RequestMethod.GET)
+	public String deleteClub(@RequestParam(value="cNum") int cNum) {
+		
+		return null;
 	}
 }

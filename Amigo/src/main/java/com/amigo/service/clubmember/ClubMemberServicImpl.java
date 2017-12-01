@@ -1,5 +1,6 @@
 package com.amigo.service.clubmember;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -37,6 +38,12 @@ public class ClubMemberServicImpl implements ClubMemberService {
 	public int deleteClub(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return clubMemberDao.deleteClub(map);
+	}
+
+	@Override
+	public List<ClubMemberVO> selectClubmembers(int cNum) {
+		// TODO Auto-generated method stub
+		return clubMemberDao.selectClubmembers(cNum);
 	}
 
 }

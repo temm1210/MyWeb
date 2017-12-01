@@ -26,7 +26,8 @@
 	color:rgba(20,20,20,.8);
 }
 #bTitle{
-	border:1px solid rgba(0,0,0,.2)
+	border:1px solid rgba(0,0,0,.2);
+
 }
 .write_row > label{
 	font-size: 14px;

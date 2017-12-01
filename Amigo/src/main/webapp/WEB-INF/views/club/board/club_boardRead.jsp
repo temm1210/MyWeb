@@ -19,11 +19,18 @@
 		/* 댓글가져오기 */
 		getReplyAjax()
 		
-		/* 동호회회원이 자기글 아닌글을 클릭시에는 수정삭제버튼 안보이게함 */
-		var obj = JSON.parse(sessionStorage.getItem('isMember'))
+		$(".boardHeader").css("display","none")
 		
-		if(obj.cNickname != "${board.bWriter}"){
-			$(".button_wrap").css("display","none");
+		if(userName=="STW"){
+			$(".button_wrap").css("display","block");
+		}
+		/* 동호회회원이 자기글 아닌글을 클릭시에는 수정삭제버튼 안보이게함 */
+		if(sessionStorage.getItem('isMember')!= "none"){
+			var obj = JSON.parse(sessionStorage.getItem('isMember'))
+		
+			if(obj.cNickname == "${board.bWriter}"){
+				$(".button_wrap").css("display","block");
+			}
 		}
 	})
 	
@@ -58,6 +65,8 @@
 				/* 홈버튼 클릭시켜서, 홈버튼에서 바로 넘어온경우는 서비스후 바로 홈으로이동  */
 					$("#first_link").click();
 				}
+				
+				$(".boardHeader").css("display","inline-block")
 			},
 			error:function(request,status,error){
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -69,7 +78,8 @@
 	<form id="updateForm">
 		<div class="onlyRead">
 			<div class="write_row">
-				<input type="text" id="bTitle" name="bTitle" value="${board.bTitle}" readonly="readonly">
+				<label for="bTitle" id="labelbTitle" class="bTitle">제목:</label>
+				<input type="text" id="bTitle" class="bTitle" name="bTitle" value="${board.bTitle}" readonly="readonly">
 				<div class="sub_info">
 					<select id="bCategory" name="bCategory" disabled="disabled">
 						<option value="1" <c:out value="${board.bCategory == '1'?'selected':''}"/> >자기소개</option>

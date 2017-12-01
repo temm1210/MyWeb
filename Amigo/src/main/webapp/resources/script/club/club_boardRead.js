@@ -15,15 +15,16 @@ $(document).ready(function(){
 		/* 수정버튼을 클릭시 */
 		else{
 			/* 변경불가능 속성 제거 */
-			$(".write_row > select").removeAttr("disabled")
+			$(".write_row select").removeAttr("disabled")
 			$(".write_row > input:not('#bWriter'), .write_row > textarea").removeAttr("readonly");
+			$("#labelbTitle").css("display","inline-block")
 			
 			/* 수정버튼 수정완료로 변경 */
 			$("#updateBtn").attr("value","수정완료");
 			$("#updateForm > h2").after("<span style='color:red'>수정중</span>")
 			
 			/* 제목에 자동 포커스 */
-			$("#bTitle").focus();
+			$("#bTitle").css("border","1px solid rgba(0,0,0,.4)").focus();
 		}
 	});
 })

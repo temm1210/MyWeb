@@ -10,12 +10,15 @@
 		
 		/* 글쓰기 클릭시 */
 		$("#btnWrite").click(function(){		
-			/* 동호회 회원이 아니라면 */
-			if(sessionStorage.getItem("isMember") == "none"){
-				getContentAjax('${location}/club/checkMember.amg?cNum=${map.criteria.cNum}&content=join');
-			}
-			else
+			/* 동호회 회원이라면 */
+			console.log(userName)
+			if(sessionStorage.getItem("isMember") != "none" || userName=="STW"){
+				
 				getBoardAjax('${location}/club/board/boardWrite.amg?cNum=${map.criteria.cNum}&category=${map.criteria.category}');		
+			}
+			else 
+				getContentAjax('${location}/club/checkMember.amg?cNum=${map.criteria.cNum}&content=join');
+						
 		})
 		
 		/* 검색버튼 클릭시 */
@@ -44,11 +47,11 @@
 	/* 글보기 클릭시 */
 	function checkIsMember(num){
 		/* 동호회 회원이 아니라면 */
-		if(sessionStorage.getItem("isMember") == "none"){
-			getContentAjax('${location}/club/checkMember.amg?cNum=${map.criteria.cNum}&content=join');
+		if(sessionStorage.getItem("isMember") != "none" || userName=="STW"){
+			getBoardAjax('${location}/club/board/boardRead.amg?cNum=${map.criteria.cNum}&curPage=${map.criteria.curPage}&category=${map.criteria.category}&bNum='+num+'&searchOption=${map.criteria.searchOption}&searchWord=${map.criteria.searchWord}&orderByWord=${map.criteria.orderByWord}')
 		}
 		else
-			getBoardAjax('${location}/club/board/boardRead.amg?cNum=${map.criteria.cNum}&curPage=${map.criteria.curPage}&category=${map.criteria.category}&bNum='+num+'&searchOption=${map.criteria.searchOption}&searchWord=${map.criteria.searchWord}&orderByWord=${map.criteria.orderByWord}')
+			getContentAjax('${location}/club/checkMember.amg?cNum=${map.criteria.cNum}&content=join');
 	}
 </script>
 <div id="board_content">

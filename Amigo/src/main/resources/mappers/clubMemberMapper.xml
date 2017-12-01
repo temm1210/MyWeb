@@ -13,11 +13,12 @@
   	<!-- 멤버가져오기 -->
   	<select id="selectClubMember" resultType="ClubMemberVO">
   		SELECT 
-  			cnum,cnickname,mid,cgrade,(SELECT mpic FROM amigo_member WHERE mid=#{username} ) as mpic
+  			cm.cnum,cm.cnickname,cm.mid,cm.cgrade,(SELECT mpic FROM amigo_member am WHERE am.mid=#{username} ) as mpic,
+        (select authority from amigo_author aa WHERE aa.mid=cm.mid) as author
   		FROM 
-  			amigo_club_members 
+  			amigo_club_members cm 
   		WHERE 
-  			mid = #{username} AND cnum = #{cNum}
+  			cm.mid = #{username} AND cm.cnum = #{cNum}
   	</select>
   	
   	<!-- 닉네임가져오기  -->
@@ -41,4 +42,15 @@
   		DELETE FROM amigo_club_members
   		WHERE cnum =#{cNum} AND cnickname=#{cNickname}
   	</delete>
+  	
+  	<select id="selectClubmembers" resultType="ClubMemberVO">
+  		SELECT 
+  			cm.cnum,cm.cnickname,cm.mid,(SELECT grade FROM amigo_grade WHERE gnum = cm.cgrade) as cgrade,cm.cmregdate, (SELECT mpic FROM amigo_member am WHERE am.mid=cm.mid) as mpic
+  		FROM 
+  			amigo_club_members cm 
+  		WHERE 
+  			cm.cnum = #{cNum}
+  		ORDER BY
+  			cm.cgrade asc,cm.cmregdate desc
+  	</select>
   </mapper>

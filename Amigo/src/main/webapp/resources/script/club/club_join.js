@@ -1,7 +1,6 @@
 var path = $("#loc").val();
 $(document).ready(function(){
 
-	$(window).scrollTop(180);
 	/*닉네임 입력후 포커스 해제되었을때 작동*/
 	$("#cNickname").stop().blur(function(){
 		/*데이터 저장(JSON)*/

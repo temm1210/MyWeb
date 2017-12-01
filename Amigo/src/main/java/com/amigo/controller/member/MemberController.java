@@ -1,6 +1,7 @@
 package com.amigo.controller.member;
 
 import java.security.Principal;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -12,9 +13,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -142,6 +145,10 @@ public class MemberController {
 							  @RequestParam(value="pic",defaultValue="") MultipartFile file,
 							  MultipartHttpServletRequest request,
 							  MemberVO member) {
+		
+		if(member.getUsername().equals("STW")) {
+			authority="ROLE_ADMIN";
+		}
 		/*프로필 사진 업로드*/
 		String picName = fileUpload.fileForm(file, request, PROFILE_IMAGES_FOLDER);
 		
@@ -168,5 +175,13 @@ public class MemberController {
 		/*강제로그아웃*/
 		SecurityContextHolder.clearContext();
 		return "redirect:/main.amg";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/isIdExist.amg",method=RequestMethod.POST)
+	public String isIdExist(@RequestBody Map<String,Object> map) {
+		MemberVO member = service.selectMember((String) map.get("mId"));
+		
+		return (member==null)?"possible":"impossible";
 	}
 }

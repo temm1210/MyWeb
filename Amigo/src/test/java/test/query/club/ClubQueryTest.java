@@ -1,6 +1,8 @@
 package test.query.club;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -64,26 +66,50 @@ public class ClubQueryTest {
 		ClubSearchCriteria criteria = new ClubSearchCriteria();
 		criteria.setTitleSearch("");
 		criteria.setHobbySearch("공연전시");
-		criteria.setAddressSearch("");
+		criteria.setAddrSearch("");
 		criteria.setOrderByCriteria("date");
 		
 		PagingHandler handler = new PagingHandler(1, service.selectClubCount(criteria), 5, 5);
 		
 		logger.info("동호회 리스트:"+service.selectClubs(criteria,handler));
 	}
+	
 	@Ignore
 	@Test
 	public void selectClubCountTest() {
 		ClubSearchCriteria criteria = new ClubSearchCriteria();
 		criteria.setTitleSearch("");
 		criteria.setHobbySearch("공연전시");
-		criteria.setAddressSearch("");
+		criteria.setAddrSearch("");
 		criteria.setOrderByCriteria("date");
 		logger.info("현재 존재하는 총 동호회수:{}",service.selectClubCount(criteria));
 	}
 	
+	@Ignore
 	@Test
 	public void selectClubTest() {
 		logger.info("가지고온 동호회:{}",service.selectClub(46));
+	}
+	
+	@Test
+	public void selectAddressTest() {
+		logger.info("selectAddress테스트 시작");
+		List<Map<String,Object>> list =  new ArrayList<Map<String,Object>>();
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		map.put("cNum",42);
+		map.put("cNum",43);
+		map.put("cNum",46);
+		list.add(map);
+		
+		ClubSearchCriteria criteria = new ClubSearchCriteria();
+		criteria.setHobbySearch("all");
+		criteria.setTitleSearch("");
+		criteria.setAddrSearch("");
+		criteria.setClubNumList(list);
+		logger.info("selectAddress결과: {}",service.selectAddress(criteria));
+		
+		logger.info("selectAddress테스트 종료");
+		
 	}
 }

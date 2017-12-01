@@ -12,8 +12,9 @@ $(document).ready(function(){
 			 errorCheckEffect("아이디를 입력하세요",$id_parent);
 		 else if(id.length > 13)
 			 errorCheckEffect("13자리 이하로 입력하세요",$id_parent);
-		 else
-			 successCheckEffect($id_parent);
+		 else{
+			 idCheckAjax();
+		 }
 	})
 	/*  -------------------- ---------------------------------------- */
 	

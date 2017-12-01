@@ -103,6 +103,16 @@ ul.sub_ul .fa{
 .click{
 	color: black !important;
 }
+
+#clubArea{
+	border: none;
+    width: 100%;
+    background: none;
+    text-align: center;
+    margin-left: 20px;
+    font-weight: bold;
+    font-size: 15px;
+}
 @media all and (max-width: 787px) {
 	#img_wrap > h2{
 		font-size: 20px;

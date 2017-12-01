@@ -31,13 +31,16 @@
 	display: inline-block;
     float: right;
 }
+#labelbTitle{
+	display: none;
+}
 #bTitle{
 	border-right: 1px solid rgba(0,0,0,.3);
-	padding-right: 10px;
+	padding-right: 180px;
 	font-weight: bold;
 }
 .write_row > label{
-	font-size: 14px;
+	font-size: 12px;
 	display: inline-block;
 	margin-right: 10px;
 }
@@ -45,6 +48,7 @@
 .button_wrap{
 	text-align: center;
 	margin-top: 30px;
+	display: none;
 }
 #updateForm{
 	margin-bottom:60px;
@@ -65,7 +69,7 @@
 	cursor: pointer;
 }
 #uptLabel{
-	margin-left: 150px;
+	margin-left: 30px;
 	margin-right: 10px;
 	width: 70px;
 	color: rgba(0,0,0,.4);

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.amigo.service.reply.ReplyService;
+import com.amigo.util.PagingHandler;
 import com.amigo.vo.reply.ReplyVO;
 
 @RestController
@@ -40,14 +41,19 @@ public class ReplyController {
 	
 	/*댓글 리스트 가져오기*/
 	@RequestMapping(value="/getReplys.amg",method=RequestMethod.GET)
-	public ModelAndView getReplys(@RequestParam("cNum") int cNum,
+	public ModelAndView getReplys(@RequestParam(value="curPage",defaultValue="1") int curPage,
+								  @RequestParam("cNum") int cNum,  
 								  @RequestParam("bNum") int bNum){
 		
+		int totalCount = replyService.selectReplyCount(cNum, bNum);
 		ModelAndView mav = new ModelAndView();
+		PagingHandler pager = new PagingHandler(curPage, totalCount, 2, 3);
 		Map<String,Object> map = new HashMap<String,Object>();
 		
-		map.put("reply", replyService.selectReplys(cNum, bNum));
+		
+		map.put("reply", replyService.selectReplys(cNum, bNum,pager));
 		map.put("count", replyService.selectReplyCount(cNum, bNum));
+		map.put("pager", pager);
 		
 		mav.addObject("map", map);
 		mav.setViewName("club/reply/club_replyList");

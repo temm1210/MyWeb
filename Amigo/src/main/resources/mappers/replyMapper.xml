@@ -11,6 +11,7 @@
   	
   	<!-- 해당게시글의 댓글리스트 가져오기 -->
   	<select id="selectReplys" resultType="ReplyVO">
+  		<include refid="boardBeforePaging"/>
   		SELECT   
   			br.rnum, br.rwriter, br.cnum, br.bnum, br.rcontent, br.reregdate, m.mpic
   		FROM 
@@ -18,10 +19,23 @@
   		WHERE
   			br.cnum = #{cNum} AND br.bnum = #{bNum}
   			<include refid="searchMpic"/>
+  		ORDER BY
+  			br.reregdate asc,br.rnum asc
+  		<include refid="boardAfterPaging"/>
   	</select>
   	
   	<sql id="searchMpic">
   		AND br.rwriter = cm.cnickname AND m.mid = cm.mid AND br.cnum = cm.cnum
+  	</sql>
+  	
+  	<sql id="boardBeforePaging">
+  		SELECT * FROM(
+  				SELECT ROWNUM rm, A.* FROM(
+  	</sql>
+  	
+  	<sql id="boardAfterPaging">
+			  )A
+		)WHERE rm BETWEEN ${start} AND #{end}
   	</sql>
   	
   	<!-- 해당게시글의 댓글 총 갯수 가져오기  -->

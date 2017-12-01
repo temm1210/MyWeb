@@ -1,5 +1,6 @@
 package com.amigo.dao.clubmember;
 
+import java.util.List;
 import java.util.Map;
 
 import com.amigo.vo.clubmember.ClubMemberVO;
@@ -10,4 +11,5 @@ public interface ClubMemberDAO {
 	public boolean selectNickname(Map<String,Object> map);
 	public int joinClub(ClubMemberVO clubMember);
 	public int deleteClub(Map<String,Object> map);
+	public List<ClubMemberVO> selectClubmembers(int cNum);
 }

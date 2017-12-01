@@ -7,7 +7,7 @@ $(document).ready(function(){
 		sessionStorage.setItem('isRefresh',false);
 	
 	/* 페이지 로드시 동호회 리스트를 불러옴  */
-	getClubsAjax(curPage);
+	getClubsAjax(curPage,null);
 	
 	/* 새로고침 눌렀을시 isRefresh세션스토리지 true로 설정 */
 	$(document).keydown(function(e){
@@ -15,8 +15,27 @@ $(document).ready(function(){
 			sessionStorage.setItem('isRefresh',true);	
 	})  
 	
+	//전체검색 버튼클릭시
+	$("#btn_all").click(function(){
+			//검색옵션 전부초기화
+			$("#titleSearch").val('');
+			$("#hobbySearch").val('all');
+			$("#addrSearch").val('')
+			
+			getClubsAjax(1,null);
+	})
+	
+	//검색버튼 클릭시
 	$("#btn_search").click(function(){
-		getClubsAjax(curPage);
+		//동호회 리스트불러오는 AJAX
+		getClubsAjax(curPage,cNumJSON);
+		
+		//동호회 주소불러와서 map에 뿌려주는 AJAX
+		getAddressAjax();
+		
+		//검색후 맵을 초기상태로 돌려놓음
+		map.setCenter(new daum.maps.LatLng(37.20446357557853,137.13464871597167));
+		map.setLevel(14)
 	})
 	
 	/* 뒤로가기 버튼눌렀을때 Ajax요청으로 가져온 이전 부분만 출력 (SPA랑비슷) */
@@ -40,46 +59,8 @@ $(document).ready(function(){
 		getClubsAjax(1)
 	})
 })
-
-/* 제목검색,취미검색,주소검색,페이지를 넘겨서 아작스방식으로 동호회리스트를 가져옴 */
-function getClubsAjax(curPage){
-
-	var titleSearch = $("#titleSearch").val();
-	var hobbySearch = $("#hobbySearch").val();
-	var addressSearch = $("#addressSearch").val();
-	var orderByCriteria =$(".click").text();
-	var curPage = curPage;
-
-	/* 넘어온 파라미터들을 JSON형식으로 파싱 */
-	var data={
-			titleSearch:titleSearch,
-			hobbySearch:hobbySearch,
-			addressSearch:addressSearch,
-			orderByCriteria:orderByCriteria,
-			curPage:curPage
-	};
-	
-	$.ajax({
-		type:"POST",
-		url:"clubsList.amg",
-		headers:{
-			"Content-Type":"application/json; charset=UTF-8"
-		},
-		data:JSON.stringify(data),	
-		success:function(clubs){
-		
- 			$(".club-wrap").html(clubs);
- 			$(window).scrollTop(85); 
- 			
- 			/* 새로고침을 눌렀을시에는 현재페이지를 history에 저장하지 않음 */
- 			if(sessionStorage.getItem('isRefresh') == "true"){
- 				sessionStorage.setItem('isRefresh',false);
- 			}else{
- 				history.pushState({ clubs: clubs,curPage:curPage}, '', '?page='+curPage)
- 			}	
-		},
-		error:function(request,status,error){
-			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		}
-	})
+function goPagingPage(curPage){
+	$(window).scrollTop(85);
+	getClubsAjax(curPage,cNumJSON)
+	 
 }

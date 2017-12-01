@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.amigo.util.PagingHandler;
 import com.amigo.vo.reply.ReplyVO;
 
 @Repository
@@ -24,11 +25,13 @@ public class ReplyDAOImpl implements ReplyDAO {
 	}
 
 	@Override
-	public List<ReplyVO> selectReplys(int cNum, int bNum) {
+	public List<ReplyVO> selectReplys(int cNum, int bNum,PagingHandler pager) {
 		// TODO Auto-generated method stub
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("cNum", cNum);
 		map.put("bNum", bNum);
+		map.put("start", pager.getStartRownum());
+		map.put("end", pager.getEndRownum());
 		
 		return sqlSession.selectList("selectReplys", map);
 	}

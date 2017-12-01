@@ -1,13 +1,29 @@
 #container{
 	background-color: white;
-	padding-top: 150px;
+	padding-top: 80px;
+	min-width: 400px;
+	display: flex;
+	flex-flow: wrap row;
+}
+
+#article1{
+	border-bottom: 1px solid rgba(0,0,0,.2);
+	padding-bottom: 20px;
 }
 #content{
 	width:100%;
 	height:100%;
+	flex:2 2 200px;
+	margin-right: 20px;
+}
+
+#mpaContainer{
+	flex:1 1 300px;
+    background: #eee;
 }
 
 #content > #article1 > h2{
+	margin-top: 40px;
 	font-weight: bold;
 	font-size: 25px;
 	text-align: center;
@@ -16,18 +32,23 @@
 	border-bottom: 1px solid rgba(0,0,0,.2);
 	color:#b49759;
 }
+#mapTransInfo{
+	position: fixed;
+    width: 300px;
+    margin-left: 140px;
+}
 .input_box{
 	margin-bottom: 20px;
 	border-bottom: 1px solid #eee;
 	margin-left: 40px;
 }
 
-label{
+.input_box label{
 	display:inline-block;
 	text-align:left;
 	width:200px;
 }
-input{
+.input_box input{
 	font-family: 'Jeju Gothic', serif;
 	outline:none;
 	width:170px;
@@ -42,7 +63,7 @@ input[type="button"]{
 	width: 100px;
 	height: 35px;
 	cursor: pointer;
-	margin-left:40px;
+	margin-left:245px;
 	border-radius:2px;
 	border:1px solid rgba(0,0,0,.6);
 }

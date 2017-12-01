@@ -5,7 +5,6 @@
 <c:set var="location" value="${pageContext.request.contextPath}"/>
 <script src="<c:url value="/resources/script/club/club_leave.js"/>"></script>
 <style>
-
 	#leaveContainer{
 		width: 800px;
 	}

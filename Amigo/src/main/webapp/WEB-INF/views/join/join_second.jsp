@@ -4,11 +4,47 @@
 <html>
 <head>
 <%@ include file="join_header.jsp" %>
+<meta id="_csrf" name="_csrf" content="${_csrf.token}"/>
+<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}"/>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="<c:url value="/resources/script/checkEffect.js"/>"></script>
 <script src="<c:url value="/resources/script/information_check.js"/>"></script>
 <script src="<c:url value="/resources/script/join/join_second.js"/>"></script>
 <link rel="stylesheet" href="<c:url value="/resources/css/join/join_second.css"/>">
+<script>
+	/* 스프링 시큐리티의 CSRF라는 기능으로 인해 POST방식으로 보낼때 CSRF처리를 해줘야함. AJAX에서 POST요청을함으로 로딩과 동시에 CSRF처리 */
+	var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content");
+	
+	$(document).ajaxSend(function(e, xhr, options) {
+	    xhr.setRequestHeader(header, token);
+	});
+	/* --------------------------------------------------- */
+	function idCheckAjax(){
+		var mId = $("#username").val()
+		
+		var data={
+			mId:mId
+		}
+		
+		$.ajax({
+			type:"POST",
+			url:"${location}/member/isIdExist.amg",
+			headers:{
+				"Content-Type":"application/json; charset=UTF-8"
+			},
+			data:JSON.stringify(data),
+			success:function(msg){
+				if(msg == "possible"){
+					$("#id_field > .input_check").css("color","green").text("사용가능한 아이디입니다")
+					 successCheckEffect($("#id_field"));
+				}
+				else
+					$("#id_field > .input_check").css("color","red").text("이미 있는 아이디입니다")
+			}
+		})
+	}
+</script>
 </head>
 <body>
 	<div id="container">

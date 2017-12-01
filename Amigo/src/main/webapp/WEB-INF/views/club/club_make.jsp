@@ -60,7 +60,6 @@
 					<div id="area_field" class="club_row">
 						<label for="area">활동 지역</label>
 						<input type="text" name="cAddress" id="cAddress" placeholder="주소입력:여기를 클릭해주세요" readonly="readonly" onfocus="linkToBtn()" onclick="linkToBtn()">
-						<!-- <input type="button" id="addr_btn" onclick="sample5_execDaumPostcode()" value="주소 검색"> --> 
 						<i class="fa fa-check ch" aria-hidden="true"></i><br>
 						<div id="map" style="width:100%;height:300px;margin:10px 0;display:none"></div>	
 					</div>

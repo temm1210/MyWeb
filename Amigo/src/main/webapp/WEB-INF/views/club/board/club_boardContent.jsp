@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="location" value="${pageContext.request.contextPath}"/>
 <style>
 	.boardTop{
 		margin-bottom: 40px;
@@ -37,9 +38,9 @@
 	}
 </style>
 <script>
-	var isFirst = true;
+	//게시판 처음 진입했는지 확인을 위한 플래그변수
+	var isFirstBoard = true;
 	$(document).ready(function(){
-		
 		getFirstView()
 		$("#order > a").click(function(){
 			$("#order > a").removeClass("orderClick");
@@ -72,10 +73,10 @@
 				/* 처음으로 게시물을 가져올때는, club.jsp에서 history.pushState를 한번시행함. 그래서 여기서 또 해줘버리면 중복 저장이되버림. 중복저장을 막는코딩.
 					url을 참조하면 처음에는 검색옵션이 url뒤에 안붙음.
 				*/
-				if(!isFirst)
+				if(!isFirstBoard)
 			 		history.pushState({ content:content,page:"board",orderWord:orderWord},'','?'+path)
 			 	else
-			 		isFirst = false;
+			 		isFirstBoard = false;
 			}
 		});
 	}
@@ -118,5 +119,4 @@
 	<div id="boardList">
 	
 	</div>
-
 </div>

@@ -64,10 +64,7 @@
 					$("#join_clubs").append(str)
 					str="";
 				})
-			},
-			error:function(request,error){
-		        alert("code:"+request.status+"\n"+"error:"+error);
-		    }
+			}
 		}); 
 	} 
 </script>
@@ -100,6 +97,8 @@
 		  			</i>	  
 	  			</div>
 		  		<input id="subBtn" type="button">
+		  		
+		  		<!-- 가입한 동호회 리스트를 보여줌 -->
 				<div class="clubsWrap">
 					<ul id="join_clubs">
 					
@@ -125,7 +124,7 @@
 				</c:choose>
 	  		</a>
 	  																		
-	  		<form id="logOutForm" action="<c:url value='${location}/member/logOut.amg?logoutMethod=basic'/>" method="post">
+	  		<form id="logOutForm" action="<c:url value='/member/logOut.amg?logoutMethod=basic'/>" method="post">
 	  			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	  		</form> 
 	  	</sec:authorize>
@@ -133,14 +132,14 @@
    
   	<nav id="menu" class="menu">
     	<ul class="dropdown">
-      		<li ><a href="#Link" title="Link">동호회</a>
+      		<li ><a href="#Link">동호회</a>
       			<ul>
       				<li><a href="${location}/club/clubMake.amg">동호회 만들기</a>
       				<li><a href="${location}/club/clubSearch.amg?page=1">동호회 찾기</a>
       			</ul>
       		</li>
 
-			<li><a href="#Link" title="Link">고객센터</a>
+			<li><a href="#Link">고객센터</a>
 				<ul>
 					<li><a href="${location}/qna/faq.amg">F&Q</a></li>
 					<li><a href="${location}/qna/qna.amg">1:1질문</a></li>

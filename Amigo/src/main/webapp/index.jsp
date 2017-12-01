@@ -3,4 +3,4 @@
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="location" value="${pageContext.request.contextPath}"/>
-<% response.sendRedirect("/main.amg"); %>
+<% response.sendRedirect("main.amg"); %>

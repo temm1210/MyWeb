@@ -7,7 +7,9 @@ import javax.inject.Inject;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.amigo.service.clubmember.ClubMemberService;
 import com.amigo.vo.clubmember.ClubMemberVO;
@@ -24,7 +26,6 @@ public class ClubMemberController {
 			
 		String username = (String) map.get("userName");
 		int cNum = (int) map.get("cNum");
-
  		return service.selectClubMember(username,cNum);
 	}
 	
@@ -49,5 +50,15 @@ public class ClubMemberController {
 		int ch = service.deleteClub(map);
 		
 		return (ch>0)?"정상적으로 탈퇴 되었습니다.":"탈퇴에 실패 하였습니다";
+	}
+	
+	@RequestMapping(value="/memberList.amg",method=RequestMethod.GET)
+	public ModelAndView memberList(@RequestParam("cNum") int cNum){
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("club/club_memberList");
+		mav.addObject("member", service.selectClubmembers(cNum));
+		
+		return mav;
 	}
 }

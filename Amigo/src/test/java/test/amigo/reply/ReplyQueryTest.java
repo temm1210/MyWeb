@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.amigo.service.reply.ReplyService;
+import com.amigo.util.PagingHandler;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations= {"file:src/main/webapp/WEB-INF/spring/**/*.xml"})
@@ -24,8 +25,10 @@ public class ReplyQueryTest {
 
 	@Test
 	public void selectReplysTest() {
+		PagingHandler pager = new PagingHandler(1, replyService.selectReplyCount(56, 2), 2, 3);
+		
 		logger.info("selectReplys테스트 시작");
-		logger.info("selectReplys결과 {}",replyService.selectReplys(56, 2));
+		logger.info("selectReplys결과 {}",replyService.selectReplys(56, 2,pager));
 		logger.info("selectReplys테스트 종료");
 	}
 }

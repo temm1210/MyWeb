@@ -5,25 +5,29 @@
 <c:set var="location" value="${pageContext.request.contextPath}"/>
 <c:url var="memberImg" value="/resources/images/member_images" />
 <script>
+	//댓글첫화면인지 아닌지 확인해주는 플래그변수
+	var isFirstBoard = true;
 	$(document).ready(function(){
+		getListReplyAjax(1)
+		
+		if(sessionStorage.getItem('isMember')!= "none"){
+			var objJSON = JSON.parse(sessionStorage.getItem('isMember'))
+			$("#rWriter").val(objJSON.cNickname)
 	
-		var obj = JSON.parse(sessionStorage.getItem('isMember'))
-		
-		$("#rWriter").val(obj.cNickname)
-		
-		getListReplyAjax()
-		/* 현재유저 프로필사진 등록 */
-		if(obj.mPic == null){
-			$("#picLabel").html('<i class="fa fa-user-circle nopic" aria-hidden="true"></i>')
-		}else{
-			$("#picLabel").html('<img id="pr_pic" height="60px" width="60px" src=${memberImg}/'+obj.mPic+'>')
+			/* 현재유저 프로필사진 등록 */
+			if(objJSON.mPic == null){
+				$("#picLabel").html('<i class="fa fa-user-circle nopic" aria-hidden="true"></i>')
+			}else{
+				$("#picLabel").html('<img id="member_pic" height="60px" width="60px" src=${memberImg}/'+objJSON.mPic+'>')
+			}
 		}
-		
 	})
 	
 	/* 댓글입력 */
 	function writeReplyAjax(url){
- 		
+		
+ 		var replyCount = parseInt( $(".replyCount").text() ) +1;
+ 		var curPage = Math.ceil( replyCount/3.0 );
 		var data={
 				cNum:$("#cNum").val(),
 				bNum:$("#bNum").val(),
@@ -40,33 +44,47 @@
 			data:JSON.stringify(data),
 			success:function(msg){
 				alert(msg)
-				/* 입력했던 댓글내용 초기화 */
+				// 입력했던 댓글내용 초기화 
 				$("#rContent").val("");
 				
-				/* 동호회 댓글리스트만 다시불러오기 */
-				getListReplyAjax()
+				// 댓글 작성후,댓글 마지막 페이지로 이동
+				getListReplyAjax(curPage);
 			}
-		}) 
+		});
 	}
 	
 	/* 댓글 리스트 불러오기 */
-	function getListReplyAjax(){
+	function getListReplyAjax(curPage){
 		
 		var cNum = $("#cNum").val()
 		var bNum = $("#bNum").val()
 		
+		var url = "${location}/reply/getReplys.amg?cNum="+cNum+"&bNum="+bNum+"&curPage="+curPage;
+		var path = url.substring(url.lastIndexOf('?')+1 , url.length);
+		
 		$.ajax({
 			type:"GET",
-			url:"${location}/reply/getReplys.amg?cNum="+cNum+"&bNum="+bNum,
+			url:url,
 			success:function(replyList){
 				/* 불러온 댓글리스트,해당 div영역에 붙여줌 */
 				$("#replyList").html(replyList);
+				
+				//처음으로, 해당화면으로 진입시 
+				if(isFirstBoard)
+					isFirstBoard=false;
+				//처음진입하지 않았다면
+				else
+					history.pushState({ content:replyList,page:"reply"},'','?'+path)
 			}
 		})
 		
 	}
 </script>
 <style>
+	.replyCount{
+		display: inline-block;
+		margin-bottom: 20px;
+	}
 	.replyWrap{
 		width: 800px;
 		background: rgba(220,220,220,.23);
@@ -75,7 +93,8 @@
 		margin-left: -35px;
 	}
 	
-	#pr_pic{
+	#member_pic{
+		border-radius: 50%;
 		margin-bottom: 6px;
 		margin-right: 10px;
 	}
@@ -97,25 +116,24 @@
 	    margin: 0 10px 6px 0;
 	}
 </style>
-<div>
+<div id="replyContainer">
 	댓글수:<span class="replyCount"></span>
 	<div class="replyWrap">
-	<form id="reply_form">
-		<div class="reply_row">
-		
-			<!-- 댓글목록 불러오기 -->
-			<div id="replyList">
+		<form id="reply_form">
+			<div class="reply_row">
 			
+				<!-- 댓글목록 불러오기 -->
+				<div id="replyList">
+				
+				</div>
+				
+				<div class="reply_content">
+					<span id="picLabel"></span>
+					<textarea cols="80" rows="4" id="rContent" name="rContent"></textarea>
+					<input type="hidden" name="rWriter" id="rWriter">		
+					<input type="button" value="등록" onclick="writeReplyAjax('${location}/reply/writeReply.amg')" id="writeBtn">
+				</div>
 			</div>
-			
-			<div class="reply_content">
-				<span id="picLabel"></span>
-				<textarea cols="80" rows="4" id="rContent" name="rContent"></textarea>
-				<input type="hidden" name="rWriter" id="rWriter">
-							
-				<input type="button" value="등록" onclick="writeReplyAjax('${location}/reply/writeReply.amg')" id="writeBtn">
-			</div>
-		</div>
-	</form>
+		</form>
 	</div>
 </div>

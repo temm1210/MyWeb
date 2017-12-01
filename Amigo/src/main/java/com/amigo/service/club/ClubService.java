@@ -14,4 +14,5 @@ public interface ClubService {
 	public List<ClubVO> selectClubs(ClubSearchCriteria criteria,PagingHandler pager);
 	public int selectClubCount(ClubSearchCriteria criteria);
 	public ClubVO selectClub(int cNum);
+	public List<ClubVO> selectAddress(ClubSearchCriteria criteria);
 }

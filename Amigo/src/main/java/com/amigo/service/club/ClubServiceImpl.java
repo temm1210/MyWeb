@@ -54,4 +54,10 @@ public class ClubServiceImpl implements ClubService {
 		// TODO Auto-generated method stub
 		return clubDao.selectClub(cNum);
 	}
+
+	@Override
+	public List<ClubVO> selectAddress(ClubSearchCriteria criteria) {
+		// TODO Auto-generated method stub
+		return clubDao.selectAddress(criteria);
+	}
 }

@@ -3,8 +3,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="location" value="${pageContext.request.contextPath}"/>
 <script>
+	$(document).ready(function(){
+		$(window).scrollTop(0);
+	})
+	
+	
 	function path(category){
+		var $aLink = $(".sub_ul > li")
+		
+		$.each($aLink,function(index,element){
+			
+			if( $(".subCategory_"+category).text() == $(element).children("a").text() ){
+				$aLink.children("a").removeClass("click")
+				$(element).children("a").addClass("click")
+			}
+		})
 		getContentAjax('${location}/club/board/boardContent.amg?cNum=${criteria.cNum}&curPage=1&category='+category)
 	}
 	
@@ -34,7 +49,7 @@
 	}
 	.board_row{
 		display: flex;
-		text-align: center;
+		margin-bottom: 80px;
 	}
 	a.title_link:hover{
 		color:rgba(0,0,0,.6);
@@ -66,23 +81,23 @@
 		<span class="boardKind">
 			<a href="javascript:void(0)" onclick="path(${category})">
 				<c:if test="${category == 1 }">
-					<h2>자기소개</h2>
+					<h2 class="subCategory_${category}">자기소개</h2>
 				</c:if>
 				
 				<c:if test="${category == 2 }">
-					<h2>QnA</h2>
+					<h2 class="subCategory_${category}">QnA</h2>
 				</c:if>
 				
 				<c:if test="${category == 3 }">
-					<h2>등업</h2>
+					<h2 class="subCategory_${category}">등업</h2>
 				</c:if>
 				
 				<c:if test="${category == 4 }">
-					<h2>자유게시판</h2>
+					<h2 class="subCategory_${category}">자유게시판</h2>
 				</c:if>
 				
 				<c:if test="${category == 5 }">
-					<h2>공지사항</h2>
+					<h2 class="subCategory_${category}">공지사항</h2>
 				</c:if>
 			</a>
 		</span>

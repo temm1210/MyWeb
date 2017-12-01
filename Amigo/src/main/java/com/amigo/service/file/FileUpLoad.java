@@ -20,11 +20,15 @@ public class FileUpLoad {
 	public String fileForm(MultipartFile file,MultipartHttpServletRequest request,String folderName) {		
 		String uploadPath = getSaveLocation(request,folderName);
 		String saveFileName = file.getOriginalFilename();
+		File fileDir = new File(uploadPath + saveFileName);
 		int maxWidth = 1600;
 		int maxHeight = 950;
 		
 		if(saveFileName != null && !saveFileName.equals("")) {
-			if(new File(uploadPath + saveFileName).exists()) 
+			if(!fileDir.exists())
+				fileDir.mkdirs();
+			
+			if(fileDir .exists()) 
 				saveFileName =System.currentTimeMillis() +"_"+saveFileName;
 			
 			try {

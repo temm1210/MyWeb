@@ -82,6 +82,7 @@ public class ClubDAOImpl implements ClubDAO {
 		map.put("end", pager.getEndRownum());
 		map.put("criteria", criteria);
 		
+		
 		return session.selectList("selectClubs", map);
 	}
 
@@ -104,5 +105,14 @@ public class ClubDAOImpl implements ClubDAO {
 	public int selectCnum(String cTitle) {
 		// TODO Auto-generated method stub
 		return session.selectOne("selectCnum", cTitle);
+	}
+
+	@Override
+	public List<ClubVO> selectAddress(ClubSearchCriteria criteria) {
+		// TODO Auto-generated method stub
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		map.put("criteria", criteria);
+		return session.selectList("selectAddress", map);
 	}
 }

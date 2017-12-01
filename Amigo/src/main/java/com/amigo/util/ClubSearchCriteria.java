@@ -1,15 +1,30 @@
 package com.amigo.util;
 
+import java.util.List;
+import java.util.Map;
 
 /*동호회 검색시 사용자가 원하는 키워드로 검색해주도록 해주는 클래스*/
 public class ClubSearchCriteria {
 	
 	private String titleSearch;
 	private String hobbySearch;
-	private String addressSearch;
+	private String addrSearch;
 	private String orderByCriteria;
 	private int curPage;
+	private List<Map<String,Object>> clubNumList;
 	
+	public List<Map<String, Object>> getClubNumList() {
+		return clubNumList;
+	}
+	public void setClubNumList(List<Map<String, Object>> clubNumList) {
+		this.clubNumList = clubNumList;
+	}
+	public String getAddrSearch() {
+		return addrSearch;
+	}
+	public void setAddrSearch(String addrSearch) {
+		this.addrSearch = addrSearch;
+	}
 	public int getCurPage() {
 		return curPage;
 	}
@@ -28,12 +43,7 @@ public class ClubSearchCriteria {
 	public void setHobbySearch(String hobbySearch) {
 		this.hobbySearch = hobbySearch;
 	}
-	public String getAddressSearch() {
-		return addressSearch;
-	}
-	public void setAddressSearch(String addressSearch) {
-		this.addressSearch = addressSearch;
-	}
+
 	public String getOrderByCriteria() {
 		return orderByCriteria;
 	}
@@ -42,7 +52,9 @@ public class ClubSearchCriteria {
 	}
 	@Override
 	public String toString() {
-		return "ClubSearchCriteria [titleSearch=" + titleSearch + ", hobbySearch=" + hobbySearch + ", addressSearch="
-				+ addressSearch + ", orderByCriteria=" + orderByCriteria + ", curPage=" + curPage + "]";
+		return "ClubSearchCriteria [titleSearch=" + titleSearch + ", hobbySearch=" + hobbySearch + ", addrSearch="
+				+ addrSearch + ", orderByCriteria=" + orderByCriteria + ", curPage=" + curPage + ", clubNumList="
+				+/* clubNumList +*/ "]";
 	}
+	
 }

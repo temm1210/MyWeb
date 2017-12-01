@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.amigo.dao.reply.ReplyDAO;
+import com.amigo.util.PagingHandler;
 import com.amigo.vo.reply.ReplyVO;
 
 @Service
@@ -23,9 +24,9 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 
 	@Override
-	public List<ReplyVO> selectReplys(int cNum, int bNum) {
+	public List<ReplyVO> selectReplys(int cNum, int bNum,PagingHandler pager) {
 		// TODO Auto-generated method stub
-		return replyDao.selectReplys(cNum, bNum);
+		return replyDao.selectReplys(cNum, bNum,pager);
 	}
 
 	@Override

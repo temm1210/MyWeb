@@ -47,7 +47,7 @@ public class ClubMemberController {
 	@RequestMapping(value="/leaveClub.amg",method=RequestMethod.DELETE,produces = "application/text; charset=utf8")
 	public String leaveClub(@RequestBody Map<String,Object> map) {
 		
-		int ch = service.deleteClub(map);
+		int ch = service.leaveClub(map);
 		
 		return (ch>0)?"정상적으로 탈퇴 되었습니다.":"탈퇴에 실패 하였습니다";
 	}
@@ -60,5 +60,11 @@ public class ClubMemberController {
 		mav.addObject("member", service.selectClubmembers(cNum));
 		
 		return mav;
+	}
+	
+	@RequestMapping(value="/memberLevel.amg", method=RequestMethod.POST,produces = "application/text; charset=utf8")
+	public String memberLevel(@RequestBody Map<String,Object> map) {
+		
+		return service.updateGrade(map);
 	}
 }

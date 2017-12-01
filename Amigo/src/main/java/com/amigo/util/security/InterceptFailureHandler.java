@@ -19,6 +19,7 @@ public class InterceptFailureHandler implements AuthenticationEntryPoint {
 		// TODO Auto-generated method stub
 		
 		response.setContentType("text/html; charset=EUC-KR");
+		
 		PrintWriter out = response.getWriter();
 		String output = null;
 		
@@ -26,7 +27,7 @@ public class InterceptFailureHandler implements AuthenticationEntryPoint {
 		
 		output+="if( confirm('로그인후 이용가능한 서비스입니다. 로그인 하시겠습니까?') )";
 		output+="{";
-		output+="location.href='/Amigo/member/login.amg'";
+		output+="location.href='"+request.getContextPath()+"/member/login.amg'";
 		output+="}";
 		
 		output+="else";

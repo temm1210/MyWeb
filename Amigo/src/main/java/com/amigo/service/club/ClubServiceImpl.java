@@ -60,4 +60,16 @@ public class ClubServiceImpl implements ClubService {
 		// TODO Auto-generated method stub
 		return clubDao.selectAddress(criteria);
 	}
+
+	@Override
+	public int deleteClub(int cNum) {
+		// TODO Auto-generated method stub
+		return clubDao.deleteClub(cNum);
+	}
+
+	@Override
+	public int updateClub(ClubVO club) {
+		// TODO Auto-generated method stub
+		return clubDao.updateClub(club);
+	}
 }

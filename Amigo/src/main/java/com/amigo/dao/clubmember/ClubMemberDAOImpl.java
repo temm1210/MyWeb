@@ -49,9 +49,9 @@ public class ClubMemberDAOImpl implements ClubMemberDAO {
 	}
 
 	@Override
-	public int deleteClub(Map<String, Object> map) {
+	public int leaveClub(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		int ch = sqlSession.delete("deleteClub", map);
+		int ch = sqlSession.delete("leaveClub", map);
 		
 		return ch;
 	}
@@ -60,5 +60,12 @@ public class ClubMemberDAOImpl implements ClubMemberDAO {
 	public List<ClubMemberVO> selectClubmembers(int cNum) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("selectClubmembers", cNum);
+	}
+
+	@Override
+	public String updateGrade(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		sqlSession.update("updateGrade", map);
+		return (String) map.get("cGrade");
 	}
 }

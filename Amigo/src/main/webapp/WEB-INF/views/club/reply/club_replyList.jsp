@@ -98,8 +98,7 @@
 	$(document).ready(function(){
 		/* 댓글개수 셋팅 */
 		$(".replyCount").text("${map.count}")	
-		
-		
+		var master = $("#clubMaster").text();
  		var replyWriter = $(".replyWriter")
  		
  		if(userName=="STW")
@@ -110,11 +109,15 @@
 		
 			//현재로그인한 동호회 유저랑 댓글작성한 유저랑 같으면 수정,삭제 버튼 활성화  
 			$.each(replyWriter,function(index,element){
-				/*   댓글작성자랑, 로그인한 동호회 유저가 같을시 버튼활성화  */
-				if( $(element).text() == obj.cNickname){
+				//   댓글작성자랑, 로그인한 동호회 유저가 같을시 버튼활성화 
+				if( $(element).text() == obj.cNickname || obj.cNickname == master){
 					$(element).siblings(".modifyLinkWrap").removeClass("viewNone")
 				}	
-			})  
+			})
+			
+			if(obj.cNickname == master){
+				$(".updateLink").css("display","none");
+			}
 		}
 	});
 	

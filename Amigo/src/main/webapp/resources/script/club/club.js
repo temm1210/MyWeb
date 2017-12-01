@@ -5,7 +5,7 @@ $(document).ready(function(){
 	
 	/*사이드 메뉴에바에서 특정 메뉴 클릭할때*/
 	$("#aside > ul > li a").click(function(){
-		$(".sub_ul > li > a").removeClass("click");
+		$("#aside > ul > li a").removeClass("click");
 		$(this).addClass("click");
 	})
 	

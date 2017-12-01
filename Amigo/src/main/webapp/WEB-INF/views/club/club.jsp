@@ -21,6 +21,20 @@
 	
 	});
 	
+	function clubDeleteAjax(path){
+		if(confirm("정말 동호회를 삭제하시겠습니까? 삭제후 복구는 불가능합니다. '확인'을 누르시면 바로 삭제됩니다")){
+			$.ajax({
+				type:"get",
+				url:path,
+				success:function(msg){
+					alert(msg)
+					location.href="${location}/club/clubSearch.amg";
+				}
+				
+			});
+		}//if
+	}
+	
 	function getUserInfo(){
 		var clubMaster = $("#clubMaster").text()
 		
@@ -39,7 +53,7 @@
 			success:function(clubMember){
 				
 				$(".userNickName").text(clubMember.cNickname)
-		
+					
 				/* 동호회 유저가 아니라면 */
 				if(clubMember == ''){
 					sessionStorage.setItem('isMember',"none");
@@ -57,10 +71,11 @@
 					$(".leaveClub").removeClass("none");
 					$(".joinClub").addClass("none");
 					
-					/* 동호회 유저중 회장이라면 */
-					if(clubMember.cGrade ==1){
+					/* 동호회 유저중 매니저나 부매니저라면 */
+					if(clubMember.cGrade == 1 || clubMember.cGrade == 2){
 						$(".leaveClub").addClass("none");
 						$(".deleteClub").removeClass("none");
+						$(".clubUpdate").removeClass("none");
 						$(".masterOnly").css("display","inline-block");
 					}
 				}
@@ -96,18 +111,23 @@
 <body>
 <div id="container">
 	<div id="club_pic">
-		<div id="img_wrap">
-			<h2>${club.cTitle}</h2>
-		</div>	
+		<div id="img_wrap"></div>	
 	</div>
 	
+	<input type="hidden" id="clubTitle" value="${club.cTitle}"/>
+	<input type="hidden" id="clubContent" value="${club.cContent}"/>
 	<div class="clubContent">
 		<div class="contentWrap">
 			<div id="aside">
 				<ul>
-					<li>
-						<span><a id="first_link" href="javascript:void(0);" onclick="goHome('${location}/club/board/clubHome.amg?cNum=${cNum}')">동호회홈으로가기</a></span>
+					<li class="none clubUpdate">
+						<span><a id="first_link" href="javascript:void(0);" onclick="goHome('${location}/club/board/clubHome.amg?cNum=${cNum}')">동호회홈</a></span>
 					</li>
+					
+					<li class="none clubUpdate">
+						<span><a href="javascript:getContentAjax('${location}/club/getClub.amg?cNum=${cNum}')">동호회 수정</a></span>
+					</li>
+
 					<li>
 						<span id="clubMasterPic">동호회장</span> 
 						<div class="clubMasterInfo">
@@ -137,7 +157,7 @@
 					<li><span><a href="javascript:getContentAjax('${location}/clubMember/memberList.amg?cNum=${cNum}')">멤버리스트보기</a></span></li>
 					<li class="joinClub"><span><a href="javascript:getContentAjax('${location}/club/joinClub.amg?cNum=${cNum}')">동호회 가입하기</a></span></li>
 					<li class="leaveClub"><span><a href="javascript:getContentAjax('${location}/club/laeveClub.amg?cNum=${cNum}')">동호회 탈퇴하기</a></span></li>
-					<li class="deleteClub none"><span><a href="javascript:clubUpdateAjax('${location}/club/deleteClub.amg?cNum=${cNum}')">동호회 삭제하기</a></span></li>
+					<li class="deleteClub none"><span><a href="javascript:clubDeleteAjax('${location}/club/getClub.amg?cNum=${cNum}')">동호회 삭제하기</a></span></li>
 				</ul>
 			</div>
 			

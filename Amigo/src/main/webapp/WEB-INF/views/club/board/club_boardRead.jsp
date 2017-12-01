@@ -6,6 +6,7 @@
 <c:set var="location" value="${pageContext.request.contextPath}"/>
 <link rel="stylesheet" href="<c:url value="/resources/css/club/club_boardRead.css"/>">
 <script src="<c:url value="/resources/script/club/club_boardRead.js"/>"></script>
+<script src="<c:url value="/resources/script/club/club_level.js"/>"></script>
 <style>
 	#likeBtn{
 		display: inline-block;
@@ -13,22 +14,36 @@
 		font-size: 20px;
 		text-align: center;
 	}
+	
+	#levelUp{
+		text-shadow: 1px 1px 2px;
+	}
+	
+	.writerGrade{
+		margin-right: 50px;
+	}
 </style>
 <script>
 	$(document).ready(function(){
 		/* 댓글가져오기 */
 		getReplyAjax()
+		var master = $("#clubMaster").text();
 		
 		$(".boardHeader").css("display","none")
-		
-		if(userName=="STW"){
-			$(".button_wrap").css("display","block");
-		}
+
 		/* 동호회회원이 자기글 아닌글을 클릭시에는 수정삭제버튼 안보이게함 */
 		if(sessionStorage.getItem('isMember')!= "none"){
 			var obj = JSON.parse(sessionStorage.getItem('isMember'))
 		
-			if(obj.cNickname == "${board.bWriter}"){
+			if(obj.cNickname == "${board.bWriter}" || obj.cNickname == master){
+				$(".button_wrap").css("display","block");
+			}
+		
+			if(obj.cNickname == master && obj.cNickname != "${board.bWriter}"){
+				$("#updateBtn").css("display","none");
+			}
+		}else{
+			if(userName=="STW"){
 				$(".button_wrap").css("display","block");
 			}
 		}
@@ -44,7 +59,7 @@
 		})
 	}
 	
-	/* 수정,삭제처리 */
+	//수정,삭제처리 
 	function boardAjax(url,type){
 	
 		var data = $("#updateForm").serializeObject();
@@ -67,9 +82,6 @@
 				}
 				
 				$(".boardHeader").css("display","inline-block")
-			},
-			error:function(request,status,error){
-				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
 		});
 	}
@@ -95,7 +107,11 @@
 			
 			<div class="write_row">
 				<label for="bWriter">작성자  </label> 
-				<input type="text" id="bWriter" style="font-size: 14px;" readonly="readonly" name="bWriter" value="${board.bWriter}" readonly="readonly">
+				<input type="text" class="nickName" id="bWriter" style="font-size: 14px;" readonly="readonly" name="bWriter" value="${board.bWriter}" readonly="readonly">
+				<span class="writerGrade">${board.grade}</span>
+				<c:if test="${board.bCategory == '3' && board.grade !='매니저'}">
+					<a href="javascript:void(0)" id="levelUp" onclick="levelUpAjax('${location}/clubMember/memberLevel.amg','등급업','${board.bWriter}')">등업시키기</a>
+				</c:if>
 			</div>
 		</div>
 		
@@ -114,13 +130,15 @@
 		
 		<div class="button_wrap">
 			<input type="button" id="updateBtn" value="수정하기">
-			<input type="button" onclick="boardDelete('${location}/club/board/boardDelete.amg','DELETE')" value="삭제하기">
+			<input type="button" id="deleteBtn" onclick="boardDelete('${location}/club/board/boardDelete.amg','DELETE')" value="삭제하기">
 		</div>
+
 	</form>
 	
 	<!-- 댓글 불러오기 -->
 	<div class="replyContainer">
 	
 	</div>
+	<input type="hidden" id="cnum" value="${board.cNum}">
 	<input type="hidden" id="loc" value="${location}">
 </div>

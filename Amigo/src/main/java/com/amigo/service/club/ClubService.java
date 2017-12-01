@@ -15,4 +15,6 @@ public interface ClubService {
 	public int selectClubCount(ClubSearchCriteria criteria);
 	public ClubVO selectClub(int cNum);
 	public List<ClubVO> selectAddress(ClubSearchCriteria criteria);
+	public int deleteClub(int cNum);
+	public int updateClub(ClubVO club);
 }

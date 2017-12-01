@@ -12,10 +12,17 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
+		<property name="url" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:xe"/>
+		<property name="username" value="scott"/>
+		<property name="password" value="tiger"/>
+	</bean>
+	
+	<!--  
 		<property name="url" value="jdbc:log4jdbc:oracle:thin:@amigostw.cj9s3wnmhmqr.ap-northeast-2.rds.amazonaws.com:1521:ORCL"/>
 		<property name="username" value="AmigoSTW"/>
 		<property name="password" value="amigo1025051"/>
-	</bean>
+	
+	-->
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>

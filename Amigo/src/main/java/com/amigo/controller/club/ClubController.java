@@ -23,7 +23,6 @@ import com.amigo.util.ClubSearchCriteria;
 import com.amigo.util.PagingHandler;
 import com.amigo.vo.club.ClubVO;
 
-
 @Controller
 @RequestMapping("/club")
 public class ClubController {
@@ -33,6 +32,8 @@ public class ClubController {
 	@Inject
 	private ClubService service;
 	
+	@Inject
+	private FileUpLoad fileUpload;
 	
 	@RequestMapping(value="/clubMake.amg",method= {RequestMethod.GET,RequestMethod.POST})
 	public String clubMake() {
@@ -46,8 +47,8 @@ public class ClubController {
 						   Authentication authencation,
 						   @RequestParam Map<String,Object> map) {
 		
-		FileUpLoad ful = new FileUpLoad();
-		String picName = ful.fileForm(file,request,CLUB_IMAGES_FOLER);
+	
+		String picName = fileUpload.fileForm(file,request,CLUB_IMAGES_FOLER);
 		String redirectPath = "";
 		
 		/*동호회 만드는 사람의 아이디 확인(동호회장)*/
@@ -202,9 +203,50 @@ public class ClubController {
 	
 	//동호회 삭제
 	@ResponseBody
-	@RequestMapping(value="/deleteClub.amg",method=RequestMethod.GET)
+	@RequestMapping(value="/deleteClub.amg",method=RequestMethod.GET,produces = "application/text; charset=utf8")
 	public String deleteClub(@RequestParam(value="cNum") int cNum) {
+		int ch = service.deleteClub(cNum);
+		return (ch>0)?"해당 동호회를 삭제하였습니다":"동호회 삭제에 실패하였습니다.";
+	}
+	
+	//동호회 수정(1)
+	@ResponseBody
+	@RequestMapping(value="/getClub.amg")
+	public ModelAndView getClub( @RequestParam(value="cNum") int cNum ) {
+		ModelAndView mav = new ModelAndView();
+		ClubVO club = service.selectClub(cNum);
+		Map<String,Object> map = new HashMap<String,Object>();
 		
-		return null;
+		map.put("club", club);
+		mav.addObject("map", map);
+		mav.setViewName("club/club_modify");
+		
+		return mav;
+	}
+	
+	//동호회 수정(2)
+	@RequestMapping(value="/clubUpdate.amg",method=RequestMethod.POST)
+	public String clubUpdate(ClubVO club,
+							 MultipartHttpServletRequest request,
+							 @RequestParam(value="prev_cPic") String prevFileName,
+							 @RequestParam(value="cpic",defaultValue="") MultipartFile file,
+							 @RequestParam(value="isChange") String isChange) {
+
+		String updatePicName = null;
+		
+		//동호회 사진을 변경했다면 기존사진 삭제하고 새로운 사진등록
+		if(isChange.equals("change")) {
+			fileUpload.deleteFile(request,CLUB_IMAGES_FOLER, prevFileName);
+			updatePicName=fileUpload.fileForm(file, request, CLUB_IMAGES_FOLER);
+		}else {
+			updatePicName=prevFileName;
+		}//삭제하지 않았다면, 기존사진 그대로 사용
+		
+		club.setcPic(updatePicName);
+		
+		service.updateClub(club);
+		
+
+		return "redirect:/club/club.amg?cNum="+club.getcNum();
 	}
 }

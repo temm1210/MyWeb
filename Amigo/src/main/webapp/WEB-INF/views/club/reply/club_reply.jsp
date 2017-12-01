@@ -28,13 +28,16 @@
 		
  		var replyCount = parseInt( $(".replyCount").text() ) +1;
  		var curPage = Math.ceil( replyCount/3.0 );
-		var data={
+ 		var data;
+ 		
+
+		data={
 				cNum:$("#cNum").val(),
 				bNum:$("#bNum").val(),
 				rWriter:$("#rWriter").val(),
 				rContent:$("#rContent").val()
 		}
-		
+ 		
  		$.ajax({
 			type:"POST",
 			url:url,

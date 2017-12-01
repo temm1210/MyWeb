@@ -35,15 +35,21 @@ public class ClubMemberServicImpl implements ClubMemberService {
 	}
 
 	@Override
-	public int deleteClub(Map<String, Object> map) {
+	public int leaveClub(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		return clubMemberDao.deleteClub(map);
+		return clubMemberDao.leaveClub(map);
 	}
 
 	@Override
 	public List<ClubMemberVO> selectClubmembers(int cNum) {
 		// TODO Auto-generated method stub
 		return clubMemberDao.selectClubmembers(cNum);
+	}
+
+	@Override
+	public String updateGrade(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return clubMemberDao.updateGrade(map);
 	}
 
 }

@@ -23,6 +23,9 @@ $(document).ready(function(){
 			$("#addrSearch").val('')
 			
 			getClubsAjax(1,null);
+			
+			//동호회 주소불러와서 map에 뿌려주는 AJAX
+			getAddressAjax();
 	})
 	
 	//검색버튼 클릭시

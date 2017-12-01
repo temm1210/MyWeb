@@ -78,7 +78,7 @@
   		<choose>
   			<when test="category == 0 and start == 1">
   					)A
-  				)WHERE rnum BETWEEN ${start} AND (#{end}+( SELECT COUNT(*) FROM amigo_board WHERE bcategory = 5))
+  				)WHERE rnum BETWEEN ${start} AND (#{end}+( SELECT COUNT(*) FROM amigo_board WHERE cnum=#{cNum} and bcategory = 5))
   			</when>
   			
   			<otherwise>
@@ -107,12 +107,13 @@
   	
   	<!-- 특정 게시글 가져오기 -->
   	<select id="selectBoard" resultType="BoardVO">
-  		SELECT
-  			bnum,cnum,btitle,bcontent,breadcnt,bregdate,bupdate,blike,bwriter,bcategory
-  		FROM
-  			amigo_board
-  		WHERE
-  			bnum=#{bNum} AND cNum=${cNum}
+		SELECT
+		  b.bnum,b.cnum,b.btitle,b.bcontent,b.breadcnt,b.bregdate,b.bupdate,b.blike,b.bwriter,b.bcategory,
+		  (SELECT grade FROM amigo_grade WHERE gnum = (SELECT cgrade FROM amigo_club_members cm WHERE cm.cnickname = b.bwriter)) as grade
+		FROM
+		  amigo_board b
+		WHERE
+		  b.bnum=#{bNum} AND b.cNum=${cNum}
   	</select>
   	
   	<!-- 게시글 수정시 -->

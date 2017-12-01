@@ -28,8 +28,7 @@ public class FileUpLoad {
 			if(!fileDir.exists())
 				fileDir.mkdirs();
 			
-			if(fileDir .exists()) 
-				saveFileName =System.currentTimeMillis() +"_"+saveFileName;
+			saveFileName =System.currentTimeMillis() +"_"+saveFileName;
 			
 			try {
 				BufferedImage image = ImageIO.read(file.getInputStream());

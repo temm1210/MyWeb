@@ -11,12 +11,21 @@ public class BoardVO {
 	private int bCategory;
 	private int replyCount;
 	
+	private String grade;
 	private String bTitle;
 	private String bContent;
 	private Date bRegdate;
 	private Date bUpdate;
 	private String bWriter;
 	
+	
+	
+	public String getGrade() {
+		return grade;
+	}
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
 	public int getReplyCount() {
 		return replyCount;
 	}
@@ -86,7 +95,9 @@ public class BoardVO {
 	@Override
 	public String toString() {
 		return "BoardVO [bNum=" + bNum + ", bReadcnt=" + bReadcnt + ", bLike=" + bLike + ", cNum=" + cNum
-				+ ", bCategory=" + bCategory + ", replyCount=" + replyCount + ", bTitle=" + bTitle + ", bContent="
-				+ bContent + ", bRegdate=" + bRegdate + ", bUpdate=" + bUpdate + ", bWriter=" + bWriter + "]";
+				+ ", bCategory=" + bCategory + ", replyCount=" + replyCount + ", grade=" + grade + ", bTitle=" + bTitle
+				+ ", bContent=" + bContent + ", bRegdate=" + bRegdate + ", bUpdate=" + bUpdate + ", bWriter=" + bWriter
+				+ "]";
 	}
+	
 }

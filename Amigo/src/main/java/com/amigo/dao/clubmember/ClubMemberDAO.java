@@ -10,6 +10,7 @@ public interface ClubMemberDAO {
 	public ClubMemberVO selectClubMember(String username,int cNum);
 	public boolean selectNickname(Map<String,Object> map);
 	public int joinClub(ClubMemberVO clubMember);
-	public int deleteClub(Map<String,Object> map);
+	public int leaveClub(Map<String,Object> map);
 	public List<ClubMemberVO> selectClubmembers(int cNum);
+	public String updateGrade(Map<String,Object> map);
 }

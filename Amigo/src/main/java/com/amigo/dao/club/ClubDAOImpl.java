@@ -115,4 +115,16 @@ public class ClubDAOImpl implements ClubDAO {
 		map.put("criteria", criteria);
 		return session.selectList("selectAddress", map);
 	}
+
+	@Override
+	public int deleteClub(int cNum) {
+		// TODO Auto-generated method stub
+		return session.delete("deleteClub", cNum);
+	}
+
+	@Override
+	public int updateClub(ClubVO club) {
+		// TODO Auto-generated method stub
+		return session.update("updateClub", club);
+	}
 }

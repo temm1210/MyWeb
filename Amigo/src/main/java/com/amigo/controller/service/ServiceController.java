@@ -1,8 +1,15 @@
 package com.amigo.controller.service;
 
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.amigo.vo.member.MemberVO;
 
 
 @Controller
@@ -47,5 +54,16 @@ public class ServiceController {
 	@RequestMapping("/footerLegal.amg")
 	public String footerLegal() {
 		return "footer/footer_legal";
+	}
+	
+	@RequestMapping(value = "/chat.amg", method = RequestMethod.GET)
+	public ModelAndView home(ModelAndView mav) {
+		
+		MemberVO user = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		mav.setViewName("chat");
+		mav.addObject("userid", user.getUsername());
+		
+		
+		return mav;
 	}
 }

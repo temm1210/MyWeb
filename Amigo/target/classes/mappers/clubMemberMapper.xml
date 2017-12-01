@@ -38,11 +38,12 @@
   	</insert>
   	
   	<!-- 동호회 탈퇴 -->
-  	<delete id="deleteClub">
+  	<delete id="leaveClub">
   		DELETE FROM amigo_club_members
   		WHERE cnum =#{cNum} AND cnickname=#{cNickname}
   	</delete>
   	
+  	<!-- 동호회 멤버가져오기 -->
   	<select id="selectClubmembers" resultType="ClubMemberVO">
   		SELECT 
   			cm.cnum,cm.cnickname,cm.mid,(SELECT grade FROM amigo_grade WHERE gnum = cm.cgrade) as cgrade,cm.cmregdate, (SELECT mpic FROM amigo_member am WHERE am.mid=cm.mid) as mpic
@@ -53,4 +54,30 @@
   		ORDER BY
   			cm.cgrade asc,cm.cmregdate desc
   	</select>
+  	
+  	<!-- 동호회멤버 등급업 -->
+  	<update id="updateGrade" >
+	  	<selectKey keyProperty="cGrade" resultType="String" order="AFTER"> 
+	  		SELECT 
+	  			grade 
+	  		FROM 
+	  			amigo_grade g
+	  		WHERE
+		  		g.gnum =(SELECT cgrade FROM amigo_club_members cm
+		  		 	     WHERE cm.cnum=#{cNum} AND cm.cnickname=#{cNickname} )
+	  	</selectKey>
+  		UPDATE amigo_club_members cm
+  		<trim prefix="SET">
+	  		<if test="typeLevel == '등급업' ">
+	  			cm.cgrade=cm.cgrade-1
+	  		</if>
+	  		
+	  		<if test="typeLevel == '등급다운' ">
+	  			cm.cgrade=cm.cgrade+1
+	  		</if>
+  		</trim>
+  		
+  		WHERE
+  			cm.cnum=#{cNum} AND cm.cnickname=#{cNickname}
+  	</update>
   </mapper>

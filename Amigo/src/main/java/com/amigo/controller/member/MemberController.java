@@ -116,8 +116,6 @@ public class MemberController {
 		
 		/*프로필사진이 변경되었으면*/
 		if(isChange.equals("change")) {
-			System.out.println("삭제");
-			System.out.println("삭제파일이름:"+prevFileName);
 			/*기존프로필 사진 삭제*/
 			fileUpload.deleteFile(request, PROFILE_IMAGES_FOLDER, prevFileName);
 			/*등록한 프로필사진 불러오기*/

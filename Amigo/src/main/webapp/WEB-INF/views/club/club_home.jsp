@@ -7,6 +7,8 @@
 <script>
 	$(document).ready(function(){
 		$(window).scrollTop(0);
+		$("#boardList .title").append($("#clubTitle").val())
+		$("#boardList .content").append($("#clubContent").val())
 	})
 	
 	
@@ -47,9 +49,19 @@
 	#boardList table tr:nth-child(2n+1) td{
 		padding:10px 0;
 	}
+	.content{
+		color: rgba(0,0,0,.5);
+    	font-size: 19px;
+	}
 	.board_row{
 		display: flex;
-		margin-bottom: 80px;
+	    flex-flow: row wrap;
+	    justify-content: end;
+	    margin-bottom: 80px;
+	}
+	.boardWrap{
+	    width: 400px;
+    	margin-right: 40px;
 	}
 	a.title_link:hover{
 		color:rgba(0,0,0,.6);
@@ -71,8 +83,19 @@
 		border:1px solid #dad8d7;
 		padding:0;
 	}
+	.clubInfo{
+		margin-bottom: 80px;
+		text-align: center;
+	}
+	.title{
+		font-size: 40px;
+	}
 </style>
 <div id="boardList">
+	<div class="clubInfo">
+		<span class="title"></span><br/>
+		<span class="content"></span>
+	</div>
 	<c:forEach var="category" begin="1" end="${size}" step="1" >
 		<c:if test="${category%2 != 0 }">
 			<div class="board_row board_${category}">

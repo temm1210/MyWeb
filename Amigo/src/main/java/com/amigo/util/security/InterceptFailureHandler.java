@@ -36,7 +36,6 @@ public class InterceptFailureHandler implements AuthenticationEntryPoint {
 		output+="}";
 		
 		output+="</script>";
-		/*out.println("<script> if(confirm('로그인후 이용가능한 서비스입니다.로그인 하시겠습니까?')){ location.href='/Amigo/member/login.amg';}</script>");*/
 		out.println(output);
 
 		out.flush();

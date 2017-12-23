@@ -14,7 +14,7 @@
 			var objJSON = JSON.parse(sessionStorage.getItem('isMember'))
 			$("#rWriter").val(objJSON.cNickname)
 	
-			/* 현재유저 프로필사진 등록 */
+			// 현재유저 프로필사진 등록 
 			if(objJSON.mPic == null){
 				$("#picLabel").html('<i class="fa fa-user-circle nopic" aria-hidden="true"></i>')
 			}else{
@@ -23,7 +23,7 @@
 		}
 	})
 	
-	/* 댓글입력 */
+	// 댓글입력 
 	function writeReplyAjax(url){
 		
  		var replyCount = parseInt( $(".replyCount").text() ) +1;
@@ -56,7 +56,7 @@
 		});
 	}
 	
-	/* 댓글 리스트 불러오기 */
+	// 댓글 리스트 불러오기 
 	function getListReplyAjax(curPage){
 		
 		var cNum = $("#cNum").val()
@@ -69,7 +69,7 @@
 			type:"GET",
 			url:url,
 			success:function(replyList){
-				/* 불러온 댓글리스트,해당 div영역에 붙여줌 */
+				// 불러온 댓글리스트,해당 div영역에 붙여줌 
 				$("#replyList").html(replyList);
 				
 				//처음으로, 해당화면으로 진입시 

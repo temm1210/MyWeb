@@ -21,7 +21,6 @@
 		<div id="content">
 			<div id="main-img"></div>
 			<div class="welcome">
-				<h2>${id}님환영합니다</h2>
 				<h2><span class="important">회원가입</span>을 축하드립니다.</h2>
 				<span class="sub">고객님의 사이트 이용에 불편하지 않도록 노력하겠습니다.
 				로그인 후 바로 서비스 이용이 가능합니다. 아래 버튼을 클릭해주세요</span>

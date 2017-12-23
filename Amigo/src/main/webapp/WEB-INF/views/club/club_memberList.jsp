@@ -57,12 +57,17 @@
 		//처음에 등업시켜주는 버튼들 전부감춤
 		$(".contentLevel").css("display","none")
 		var master = $("#clubMaster").text();
-
-		var obj = JSON.parse(sessionStorage.getItem('isMember'))
 		
-		//로그인한 유저가 동호회 회장이거나, 관리자일시 등업버튼 보여줌
-		if(obj.cNickname == master || userName == "STW")
+		if(sessionStorage.getItem('isMember') != 'none'){
+			var obj = JSON.parse(sessionStorage.getItem('isMember'))
+		
+			//로그인한 유저가 동호회 회장이거나, 관리자일시 등업버튼 보여줌
+			if(obj.cNickname == master)
+				$(".contentLevel").css("display","inline-block");
+			
+		}else if(userName == "STW"){
 			$(".contentLevel").css("display","inline-block");
+		}
 	})
 </script>
 <div id="clubMemberContainer">

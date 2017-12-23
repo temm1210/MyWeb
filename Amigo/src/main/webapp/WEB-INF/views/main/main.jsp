@@ -22,24 +22,23 @@
 	<div class="wrapper">
 		<div id="visualMain">
 			<video muted=" muted" autoplay loop id="vid"> 
-				<source src="<c:url value="/resources/video/timesquare5.mp4"/>" type="video/mp4">
+				<source src="<c:url value="/resources/video/freevideo.mp4"/>" type="video/mp4">
 			</video>
 		</div>
 		
 		<!-- 첫번째 본문(시작을알림) -->
 		<div class="section">
-			<div id="article_1">
+			<div id="videoArticle">
 				<div class="caption">
-					<h1>Welcome amiGo</h1>
+					<h1>Welcome to AmiGo</h1>
 					<p>
-						amiGo 홈페이지에 오신걸 환영합니다.
+						AmiGo 홈페이지에 오신걸 환영합니다.
 						<br>
-						amiGo에서 소중한 사람들과  소중한 취미를 공유하세요.
-						<br>
-		          				여러분의 시간이 늘 행복하고 소중한 기억들로 가득하기를 바랍니다. 
+						AmiGo에서 취미가 비슷한 사람들을 찾아 같이 즐겨보세요
+						<br> 
 					</p>
 				</div>
-			</div>	
+			</div>
 			
 			<!-- 2번째 본문 (서비스및,소개)-->
 			<div id="article_2" class="article-parallax">
@@ -49,7 +48,6 @@
 							<img id="first-sub" src="<c:url value="/resources/images/camp.jpg"/>" width="100%" height="700px">
 							<div class="border-line"></div>
 							<div class="img_caption ">
-								<h1 class="main-comment">Amigo Introduce</h1>
 								<span class="sub-comment">소개보기</span>
 							</div>
 						</a>
@@ -59,7 +57,6 @@
 							<img id="second-sub" src="<c:url value="/resources/images/society.jpg"/>" width="100%" height="700px">
 							<div class="border-line"></div>
 							<div class="img_caption ">
-								<h1 class="main-comment">Amigo Service</h1>
 								<span class="sub-comment">서비스보기</span>
 							</div>
 						</a>
@@ -89,31 +86,25 @@
 				<div class="first-article">
 					<div class="img_box item-box">
 						<a href="${location}/club/clubSearch.amg?keyword=자연">
-							<!-- <div class="item-box"> -->
-								<img src="<c:url value="/resources/images/nature.jpg"/>">
-								<div class="border-line"></div>
-								<span class="supply-comment">#자연</span>
-							<!-- </div> -->
+							<img src="<c:url value="/resources/images/nature.jpg"/>">
+							<div class="border-line"></div>
+							<span class="supply-comment">#자연</span>
 						</a>
 					</div>
 							
 					<div class="img_box item-box">
 						<a href="${location}/club/clubSearch.amg?keyword=여행캠핑">
-							<!-- <div class="item-box"> -->
-								<img src="<c:url value="/resources/images/tour.jpg"/>">
-								<div class="border-line"></div>
-								<span class="supply-comment">#여행/캠핑</span>
-							<!-- </div> -->
+							<img src="<c:url value="/resources/images/tour.jpg"/>">
+							<div class="border-line"></div>
+							<span class="supply-comment">#여행/캠핑</span>
 						</a>
 					</div>
 						
 					<div class="img_box item-box">
 						<a href="${location}/club/clubSearch.amg?keyword=자동차">
-							<!-- <div class="item-box"> -->
-								<img src="<c:url value="/resources/images/supercar.jpg"/>">
-								<div class="border-line"></div>
-								<span class="supply-comment">#자동차</span>
-							<!-- </div> -->
+							<img src="<c:url value="/resources/images/supercar.jpg"/>">
+							<div class="border-line"></div>
+							<span class="supply-comment">#자동차</span>
 						</a>
 					</div>
 						

@@ -3,23 +3,31 @@ $(document).ready(function(){
 
 	/*닉네임 입력후 포커스 해제되었을때 작동*/
 	$("#cNickname").stop().blur(function(){
+		var cNickname = $("#cNickname").val();
+		var cNum = $("#cNum").val();
+		
 		/*데이터 저장(JSON)*/
 		var data={
-				cNickname:$("#cNickname").val(),
-				cNum:$("#cNum").val()
+				cNickname:cNickname,
+				cNum:cNum 
 		};
 		
-		if(data.cNickname.length < 2 || data.cNickname.length > 8){
+		if(cNickname.indexOf('관리자') != -1 || cNickname.indexOf('매니저') != -1 || cNickname.indexOf('회장') != -1){
+			alert("사용할 수 없는 닉네임입니다");
+		}else if(data.cNickname.length < 2 || data.cNickname.length > 8){
 			alert("닉네임은 최소2자, 최대7자까지 입력가능합니다")
 			return false;
 		}else{
 			/*닉네임 입력시 가입하기전에 중복체크*/
 			clubJoinAjax(path+"/clubMember/checkNickname.amg",data)
 		}
+	
 	})
 	
 	/*동호회 가입하기 눌렀을때 작동*/
 	$("#joinClubBtn").on('click',function(){
+		var cNickname = $("#cNickname").val();
+	
 		
 		/*가입정보 저장(JSON)*/
 		var data={
@@ -28,8 +36,9 @@ $(document).ready(function(){
 				cNum:$("#cNum").val(), /*현재동호회 고유번호*/
 				cGrade:"신입회원" /*등급은  처음에 최하등급 부여*/
 		};
-		
-		if($("#resultCheck").hasClass("red"))
+		if(cNickname.indexOf('관리자') != -1 || cNickname.indexOf('매니저') != -1 || cNickname.indexOf('회장') != -1){
+			alert("사용할 수 없는 닉네임입니다");
+		}else if($("#resultCheck").hasClass("red"))
 			alert("이미 존재하는 닉네임입니다. 다른 닉네임을 사용하세요")
 		else{
 			clubJoinAjax(path+"/clubMember/joinClub.amg",data)

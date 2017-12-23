@@ -16,66 +16,67 @@
 
 /* 동영상  */
 #visualMain{
-	width:100%;
-	z-index:-10;
- 	position:absolute;
-	left:0; bottom:0;  
-	overflow:hidden;
+	width: 100%;
+    z-index: -10;
+    position: fixed;
+    overflow: hidden;
+    background: black;
+    height: 100%;
 }
 
 video#vid {
-	position:fixed; 
-	top:0; 
-	left:0;
-	max-width:100%; 
-	min-height:20%;
-	z-index:-10;
-	background-size: cover;
-	margin: 0 auto;
+    position: relative;
+    top: 80px;
+    width: 100%;
+    max-width: 100%;
+    min-width: 20%;
+    min-height: 20%;
+    z-index: -10;
+    background-size: cover;
+    margin: 0 auto;
 }
-/* 동영상  */
-
-/* 몸체  */
-.section{
-	position:relative;
-	padding-top: 56%;
+#videoArticle{
+    position: relative;
+    top: -100px;
 }
-
-/* 첫번째 본문 스타일리스트 */
-#article_1 > .caption{
-	background: rgba(0,0,0,.95);
+#videoArticle > .caption{
 	width:100%;
 	text-align:center;
 	padding-top:55px;
 	padding-bottom:55px;
-	border: 1px solid #b49759;
 }
 
-#article_1 > .caption > h1{
+#videoArticle > .caption > h1{
 	letter-spacing:4px;
-	font-size:70px;
+	font-size:80px;
 	font-weight:400;
 	color:white;
 	font-family: 'Tangerine', serif;
 } 
 
-#article_1 > .caption >p{
+#videoArticle > .caption >p{
 	margin:10px auto 0px auto;
 	letter-spacing:1px;
 	font-size:16px;
 	line-height:27px;
-	color:#b49759;
+	color: rgba(152,204,201,1);
 	max-width:860px;
 	padding:0 15px;
 }
-/* 첫번째 본문 스타일리스트  끝*/
+
+/* 몸체  */
+.section{
+	position:relative;
+	padding-top: 32%;
+}
+/* 동영상  */
 .img_caption{
 	opacity:1;
 	-webkit-transition: transform 0.2s ease-out; 
    	transition: transform 0.2s ease-out; 
 	width:100%;
 	position:absolute;
-	top:35%;
+	top:45%;
 	z-index:150;
 }
 .main-comment{
@@ -103,11 +104,6 @@ video#vid {
 	flex-flow: row wrap;
 }
 
-#parallax-image > .img-text > a{
-	width:100%;
-	display:block;
-}
-
 #article_2 > .parallax-window > .img-text{
 	flex:4 4 600px;
 	position:relative;
@@ -116,6 +112,11 @@ video#vid {
 	height:700px;
 	overflow: hidden;
 	background:black;
+}
+
+#parallax-image > .img-text > a{
+	width:100%;
+	display:block;
 }
 
 #first-sub,

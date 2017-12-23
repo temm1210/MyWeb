@@ -13,5 +13,5 @@
 		<websocket:sockjs/>
 	</websocket:handlers>
 	
-	<bean id="echoHandler" class="com.test.util.EchoHandler"/>
+	<bean id="echoHandler" class="com.amigo.util.EchoHandler"/>
 </beans>

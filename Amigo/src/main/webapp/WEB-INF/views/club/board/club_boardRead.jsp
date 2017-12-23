@@ -25,13 +25,13 @@
 </style>
 <script>
 	$(document).ready(function(){
-		/* 댓글가져오기 */
+		// 댓글가져오기 
 		getReplyAjax()
 		var master = $("#clubMaster").text();
 		
 		$(".boardHeader").css("display","none")
 
-		/* 동호회회원이 자기글 아닌글을 클릭시에는 수정삭제버튼 안보이게함 */
+		// 동호회회원이 자기글 아닌글을 클릭시에는 수정삭제버튼 안보이게함 
 		if(sessionStorage.getItem('isMember')!= "none"){
 			var obj = JSON.parse(sessionStorage.getItem('isMember'))
 		
@@ -73,11 +73,11 @@
 			data:JSON.stringify(data),
 			success:function(msg){
 				
-				/* 홈이아닌 게시판컨텐츠에서 게시판서비스 사용할때 이전페이지로 가기 */
+				// 홈이아닌 게시판컨텐츠에서 게시판서비스 사용할때 이전페이지로 가기 
 				if(${criteria.curPage != 0})
 					getBoardAjax(path+'/club/board/boardListAll.amg?cNum=${board.cNum}&curPage=${criteria.curPage}&category=${criteria.category}&searchOption=${criteria.searchOption}&searchWord=${criteria.searchWord}&orderByWord=${criteria.orderByWord}')
 				else{
-				/* 홈버튼 클릭시켜서, 홈버튼에서 바로 넘어온경우는 서비스후 바로 홈으로이동  */
+				// 홈버튼 클릭시켜서, 홈버튼에서 바로 넘어온경우는 서비스후 바로 홈으로이동  
 					$("#first_link").click();
 				}
 				

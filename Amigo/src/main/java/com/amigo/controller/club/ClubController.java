@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ import com.amigo.service.file.FileUpLoad;
 import com.amigo.util.ClubSearchCriteria;
 import com.amigo.util.PagingHandler;
 import com.amigo.vo.club.ClubVO;
+import com.amigo.vo.member.MemberVO;
 
 @Controller
 @RequestMapping("/club")
@@ -80,12 +82,16 @@ public class ClubController {
 		ModelAndView mav = new ModelAndView();
 		ClubVO club = service.selectClub(cNum);
 		
+		MemberVO user = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		mav.addObject("userid", user.getUsername());
 		mav.addObject("club",club);
 		mav.addObject("cNum",cNum);
+		
 		/*mav.addObject("criteria",criteria);*/
 		mav.setViewName("club/club");
 		
-		return mav;
+		return mav;	
 	}
 	
 	/*history.pushState에서 새로운 url값을 만들어내는데, 이때 새로고침하면 404페이지가 뜬다.

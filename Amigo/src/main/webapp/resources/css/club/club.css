@@ -102,7 +102,7 @@ ul.sub_ul .fa{
 }
 .click{
 	color: black !important;
-	font-size: 18px !important;
+	font-size: 16px !important;
 }
 
 #clubArea{
@@ -114,6 +114,60 @@ ul.sub_ul .fa{
     font-weight: bold;
     font-size: 15px;
 }
+.masterOnly{
+	display: none;
+}
+.none{
+	display: none;
+}
+/* 채팅관련 */
+#clubChat{
+    margin-top: 176px;
+    margin-left: 20px;
+    border: 1px solid rgba(0,0,0,.2);
+    border-bottom: none;
+    padding: 5px 50px;
+}
+#clubChat > h2{
+	font-family: 'Jeju Gothic', serif;
+}
+#chatMessage{
+	background: rgba(200,200,200,.1);
+}
+#sendBtn{
+	float:right;
+	background: none;
+ 		border: 1px solid rgba(81,29,59,.3);
+ 		cursor: pointer;
+}
+.messageWrap{
+	padding: 15px;
+	border-bottom: 1px solid rgba(0,0,0,.2);
+    -webkit-transition: all 1s; /* Safari 3.1 to 6.0 */
+   	transition: all 1s;
+}
+.userNickname{
+	display: block;
+	color: rgba(0,0,0,.5);
+	font-size: 14px;
+}
+.regdate{
+	font-size:12px;
+	font-size: 11px;
+   	color: rgba(0,0,0,.7);
+   	float: right;
+}
+
+#chatData{
+	clear: both;
+	height: 1460px;
+    overflow: hidden;
+}
+.writeMessage{
+	border-bottom: 1px solid rgba(0,0,0,.2);
+    padding-bottom: 30px;
+   }
+/* 채팅끝 */
 @media all and (max-width: 787px) {
 	#img_wrap > h2{
 		font-size: 20px;

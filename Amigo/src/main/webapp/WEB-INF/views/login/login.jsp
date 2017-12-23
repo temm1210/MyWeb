@@ -10,10 +10,21 @@
 	$(document).ready(function(){
 		var state = "${state}";
 		
-		$("#loginBtn").click(function(){
-			/* c:url value 현재 url값(controller/member)뒤에 login_process.amg를붙인다. */
-			$("#login_form").attr("method","post").attr('action','<c:url value="login_proccess.amg"/>');
-		})
+		
+		//로그인 버튼클릭시
+
+		$("#loginBtn").on({
+			click:function(){ 
+				$("#login_form").attr("method","post").attr('action','<c:url value="login_proccess.amg"/>');
+			},
+			keydown:function(key){
+				if(key.keyCode == 13){
+					$("#login_form").attr("method","post").attr('action','<c:url value="login_proccess.amg"/>');
+				}
+			}
+		});
+		
+		//회원가입 버튼클릭시
 		$("#joinBtn").click(function(){
 			$("#login_form").attr("method","get").attr("action","${location}/member/joinFirst.amg");
 		})

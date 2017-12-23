@@ -76,10 +76,7 @@
 					<c:if test="${board.bCategory == 5}">
 						<td class="notice">공지</td>
 						<c:choose>
-							<c:when test="${board.bCategory == 6}">
-								<!-- "삭제된 게시물입니다" 를 보여주고싶을때 여기서 처리 -->
-							</c:when>
-							
+							<c:when test="${board.bCategory == 6}"><!-- "삭제된 게시물입니다" 를 보여주고싶을때 여기서 처리 --></c:when>							
 							<c:otherwise>
 								<td class="td_title notice">
 									<a id="isMemberCheck" href="javascript:void(0)" onclick="checkIsMember(${board.bNum})" class="title_link">
@@ -90,8 +87,7 @@
 									</a>
 								</td>
 							</c:otherwise>
-						</c:choose>
-						
+						</c:choose>				
 						<td class="notice">${board.bWriter}</td>
 						<td class="notice"><fmt:formatDate value="${board.bRegdate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 						<td class="notice">${board.bReadcnt}</td>
@@ -102,10 +98,7 @@
 					<c:if test="${board.bCategory < 5}">	
 						<td>${board.bNum}</td>
 						<c:choose>
-							
-							<c:when test="${board.bCategory == 6}">
-							</c:when>
-							
+							<c:when test="${board.bCategory == 6}"></c:when>	
 							<c:otherwise>
 								<td class="td_title">
 									<a id="isMemberCheck" href="javascript:void(0)" onclick="checkIsMember(${board.bNum})" class="title_link">${board.bTitle}

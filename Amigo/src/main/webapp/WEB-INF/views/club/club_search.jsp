@@ -10,9 +10,10 @@
 <title>Insert title here</title>
 </head>
 <script>
-	$(document).ready(function(){				
+	$(document).ready(function(){	
 		//맵에 클러스트 표시를 해주기위해 처음에 주소를 가져와서 맵에뿌려주는 AJAX시행 
 		getAddressAjax()
+
 	});
 	
 	/* 제목검색,취미검색,주소검색,페이지를 넘겨서 아작스방식으로 동호회리스트를 가져옴 */
@@ -158,7 +159,7 @@
 		</div>	<!-- content -->
 		
 		<div id="mpaContainer">
-			<div id="map" style="width:100%;height:800px;position: fixed;"></div>
+			<div id="map" style="width:100%;height:950px;position: fixed;"></div>
 			
 			<p id="mapTransInfo">
 				<input type="checkbox" id="chkTraffic" onclick="setOverlayMapTypeId()" /> 교통정보 보기
@@ -172,9 +173,12 @@
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0566b98b4e17dad7a8f0f0aff91a2908&libraries=services,clusterer"></script>
 <script>
+
+	/*요청페이지를 가져옴*/
+	var curPage = $("#page").val();
 	//다음맵 생성
 	var map = new daum.maps.Map(document.getElementById('map'), { // 지도를 표시할 div
-	    center : new daum.maps.LatLng(37.20446357557853,137.13464871597167), // 지도의 중심좌표
+	    center : new daum.maps.LatLng(37.20446357557853,141.83464871597167), // 지도의 중심좌표
 	    level : 14 // 지도의 확대 레벨
 	});
 	var mapTypeControl = new daum.maps.MapTypeControl();
@@ -385,7 +389,7 @@
 			//JSON을 서로비교해서 이전데이터랑 같으면 동호회 리스트 가져오는 아작스 실행안함
 			if(JSON.stringify(newcNumJSON) != JSON.stringify(cNumJSON) ){	
 				cNumJSON = newcNumJSON;	 
-				getClubsAjax(1,cNumJSON)
+				getClubsAjax(curPage,cNumJSON)
 		
 			}
 		}//if(markers != null)
@@ -457,9 +461,8 @@
 	            // 마커 위에 인포윈도우를 표시합니다
 	            viewInfowindow=true;
 	            infowindow.open(map, marker);
-	           
 	      	});
-	        
+	 
 	        //각마커에 마우스오버 이벤트를 등록합니다
 	        daum.maps.event.addListener(marker, 'mouseover', function() {    		
         	    marker.setImage(overMarkerImage);
@@ -470,26 +473,24 @@
 	            // 마커에 마우스아웃 이벤트가 발생하면 기본마커이미지 가져옴
 	        	marker.setImage(markerImage);
 	        });
-        
         })
-        
 	    // 클러스터러에 마커들을 추가합니다
         clusterer.addMarkers(markers);
 	    
 	    //맵에 마커를 새로그림
 		clusterer.redraw();
-		
+	    
+		getClubsAjax(curPage,null);
 	    // 마커 클러스터러에 클릭이벤트를 등록합니다
 	    // 마커 클러스터러를 생성할 때 disableClickZoom을 true로 설정하지 않은 경우
 	    // 이벤트 헨들러로 cluster 객체가 넘어오지 않을 수도 있습니다
 	    daum.maps.event.addListener(clusterer, 'clusterclick', function(cluster) {
-
 	        // 현재 지도 레벨에서 1레벨 확대한 레벨
 	        var level = map.getLevel()-1;
-
 	        // 지도를 클릭된 클러스터의 마커의 위치를 기준으로 확대합니다
 	        map.setLevel(level, {anchor: cluster.getCenter()});
 		});
+	    
 	}
 </script>
 </html>

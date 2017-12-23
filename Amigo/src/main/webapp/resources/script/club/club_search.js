@@ -1,15 +1,9 @@
 $(document).ready(function(){
-	/*요청페이지를 가져옴*/
-	var curPage = $("#page").val();
-	
-	/*새로고침 유무를 세션스토리지에 저장해서, 새로고침 클릭시 현재페이지는 history에 저장안함*/
+	//새로고침 유무를 세션스토리지에 저장해서, 새로고침 클릭시 현재페이지는 history에 저장안함
 	if(sessionStorage.getItem('isRefresh') == null)
 		sessionStorage.setItem('isRefresh',false);
 	
-	/* 페이지 로드시 동호회 리스트를 불러옴  */
-	getClubsAjax(curPage,null);
-	
-	/* 새로고침 눌렀을시 isRefresh세션스토리지 true로 설정 */
+	// 새로고침 눌렀을시 isRefresh세션스토리지 true로 설정 
 	$(document).keydown(function(e){
 		if(e.which == 116)
 			sessionStorage.setItem('isRefresh',true);	

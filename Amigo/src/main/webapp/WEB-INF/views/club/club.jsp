@@ -7,18 +7,35 @@
 <%@ include file="../header/topMenu.jsp" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" href="<c:url value="/resources/css/club/club.css"/>">
+<script src="https://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
 <script src="<c:url value="/resources/script/club/club.js"/>"></script>
 <title>Insert title here</title>
 <script>
+
+	//현재유저 닉네임
+	var nickname;
 	
 	$(document).ready(function(){	
 		// 처음 동호회들오면 로그인한 유저의 정보를 가져와서 동호회 회원인지 판별 
 		getUserInfo();
-		
-		/* 동호회 만들고 바로들어올경우 메세지를 띄워줌 */
+
+		// 동호회 만들고 바로들어올경우 메세지를 띄워줌 
 	 	if( ${msg == "success" } )
 			alert("축하합니다! 동호회가 개설되었습니다.");
-	
+		
+		//채팅메세지를 입력후 전송버튼을 눌렀을때
+		$("#sendBtn").on({
+			click:function(){
+				sendMessage();
+				$("#chatMessage").val("");
+			},
+			keydown:function(key){
+				if(key.keyCode == 13){
+					sendMessage();
+					$("#chatMessage").val("");
+				}
+			}
+		});
 	});
 	
 	function clubDeleteAjax(path){
@@ -31,7 +48,7 @@
 					location.href="${location}/club/clubSearch.amg";
 				}
 				
-			});
+			});//ajax
 		}//if
 	}
 	
@@ -61,12 +78,22 @@
 					
 					$(".leaveClub").addClass("none");
 					$(".joinClub").removeClass("none");
+					
+					//채팅창 숨김(관리자제외)
+					if(userName != "STW"){
+						$("#chatMessage").attr("disabled","disabled");
+						$("#sendBtn").attr("disabled","disabled")
+						$("#chatData").css("display","none");
+						$("#clubChat").append("<div style='padding-top:10px;'>해당 동호회 유저만 채팅서비스를 이용하실 수 있습니다.</div>")
+					}
 				}
 				
 				/* 동호회 유저라면  isMemeber라는 이름으로 유저정보를 저장(clubMemberVO)*/
 				else{
 					sessionStorage.setItem('isMember',JSON.stringify(clubMember));
-					
+					nickname = JSON.parse(sessionStorage.getItem("isMember")).cNickname;
+
+
 					/* 동호회가입 없애고, 탈퇴를 보여줌 */
 					$(".leaveClub").removeClass("none");
 					$(".joinClub").addClass("none");
@@ -82,11 +109,100 @@
 				if(userName=="STW"){
 					$(".deleteClub").removeClass("none");
 				}
-			},
-			error:function(request,status,error){
-				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
-		});
+		});//ajax
+	}
+
+	//채팅
+	var sock= new SockJS("<c:url value="/echo"/>");
+	//websocket 서버에서 메시지를 보내면 자동으로 실행된다.
+	sock.onmessage = onMessage;
+	//websocket 과 연결을 끊고 싶을때 실행하는 메소드
+	sock.onclose = onClose;
+	
+	function sendMessage(){
+		if(userName != "STW")
+	    	sock.send(nickname+":"+$("#chatMessage").val());
+		else{
+			nickname="관리자";
+			sock.send(nickname+":"+$("#chatMessage").val());
+		}
+	}
+	
+	//evt 파라미터는 websocket이 보내준 데이터다.
+	function onMessage(evt){  //변수 안에 function자체를 넣음.
+	    var data = evt.data; 
+		var message = null;
+		
+		var strArray = data.split(":")
+		
+		//메세지보낸 유저이름가져오기
+		sessionid = strArray[0];
+		
+		//메세지 내용가져오기
+		message = strArray[1];
+		
+		var contentHTML;
+		
+		if(sessionid == nickname){
+			contentHTML = "<div class='messageWrap' style='background:rgba(22,61,92,.2);'>";
+		}else{
+			contentHTML = "<div class='messageWrap'>";
+		}
+		
+		if(sessionid == "관리자"){
+			contentHTML+= "<span class='userNickname' style='color:green'>Admin "+sessionid+"</span>"
+			contentHTML+= "<span style='color:rgba(150,2,6,.7)'>"+message+"</span>"
+		}else if(sessionid == "${club.cMaster}"){
+			contentHTML+= "<span style='color:green; float:left; font-size:14px; margin-top: -2px;'>M</span><span  class='userNickname'>"+sessionid+"</span>"
+			contentHTML+= "<span>"+message+"</span>"
+		}
+		else{
+			contentHTML+= "<span class='userNickname'>"+sessionid+"</span>"
+			contentHTML+= "<span>"+message+"</span>"
+		}
+		
+		contentHTML+= "<span class='regdate'>"+getTimeStamp()+"</span>"
+		contentHTML+="</div><br/>"
+		
+		var dataLength = $(".messageWrap").length;
+		
+		if(dataLength >= 17 )
+			$(".messageWrap:last").remove()
+		console.log(dataLength)
+
+	    $("#chatData").prepend(contentHTML);
+	}
+	
+	function onClose(evt){
+	    $("#chatData").append("연결 끊김");
+	}
+	
+	//시간구하기
+	function getTimeStamp() {
+		var d = new Date();
+		
+		var s =
+		  leadingZeros(d.getFullYear(), 4) + '-' +
+		  leadingZeros(d.getMonth() + 1, 2) + '-' +
+		  leadingZeros(d.getDate(), 2) + ' ' +
+		
+		  leadingZeros(d.getHours(), 2) + ':' +
+		  leadingZeros(d.getMinutes(), 2) + ':' +
+		  leadingZeros(d.getSeconds(), 2);
+		
+		return s;
+	}
+	
+	function leadingZeros(n, digits) {
+	    var zero = '';
+	    n = n.toString();
+	
+	    if (n.length < digits) {
+	      for (i = 0; i < digits - n.length; i++)
+	        zero += '0';
+	    }
+	    return zero + n;
 	}
 </script>
 <style>
@@ -97,14 +213,6 @@
 		opacity: 0.9;
 		width: 100%;
 		height: 400px; 
-	}
-	.masterOnly{
-		display: none;
-	}
-</style>
-<style>
-	.none{
-		display: none;
 	}
 </style>
 </head>
@@ -120,7 +228,7 @@
 		<div class="contentWrap">
 			<div id="aside">
 				<ul>
-					<li class="none clubUpdate">
+					<li>
 						<span><a id="first_link" href="javascript:void(0);" onclick="goHome('${location}/club/board/clubHome.amg?cNum=${cNum}')">동호회홈</a></span>
 					</li>
 					
@@ -157,12 +265,25 @@
 					<li><span><a href="javascript:getContentAjax('${location}/clubMember/memberList.amg?cNum=${cNum}')">멤버리스트보기</a></span></li>
 					<li class="joinClub"><span><a href="javascript:getContentAjax('${location}/club/joinClub.amg?cNum=${cNum}')">동호회 가입하기</a></span></li>
 					<li class="leaveClub"><span><a href="javascript:getContentAjax('${location}/club/laeveClub.amg?cNum=${cNum}')">동호회 탈퇴하기</a></span></li>
-					<li class="deleteClub none"><span><a href="javascript:clubDeleteAjax('${location}/club/getClub.amg?cNum=${cNum}')">동호회 삭제하기</a></span></li>
+					<li class="deleteClub none"><span><a href="javascript:clubDeleteAjax('${location}/club/deleteClub.amg?cNum=${cNum}')">동호회 삭제하기</a></span></li>
 				</ul>
 			</div>
 			
+			<!-- 게시판 동호회가입 탈퇴 컨텐츠 -->
 			<div id="club_content">
 				
+			</div>
+			
+			<!-- 채팅 -->
+			<div id="clubChat">
+				<h2>Talk</h2>
+				<div class="chatWindow">
+					<div class="writeMessage">
+						<textarea rows="4" cols="40" id="chatMessage"></textarea>
+						<input type="button" id="sendBtn" value="전송">
+					</div>
+					<div id="chatData"></div>
+				</div>
 			</div>
 		</div>	
 		

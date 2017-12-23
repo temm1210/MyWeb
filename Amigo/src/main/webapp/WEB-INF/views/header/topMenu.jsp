@@ -79,7 +79,7 @@
  	</div>
 
 	<a href="${location}/main.amg" title="logo" id="logo">
-		<h2>amiGo</h2>
+		<h2>AmiGo</h2>
 	</a>
     <div class="sub-logo">
 	    <sec:authorize access="isAnonymous()">
@@ -96,8 +96,7 @@
 		  				<span class="clubs_list">가입동호회리스트</span>
 		  			</i>	  
 	  			</div>
-		  		<input id="subBtn" type="button">
-		  		
+		  		<input id="subBtn" type="button"> 		
 		  		<!-- 가입한 동호회 리스트를 보여줌 -->
 				<div class="clubsWrap">
 					<ul id="join_clubs">

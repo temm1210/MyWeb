@@ -96,7 +96,8 @@
 </style>
 <script>
 	$(document).ready(function(){
-		/* 댓글개수 셋팅 */
+
+		// 댓글개수 셋팅 
 		$(".replyCount").text("${map.count}")	
 		var master = $("#clubMaster").text();
  		var replyWriter = $(".replyWriter")
@@ -114,14 +115,12 @@
 					$(element).siblings(".modifyLinkWrap").removeClass("viewNone")
 				}	
 			})
-			
-			if(obj.cNickname == master){
-				$(".updateLink").css("display","none");
-			}
+		}else if(obj.cNickname == master){
+			$(".updateLink").css("display","none");
 		}
 	});
 	
-	/* 댓글 수정, 삭제 처리 */
+	// 댓글 수정, 삭제 처리 
 	function changeReply(url,type,data){
 		$.ajax({
 			type:type,
@@ -147,11 +146,11 @@
 		}
 		
 		if(confirm("수정하시겠습니까?"))
-			/* 댓글 수정 아작스 실행  */
+			//댓글 수정 아작스 실행  
 			changeReply('${location}/reply/updateReply.amg','PUT',data)
 	}
 	
-	/* 삭제링크 클릭시 */
+	// 삭제링크 클릭시 
 	function deleteLink(element){
 		var rNum = $(element).parent().siblings(".rNum").val()
 		
@@ -160,11 +159,11 @@
 		}
 		
 		if(confirm("삭제 하시겠습니까?"))
-			/* 댓글 삭제 아작스 실행  */
+			// 댓글 삭제 아작스 실행  
 			changeReply('${location}/reply/deleteReply.amg','DELETE',data);
 	}
 	
-	/* 수정링크 클릭시 작동 */
+	// 수정링크 클릭시 작동 
 	function updateLink(element){
 		
 		var firstContent = $(element).parent().siblings(".replySpan").text();
